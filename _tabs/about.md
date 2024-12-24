@@ -4,10 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# About Me
-
-My name is Arbion.
-
 ## Verifiable Truth
 
 ### Veracity Labs
