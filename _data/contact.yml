@@ -2,9 +2,11 @@
 
 - type: github
   icon: "fab fa-github"
+  url: "https://github.com/ToxicPine"
 
 - type: twitter
   icon: "fa-brands fa-x-twitter"
+  url: "https://x.com/arbion_w"
 
 - type: email
   icon: "fas fa-envelope"
