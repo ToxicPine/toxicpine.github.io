@@ -9,10 +9,12 @@ order: 4
 ### Veracity Labs
 
 I founded Veracity Labs Limited, a start-up that creates truth-telling technologies, in 2024.
+
 Veracity Labs aims to make all authentic recordings (such as real pictures) easy to distinguish from fraudulent material.
 
 Veracity Labs's first product was See3, software for taking pictures which encodes evidence of it's origin into it's metadata.
 This was initially created to help SMEs combat deepfake-related fraud. If it interests you, should visit [our website.](https://see3.xyz)
+
 We're currently helping a spinoff from The University of Oxford develop truth-telling scientific measurement devices.
 
 ### Other Truth-Related Projects
