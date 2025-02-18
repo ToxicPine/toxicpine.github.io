@@ -7,18 +7,18 @@ tags: [automation, ai, workforce]
 
 **THIS DOCUMENT IS A WORK IN PROGRESS.**
 
-This blog post suggests a three-axis model for categorizing automation initiatives, particularly those that affect core job functions. The model aims to provide a structured framework for understanding the impact of different types of automation on organizations, the space of possible automation initiatives, and the differences between historical trends and modern automation initiatives. It may also aid speculation future patterns of automation.
+This blog post suggests a three-axis model for categorizing automation initiatives, particularly those that change the nature of jobs. It is meant to help the reader understand the impact of different types of automation on organizations, the space of possible automation initiatives, and the differences between historical trends and modern automation initiatives. It may also aid speculation about future patterns of automation.
 
 ## Defining Automation in Terms of Tasks
 
 A key starting point is: **What exactly counts as “automation”?**  
 - A **job** can be viewed as a collection of tasks, some of which are primary (they define the job's purpose) and some of which are secondary (they are merely necessary for the primary tasks to be completed).  
-- **Automation** creates an interface that abstracts away the mental and physical work of job tasks. Instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
+- An **automation** is a interface that abstracts away the mental and physical work of job tasks. Instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
 
 ### Automation vs. General Technological Improvement
 
 - **Not all new technology is automation.** A more powerful computer or a better hammer still leaves every discrete action in the hands of a human. The use of a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force.  
-- **Abstraction** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole processes that are easily delegated to the system of automation.
+- **Automation** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole processes that are easily delegated to the system of automation.
 - **Automation Example – The Calculator**:  
   - **Without a calculator**: a person must track digits, carry over numbers, and check each step when adding 333 + 287.  
   - **With a calculator**: the system encapsulates the step‐by‐step arithmetic. The human only needs to input the numbers and read the output.  
