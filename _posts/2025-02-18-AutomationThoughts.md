@@ -29,7 +29,7 @@ A key starting point is: **What exactly counts as “automation”?**
 
 - If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system.  
 - If **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether.  
-- **Partial automation** can still eliminate roles if the tasks it covers are central. For instance, if an AI handles 80% of a staff accountant’s core responsibilities, the remaining 20% might be absorbed by a manager or consolidated into another position, effectively removing the accountant role.  
+- Partial automation can still eliminate roles if the tasks it covers are central. For instance, if an AI handles 80% of a staff accountant’s core responsibilities, the remaining 20% might be absorbed by a manager or consolidated into another position, effectively removing the accountant role.  
 
 These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transform / Remove.
 
@@ -37,7 +37,7 @@ These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transfor
 
 ## The Three‐Axis Model and Its Rationale
 
-Your model focuses on three questions that create a concise “label” for any automation initiative, with an emphasis on **task‐level** automation that significantly affects a role’s primary duties:
+This model is organized around three questions that create a concise “label” for any automation initiative:
 
 1. **Implementation:** Who builds and controls the system?  
    - **In‐House:** Internal teams develop it and run it.  
