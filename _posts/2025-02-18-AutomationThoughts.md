@@ -1,10 +1,8 @@
 ---
 title: Automation Thoughts - A Three-Axis Model
-date: 2025-02-18 14:00:00 +0800
+date: 2025-02-18 02:00:00 +0800
 categories: [Technology, Artificial Intelligence]
 tags: [automation, ai, workforce]
----
-
 ---
 
 **THIS DOCUMENT IS A WORK IN PROGRESS.**
