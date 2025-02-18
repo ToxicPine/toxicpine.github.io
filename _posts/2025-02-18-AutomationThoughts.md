@@ -27,10 +27,6 @@ Consider the impact of typewriters on secretarial work. Although writing out tex
 
 ### Why "Extent of Automation" Is Ambiguous
 
-When **minor or peripheral tasks** are automated, one may say that the extent of automation is limited. This is a tempting conclusion: the automation of low-time low-effort secondary tasks which don't take up a significant portion of a job's time is likely to **retool** a role rather than transform or remove it: the same employees remain, adjusting their workflows to exploit the new automation. 
-
-### Why "Extent of Automation" Is Ambiguous
-
 If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system. Conversely, if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether. Yet, if the automation of primary tasks is considered "partial", it's unclear how much of the role will be transformed or removed as a result.
 
 Even when automation requires skilled human operators, it can eliminate roles entirely if it covers core responsibilities. For example, if AI automates 80% of an accountant's primary tasks, the remaining 20% may or may not be absorbed by higher-level management positions - effectively removing the original role. This illustrates why the concept of "extent of automation" is unhelpful: we must discuss how much an automation reduces the time and cost of completing primary tasks separately from its actual workforce impact.
