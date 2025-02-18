@@ -6,6 +6,8 @@ tags: [automation, ai, workforce]
 author: Arbion Halili
 ---
 
+---
+
 **THIS DOCUMENT IS A WORK IN PROGRESS.**
 
 This blog post suggests a three-axis model for analyzing and categorizing automation initiatives, particularly those that affect core job functions. The model aims to provide a structured framework for understanding how different types of automation impact organizations and their workforce.
