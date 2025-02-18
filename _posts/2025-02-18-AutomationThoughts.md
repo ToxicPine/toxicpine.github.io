@@ -7,7 +7,7 @@ tags: [automation, ai, workforce]
 
 **THIS DOCUMENT IS A WORK IN PROGRESS.**
 
-This blog post suggests a three-axis model for analyzing and categorizing automation initiatives, particularly those that affect core job functions. The model aims to provide a structured framework for understanding how different types of automation impact organizations and their workforce.
+This blog post suggests a three-axis model for categorizing automation initiatives, particularly those that affect core job functions. The model aims to provide a structured framework for understanding the impact of different types of automation on organizations, the space of possible automation initiatives, and the differences between historical trends and modern automation initiatives. It may also aid speculation future patterns of automation.
 
 ## Defining Automation in Terms of Tasks
 
