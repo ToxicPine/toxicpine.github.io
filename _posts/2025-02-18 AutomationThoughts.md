@@ -3,7 +3,6 @@ title: Automation Thoughts - A Three-Axis Model
 date: 2025-02-18 14:00:00 +0800
 categories: [Technology, Artificial Intelligence]
 tags: [automation, ai, workforce]
-author: Arbion Halili
 ---
 
 ---
