@@ -9,27 +9,31 @@ tags: [automation, ai, workforce]
 
 This blog post suggests a three-axis model for categorizing automation initiatives, particularly those that change the nature of jobs. It is meant to help the reader understand the impact of different types of automation on organizations, the space of possible automation initiatives, and the differences between historical trends and modern automation initiatives. It may also aid speculation about future patterns of automation.
 
-## Defining Automation in Terms of Tasks
+## What is Automation?
 
-A key starting point is: **What exactly counts as “automation”?**  
-- A **job** can be viewed as a collection of tasks, some of which are primary (they define the job's purpose) and some of which are secondary (they are merely necessary for the primary tasks to be completed).  
-- An **automation** is a interface that abstracts away the mental and physical work of job tasks. Instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
+Let's briefly discuss what distinguishes automation from other forms of technological improvement.
 
-### Automation vs. General Technological Improvement
+**Automation** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole actions which can be delegated to a machine.
 
-- **Not all new technology is automation.** A more powerful computer or a better hammer still leaves every discrete action in the hands of a human. The use of a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force.  
-- **Automation** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole processes that are easily delegated to the system of automation.
-- **Automation Example – The Calculator**:  
-  - **Without a calculator**: a person must track digits, carry over numbers, and check each step when adding 333 + 287.  
-  - **With a calculator**: the system encapsulates the step‐by‐step arithmetic. The human only needs to input the numbers and read the output.  
-  - This device demonstrates how automation substitutes transaction‐level labor (digit‐by‐digit calculation) for a process‐level abstraction.
-- The **Three‐Axis Model** primarily applies when a system automates **the primary tasks** that define a role, resulting in potential **workforce impact** (discussed later) such as retooling, transforming, or removing entire jobs. It does not apply to tools like calculators that only automate secondary tasks: while calculators automated arithmetic previously done by accountants, performing arithmetic does not define the accountant's role and did not significantly retool, transform, or remove any jobs.
+If this weren't the case, we'd just be talking about tools. The use of a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force. So long as there is a meaningful distinction the terms "tool" and "automation", we must consider the degree of *task abstraction* provided by the technology before concluding that it is an automation.
 
-### Why the Degree of Task Replacement Matters
+Abstraction entails that, instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
 
-- If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system.  
-- If **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether.  
-- Partial automation can still eliminate roles if the tasks it covers are central. For instance, if an AI handles 80% of a staff accountant’s core responsibilities, the remaining 20% might be absorbed by a manager or consolidated into another position, effectively removing the accountant role.  
+I'll use these observations to suggest an interim definition for automation, which we can refine later: an **automation** is a interface that abstracts the mental or physical requirements of task completion away from humans.
+
+The **Three‐Axis Model**, introduced in this post, primarily applies when a system automates **the primary tasks** that define a paid job role. It only concerns systems of automation which significantly alter the nature of the job, resulting in **workforce impacts** (discussed later) such as retooling, transforming, or removing entire jobs. It is less applicable to systems that automate the **secondary tasks** associated with a job, which are only part of the role when they are necessary for the completion of the primary tasks associated with the job.
+
+Consider the impact of typewriters on secretarial work. Although writing out text on paper may have consumed a significant portion of a secretary's time, it would never have been part of their role if it were not necessary for their their primary tasks to be completed: composing, organizing, and managing business communications. Therefore, the task of writing out letters was secondary to the role of a secretary. The role remained (mostly) unchanged: the same personnel continued doing largely the same work with the same workflow, now using the interface of a typewriter.
+
+### Why "Extent of Automation" Is Ambiguous
+
+When **minor or peripheral tasks** are automated, one may say that the extent of automation is limited. This is a tempting conclusion: the automation of low-time low-effort secondary tasks which don't take up a significant portion of a job's time is likely to **retool** a role rather than transform or remove it: the same employees remain, adjusting their workflows to exploit the new automation. 
+
+### Why "Extent of Automation" Is Ambiguous
+
+If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system. Conversely, if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether. Yet, if the automation of primary tasks is considered "partial", it's unclear how much of the role will be transformed or removed as a result.
+
+Even when automation requires skilled human operators, it can eliminate roles entirely if it covers core responsibilities. For example, if AI automates 80% of an accountant's primary tasks, the remaining 20% may or may not be absorbed by higher-level management positions - effectively removing the original role. This illustrates why the concept of "extent of automation" is unhelpful: we must discuss how much an automation reduces the time and cost of completing primary tasks separately from its actual workforce impact.
 
 These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transform / Remove.
 
@@ -37,7 +41,7 @@ These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transfor
 
 ## The Three‐Axis Model and Its Rationale
 
-This model is organized around three questions that create a concise “label” for any automation initiative:
+This model is organized around three questions. By concatenating the answers, we can create a “label” for any automation initiative:
 
 1. **Implementation:** Who builds and controls the system?  
    - **In‐House:** Internal teams develop it and run it.  
@@ -54,10 +58,17 @@ This model is organized around three questions that create a concise “label”
    - **Transform:** The role changes drastically; many current staff are not a good fit, so partial displacement or redeployment occurs.  
    - **Remove:** The job is eliminated altogether (the system’s automation of core tasks makes the role obsolete).
 
-### Interactions Among the Axes
+Example: "In-House, Supervised, Retool" refers to a system that is built and operated by an internal team, with human oversight required for major actions. The workforce remains, but employees learn new skills and adjust their workflows.
 
-- **Implementation** may or may not correlate tightly with **Workforce** changes. One might imagine an “Outsourced” system that’s used to Retool employees (if the external SaaS product only automates minor tasks). Conversely, an “In‐House” system could completely Remove roles if it fully automates the core function.  
-- **Supervision** and **Workforce** can overlap, but partial or even manual supervision does not always protect a job if the tasks that matter have been subsumed by the system. For instance, a fully autonomous AI that takes over 70% of crucial tasks might still require a single manager for oversight, but that manager could be entirely different from the original employees doing the tasks. The original role is effectively Removed.
+### Independence of Axes
+
+For this model to be useful, it is important for the axes to be (mostly) distinct. I'll demonstrate that this is the case:
+
+1. **Implementation** doesn't tightly correlate with **Workforce** changes. One might imagine an “Outsourced” system that’s used to Retool employees, if the external SaaS product only automates minor tasks. Conversely, an “In‐House” system could completely Remove roles if it fully automates the core function. 
+2. **Supervision** doesn't tightly correlate with **Workforce** changes: a non-autonomous automation might be used to retool, transform, or remove roles, as we illustrated with the example of accountant roles possibly being absorbed into higher-level management positions. 
+3. Any degree of **Supervision** can co-occur with any **Implementation** model.
+
+Therefore, there are twenty-seven possible automation profiles in this model.
 
 ---
 
