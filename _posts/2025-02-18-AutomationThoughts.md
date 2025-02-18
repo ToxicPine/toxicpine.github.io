@@ -12,23 +12,23 @@ This blog post suggests a three-axis model for analyzing and categorizing automa
 ## Defining Automation in Terms of Tasks
 
 A key starting point is: **What exactly counts as “automation”?**  
-- A **job** can be viewed as a collection of tasks (some primary, some secondary).  
-- **Automation** creates an interface that abstracts away the mental and physical work of tasks. Instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: configuring how the system should operate (like entering numbers into a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed). This abstraction layer often makes the original detail-oriented role unnecessary.
+- A **job** can be viewed as a collection of tasks, some of which are primary (they define the job's purpose) and some of which are secondary (they are necessary for the primary tasks to be completed, but have no intrinsic value).  
+- **Automation** creates an interface that abstracts away the mental and physical work of job tasks. Instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
 
 ### Automation vs. General Technological Improvement
 
-- **Not all new technology is automation.** A more powerful computer or a better hammer still leaves every discrete action in the hands of a human. For example, using a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force.  
-- **Automation** implies that the technology **itself** handles some of the discrete decisions or micro‐steps. This means the user shifts to a **higher‐level interface**: rather than performing detailed mental or manual labor for every step, they **delegate** that work to the system.  
+- **Not all new technology is automation.** A more powerful computer or a better hammer still leaves every discrete action in the hands of a human. The use of a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force.  
+- **Abstraction** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole processes that are easily delegated to the system of automation.
 - **Automation Example – The Calculator**:  
   - **Without a calculator**: a person must track digits, carry over numbers, and check each step when adding 333 + 287.  
   - **With a calculator**: the system encapsulates the step‐by‐step arithmetic. The human only needs to **input** the numbers and read the **output**.  
   - Even this **simple** device demonstrates how automation shifts **transaction‐level** labor (digit‐by‐digit calculation) to a **process‐level abstraction**.
-- The **Three‐Axis Model** primarily applies when a system automates **the primary tasks** that define a role, resulting in potential **workforce impact** such as retooling, transforming, or removing entire jobs. It does not apply to tools like calculators that only automate secondary tasks: while calculators automated arithmetic, performing arithmetic does not define an accountant's role.
+- The **Three‐Axis Model** primarily applies when a system automates **the primary tasks** that define a role, resulting in potential **workforce impact** (discussed later) such as retooling, transforming, or removing entire jobs. It does not apply to tools like calculators that only automate secondary tasks: while calculators automated arithmetic previously done by accountants, performing arithmetic does not define the accountant's role and did not significantly retool, transform, or remove any jobs.
 
 ### Why the Degree of Task Replacement Matters
 
 - If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system.  
-- But if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether.  
+- If **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether.  
 - **Partial automation** can still eliminate roles if the tasks it covers are central. For instance, if an AI handles 80% of a staff accountant’s core responsibilities, the remaining 20% might be absorbed by a manager or consolidated into another position, effectively **removing** the accountant role.  
 
 These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transform / Remove.
