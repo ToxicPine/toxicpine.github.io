@@ -23,7 +23,7 @@ This becomes clearer when we consider the case in which a worker uses a hammer t
 
 Automation implies that, instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate an interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed). 
 
-I'll use these observations to suggest an interim definition for automation, which we will refine as we continue: an **automation** is an interface to a system capable of performing useful actions on behalf of a human, that abstracts the mental or physical requirements of task completion away from the human operator.
+I'll use these observations to suggest an interim definition for automation, which we will refine as we continue: an **automation** is an interface to a system capable of performing useful actions on behalf of a human, that abstracts much of the mental or physical requirements of task completion away from the human operator.
 
 The **Three‐Axis Model**, introduced in this post, primarily applies when a system automates **the primary tasks that define a paid job role**. It only concerns systems of automation which significantly alter the nature of the job, resulting in **workforce impacts** (discussed later) such as retooling, transforming, or removing entire jobs. It is less applicable to systems that automate the **secondary tasks** associated with a job, which are only part of the role when they are necessary for the completion of the primary tasks associated with the job.
 
@@ -43,11 +43,11 @@ These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transfor
 
 An interface provides the operator with the ability to select predefined sequences of steps, trigger the automation to execute those sequences, and generate measurable progress on the task. Through this interface, the operator's role shifts from performing individual steps to choosing which automated sequences to invoke. These options are **sometimes not isomorphic** to the operator's manual process, and thus the operator may be forced to choose a **different strategy** towards completing the task than they would have chosen without the automation.
 
-Here's an example: a brute-force search tool that presents false positives substituting for the operator's manual screening process. The machine performing the screening may present a list of potential matches, but the operator must choose which ones to investigate further, which involves manually checking each potential match. We know that this is different from the operator's manual process, since if the actions taken by the machine were isomorphic to the operator's manual process, the operator would not need to choose which matches to investigate further. It also introduces the need for result-checking steps.
+Here's an example: a brute-force search tool that presents false positives replacing an operator's manual screening process. The machine performing the screening may present a list of potential matches, but the operator must choose which ones to investigate further, which involves manually checking each potential match. We know that this is different from the operator's manual process, since if the actions taken by the machine were isomorphic to the operator's manual process, the operator would not need to choose which matches to investigate further.
 
-When it is the case that the automation introduces a new strategy, it must be an abstraction over the steps required to complete the task, as well as the sub-tasks that comprise the new strategy, but not the sub-tasks that comprise the old strategy.
+It's not merely that introducing an automation reduces the number of steps required by humans for the task. When a new strategy for task completion is required, it transforms the practical aspects of completing the task from the operator's perspective, which further complicates our previous discussion about determining the extent of an automation.
 
-These nuances tie directly into **Axis 2 (Supervision):** Manual / Supervised / Autonomous.
+These nuances tie directly into **Axis 2 (Supervision):** Manual / Supervised / Autonomous. 
 
 ---
 
@@ -74,13 +74,27 @@ Example: "In-House, Supervised, Retool" refers to a system that is built and ope
 
 ### Independence of Axes
 
-For this model to be useful, it is important for the axes to be (mostly) distinct. I'll demonstrate that this is the case:
+For this model to be useful, it is important for the axes to be (mostly) distinct. 
+
+As we saw earlier, an automation's interface design directly influences task completion strategies, which in turn determines both the **Workforce Impact** (by dictating skill requirements) and the **Supervision** needed (through the need for human judgment at decision points and the complexity of interventions). 
+
+However, these axes remain worth discussing separately. I'll demonstrate that this is the case:
 
 1. **Implementation** doesn't tightly correlate with **Workforce** changes. One might imagine an “Outsourced” system that’s used to Retool employees, if the external SaaS product only automates minor tasks. Conversely, an “In‐House” system could completely Remove roles if it fully automates the core function. 
 2. **Supervision** doesn't tightly correlate with **Workforce** changes: a non-autonomous automation might be used to retool, transform, or remove roles, as we illustrated with the example of accountant roles possibly being absorbed into higher-level management positions. 
 3. Any degree of **Supervision** can co-occur with any **Implementation** model.
 
 Therefore, there are twenty-seven possible automation profiles in this model.
+
+### Why This Model Is Useful.
+
+Firstly, there is a clear relationship between the essential aspects of how the automation works - specifically how actions are presented to the operator via the abstraction mechanism - and the two main axes of the system: Supervision and Workforce Impact. The abstraction style directly determines supervision requirements, with more complex abstractions requiring frequent operator decisions leading to Manual or Supervised models, while simplified abstractions that eliminate decision points enable Autonomous operation. This same abstraction mechanism, combined with job market and organizational context, shapes workforce impact by influencing whether roles can be retained with retraining, must transform significantly, or will be eliminated entirely, as well as determining how remaining tasks might be redistributed.
+
+Secondly, the Supervision and Workforce Impact axes represent two logically distinct aspects that people often conflate when trying to quantify the "extent" of an automation. When someone claims an automation is "more automated" than another, they might be referring to either its degree of autonomy (Supervision) or its displacement of human roles (Workforce Impact), which are separate considerations. By establishing this framework, we can trace a direct line of reasoning from an automation's interface design through to these two components of its "extent": the interface's abstraction mechanism determines both supervision requirements and, in conjunction with organizational context, workforce changes. This makes tractable what was previously an ambiguous discussion about how "automated" a system is.
+
+Thirdly, the Implementation axis provides a practical framework for analyzing concrete choices organizations face when pursuing automation. Since the necessary extent of supervision is determined by the limitations of the automation technology, and the workforce impact is mostly outside of the organization's control, their possible choices are determined mostly around the Implementation axis. 
+
+Consider a future organization that has the means to automate the work of some junior developers using an "AI Agent" product. Let's assume that they're certain that the "supervised" model of supervision is the only way to ensure tasks get done correctly. They must now determine whether they they should transform the role of junior developers, employing them to assist the agent, or scrap the role entirely, delegating the supervision workload to senior developers. If they scrap the junior developer role in favour of a commercial (outsourced) agent product, they run the risk of becoming more dependent on the external vendor than is ideal. If they own and maintain their own "AI Agent", their risk of regret is lower, but they must also consider the cost of building the product. This leaves them with six possible choices, determined by prepending "In-House", "Contracted", or "Outsourced" to "Supervised-Transform" and "Supervised-Remove". Their choice of automation strategy is now a matter of weighing the tradeoffs between these six scenarios, some of which are easily eliminated as undesirable.
 
 ---
 
