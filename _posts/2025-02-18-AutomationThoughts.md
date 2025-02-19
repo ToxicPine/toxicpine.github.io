@@ -7,31 +7,47 @@ tags: [automation, ai, workforce]
 
 **THIS DOCUMENT IS A WORK IN PROGRESS.**
 
-This blog post suggests a three-axis model for categorizing automation initiatives, particularly those that change the nature of jobs. It is meant to help the reader understand the impact of different types of automation on organizations, the space of possible automation initiatives, and the differences between historical trends and modern automation initiatives. It may also aid speculation about future patterns of automation.
+This blog post suggests a three-axis model for categorizing automation initiatives. It is meant to help the reader understand the impact of different types of automation on organizations, the space of possible job-altering automation strategies, and the differences between historical trends and modern automation initiatives. It may also aid speculation about future patterns of automation.
+
+The concepts discussed in this post are discussed in a very linear style: each section builds on the previous one. This may not constitute a good reading experience.
+
+I'll try to update this post as I continue to think about these concepts, and demonstrate a less linear style in future posts.
 
 ## What is Automation?
 
 Let's briefly discuss what distinguishes automation from other forms of technological improvement.
 
-**Automation** implies that the technology itself handles some of the discrete decisions or micro‐steps: rather than performing deliberate mental or manual labor for every step, the sub-tasks required to complete the job are organized into whole actions which can be delegated to a machine.
+The term **automation** must refer to a technology that independently handles some of the discrete decisions or micro‐steps required to complete a task: rather than performing the full series of mental or physical sub-tasks, these steps are organized into whole actions which can be delegated to a machine. If this weren't the case, we'd just be talking about tools. 
 
-If this weren't the case, we'd just be talking about tools. The use of a hammer does not automate the task of driving nails: the user must still swing for each nail, controlling direction and force. So long as there is a meaningful distinction the terms "tool" and "automation", we must consider the degree of *task abstraction* provided by the technology before concluding that it is an automation.
+This becomes clearer when we consider the case in which a worker uses a hammer to drive nails. Although the use of a hammer aids the process of completing the task, it does not automate the task. This is explained by the fact that the worker must still swing for each nail, controlling direction and force. Therefore, an automation can not merely make a task easier or faster to complete: we must consider the degree to which the technology *abstracts over the necessary steps towards task completion* before concluding that it is an automation.
 
-Abstraction entails that, instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate the interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed).
+Automation implies that, instead of manually executing each step (like calculating each digit in arithmetic), humans shift to a higher-level role: determining how to operate an interface (like deciding which series of buttons to press on a calculator), checking if outputs make sense (like verifying the calculator's sum), and making judgment calls the system can't handle (like deciding when calculation is needed). 
 
-I'll use these observations to suggest an interim definition for automation, which we can refine later: an **automation** is a interface that abstracts the mental or physical requirements of task completion away from humans.
+I'll use these observations to suggest an interim definition for automation, which we will refine as we continue: an **automation** is an interface to a system capable of performing useful actions on behalf of a human, that abstracts the mental or physical requirements of task completion away from the human operator.
 
-The **Three‐Axis Model**, introduced in this post, primarily applies when a system automates **the primary tasks** that define a paid job role. It only concerns systems of automation which significantly alter the nature of the job, resulting in **workforce impacts** (discussed later) such as retooling, transforming, or removing entire jobs. It is less applicable to systems that automate the **secondary tasks** associated with a job, which are only part of the role when they are necessary for the completion of the primary tasks associated with the job.
+The **Three‐Axis Model**, introduced in this post, primarily applies when a system automates **the primary tasks that define a paid job role**. It only concerns systems of automation which significantly alter the nature of the job, resulting in **workforce impacts** (discussed later) such as retooling, transforming, or removing entire jobs. It is less applicable to systems that automate the **secondary tasks** associated with a job, which are only part of the role when they are necessary for the completion of the primary tasks associated with the job.
+
+### What's The Difference Between Secondary And Primary Tasks?
 
 Consider the impact of typewriters on secretarial work. Although writing out text on paper may have consumed a significant portion of a secretary's time, it would never have been part of their role if it were not necessary for their their primary tasks to be completed: composing, organizing, and managing business communications. Therefore, the task of writing out letters was secondary to the role of a secretary. The role remained (mostly) unchanged: the same personnel continued doing largely the same work with the same workflow, now using the interface of a typewriter.
 
-### Why "Extent of Automation" Is Ambiguous
+### Why Is "Extent of Automation" Not A Helpful Concept?
 
 If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system. Conversely, if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether. Yet, if the automation of primary tasks is considered "partial", it's unclear how much of the role will be transformed or removed as a result.
 
 Even when automation requires skilled human operators, it can eliminate roles entirely if it covers core responsibilities. For example, if AI automates 80% of an accountant's primary tasks, the remaining 20% may or may not be absorbed by higher-level management positions - effectively removing the original role. This illustrates why the concept of "extent of automation" is unhelpful: we must discuss how much an automation reduces the time and cost of completing primary tasks separately from its actual workforce impact.
 
 These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transform / Remove.
+
+## How Does Automation Relate To Changes In Working Strategy?
+
+An interface provides the operator with the ability to select predefined sequences of steps, trigger the automation to execute those sequences, and generate measurable progress on the task. Through this interface, the operator's role shifts from performing individual steps to choosing which automated sequences to invoke. These options are **sometimes not isomorphic** to the operator's manual process, and thus the operator may be forced to choose a **different strategy** towards completing the task than they would have chosen without the automation.
+
+Here's an example: a brute-force search tool that presents false positives substituting for the operator's manual screening process. The machine performing the screening may present a list of potential matches, but the operator must choose which ones to investigate further, which involves manually checking each potential match. We know that this is different from the operator's manual process, since if the actions taken by the machine were isomorphic to the operator's manual process, the operator would not need to choose which matches to investigate further. It also introduces the need for result-checking steps.
+
+When it is the case that the automation introduces a new strategy, it must be an abstraction over the steps required to complete the task, as well as the sub-tasks that comprise the new strategy, but not the sub-tasks that comprise the old strategy.
+
+These nuances tie directly into **Axis 2 (Supervision):** Manual / Supervised / Autonomous.
 
 ---
 
