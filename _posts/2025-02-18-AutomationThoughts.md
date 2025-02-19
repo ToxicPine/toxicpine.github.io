@@ -5,8 +5,6 @@ categories: [Technology, Artificial Intelligence]
 tags: [automation, ai, workforce]
 ---
 
-**THIS DOCUMENT IS A WORK IN PROGRESS.**
-
 This blog post suggests a three-axis model for categorizing automation initiatives. It is meant to help the reader understand the impact of different types of automation on organizations, the space of possible job-altering automation strategies, and the differences between historical trends and modern automation initiatives. It may also aid speculation about future patterns of automation.
 
 The concepts discussed in this post are discussed in a very linear style: each section builds on the previous one. This may not constitute a good reading experience.
@@ -33,11 +31,11 @@ Consider the impact of typewriters on secretarial work. Although writing out tex
 
 ### Why Is "Extent of Automation" Not A Helpful Concept?
 
-If only **minor or peripheral tasks** are automated, the result might merely **retool** the role: the same employees remain, adjusting their workflows or learning to use the system. Conversely, if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether. Yet, if the automation of primary tasks is considered "partial", it's unclear how much of the role will be transformed or removed as a result.
+If only **minor or peripheral tasks** are automated, the result might merely **adapt** the role: the same employees remain, adjusting their workflows or learning to use the system. Conversely, if **primary tasks** (the main reason the job exists) are automated, the entire role may be **transformed** into something quite different or be **removed** altogether. Yet, if the automation of primary tasks is considered "partial", it's unclear how much of the role will be transformed or removed as a result.
 
 Even when automation requires skilled human operators, it can eliminate roles entirely if it covers core responsibilities. For example, if AI automates 80% of an accountant's primary tasks, the remaining 20% may or may not be absorbed by higher-level management positions - effectively removing the original role. This illustrates why the concept of "extent of automation" is unhelpful: we must discuss how much an automation reduces the time and cost of completing primary tasks separately from its actual workforce impact.
 
-These nuances tie directly into **Axis 3 (Workforce Impact):** Retool / Transform / Remove.
+These nuances tie directly into **Axis 3 (Workforce Impact):** Adapt / Transform / Remove.
 
 ## How Does Automation Relate To Changes In Working Strategy?
 
@@ -47,7 +45,7 @@ Here's an example: a brute-force search tool that presents false positives repla
 
 It's not merely that introducing an automation reduces the number of steps required by humans for the task. When a new strategy for task completion is required, it transforms the practical aspects of completing the task from the operator's perspective, which further complicates our previous discussion about determining the extent of an automation.
 
-These nuances tie directly into **Axis 2 (Supervision):** Manual / Supervised / Autonomous. 
+These nuances tie directly into **Axis 2 (Oversight):** Manual / Supervised / Autonomous. 
 
 ---
 
@@ -55,123 +53,49 @@ These nuances tie directly into **Axis 2 (Supervision):** Manual / Supervised / 
 
 This model is organized around three questions. By concatenating the answers, we can create a “label” for any automation initiative:
 
-1. **Implementation:** Who builds and controls the system?  
+1. **Ownership:** Who builds and controls the system?  
    - **In‐House:** Internal teams develop it and run it.  
    - **Contracted:** An external vendor develops it, then hands it off for the organization to run.  
    - **Outsourced:** A third‐party handles both creation and ongoing operations.
 
-2. **Supervision:** How much human oversight is involved in day‐to‐day operation?  
+2. **Oversight:** How much human oversight is involved in day‐to‐day operation?  
    - **Manual (Human in the Loop):** A human must explicitly guide or approve major actions.  
    - **Supervised (Human on the Loop):** The system runs on its own most of the time; humans monitor and may intervene.  
    - **Autonomous (Human out of the Loop):** The system requires minimal or no routine human involvement.
 
 3. **Workforce Impact:** What is the impact on employees who used to do these tasks?  
-   - **Retool:** The same employees remain but adapt (learn new skills, adjust workflows).  
+   - **Adapt:** The same employees remain but adapt (learn new skills, adjust workflows).  
    - **Transform:** The role changes drastically; many current staff are not a good fit, so partial displacement or redeployment occurs.  
    - **Remove:** The job is eliminated altogether (the system’s automation of core tasks makes the role obsolete).
 
-Example: "In-House, Supervised, Retool" refers to a system that is built and operated by an internal team, with human oversight required for major actions. The workforce remains, but employees learn new skills and adjust their workflows.
+Example: "In-House, Supervised, Adapt" refers to a system that is built and operated by an internal team, with human oversight required for major actions. The workforce remains, but employees learn new skills and adjust their workflows.
 
 ### Independence of Axes
 
 For this model to be useful, it is important for the axes to be (mostly) distinct. 
 
-As we saw earlier, an automation's interface design directly influences task completion strategies, which in turn determines both the **Workforce Impact** (by dictating skill requirements) and the **Supervision** needed (through the need for human judgment at decision points and the complexity of interventions). 
+As we saw earlier, an automation's interface design directly influences task completion strategies, which in turn determines both the **Workforce Impact** (by dictating skill requirements) and the **Oversight** needed (through the need for human judgment at decision points and the complexity of interventions). 
 
 However, these axes remain worth discussing separately. I'll demonstrate that this is the case:
 
-1. **Implementation** doesn't tightly correlate with **Workforce** changes. One might imagine an “Outsourced” system that’s used to Retool employees, if the external SaaS product only automates minor tasks. Conversely, an “In‐House” system could completely Remove roles if it fully automates the core function. 
-2. **Supervision** doesn't tightly correlate with **Workforce** changes: a non-autonomous automation might be used to retool, transform, or remove roles, as we illustrated with the example of accountant roles possibly being absorbed into higher-level management positions. 
-3. Any degree of **Supervision** can co-occur with any **Implementation** model.
+1. **Ownership** doesn't tightly correlate with **Workforce** changes. One might imagine an “Outsourced” system to which employees "Adapt", if the external SaaS product only automates minor tasks. Conversely, an “In‐House” system could completely Remove roles if it fully automates the core function. 
+2. **Oversight** doesn't tightly correlate with **Workforce** changes: a non-autonomous automation might be used to adapt, transform, or remove roles, as we illustrated with the example of accountant roles possibly being absorbed into higher-level management positions. 
+3. Any degree of **Oversight** can co-occur with any **Ownership** model.
 
 Therefore, there are twenty-seven possible automation profiles in this model.
 
 ### Why This Model Is Useful.
 
-Firstly, there is a clear relationship between the essential aspects of how the automation works - specifically how actions are presented to the operator via the abstraction mechanism - and the two main axes of the system: Supervision and Workforce Impact. The abstraction style directly determines supervision requirements, with more complex abstractions requiring frequent operator decisions leading to Manual or Supervised models, while simplified abstractions that eliminate decision points enable Autonomous operation. This same abstraction mechanism, combined with job market and organizational context, shapes workforce impact by influencing whether roles can be retained with retraining, must transform significantly, or will be eliminated entirely, as well as determining how remaining tasks might be redistributed.
+Firstly, there is a clear relationship between the essential aspects of how the automation works - specifically how actions are presented to the operator via the abstraction mechanism - and the two main axes of the system: Oversight and Workforce Impact. The abstraction style directly determines oversight requirements, with more complex abstractions requiring frequent operator decisions leading to Manual or Supervised models, while simplified abstractions that eliminate decision points enable Autonomous operation. This same abstraction mechanism, combined with job market and organizational context, shapes workforce impact by influencing whether roles can be retained with retraining, must transform significantly, or will be eliminated entirely, as well as determining how remaining tasks might be redistributed.
 
-Secondly, the Supervision and Workforce Impact axes represent two logically distinct aspects that people often conflate when trying to quantify the "extent" of an automation. When someone claims an automation is "more automated" than another, they might be referring to either its degree of autonomy (Supervision) or its displacement of human roles (Workforce Impact), which are separate considerations. By establishing this framework, we can trace a direct line of reasoning from an automation's interface design through to these two components of its "extent": the interface's abstraction mechanism determines both supervision requirements and, in conjunction with organizational context, workforce changes. This makes tractable what was previously an ambiguous discussion about how "automated" a system is.
+Secondly, the Oversight and Workforce Impact axes represent two logically distinct aspects that people often conflate when trying to quantify the "extent" of an automation. When someone claims an automation is "more automated" than another, they might be referring to either its degree of autonomy (Oversight) or its displacement of human roles (Workforce Impact), which are separate considerations. By establishing this framework, we can trace a direct line of reasoning from an automation's interface design through to these two components of its "extent": the interface's abstraction mechanism determines both oversight requirements and, in conjunction with organizational context, workforce changes. This makes tractable what was previously an ambiguous discussion about how "automated" a system is.
 
-Thirdly, the Implementation axis provides a practical framework for analyzing concrete choices organizations face when pursuing automation. Since the necessary extent of supervision is determined by the limitations of the automation technology, and the workforce impact is mostly outside of the organization's control, their possible choices are determined mostly around the Implementation axis. 
+Thirdly, the Ownership axis provides a practical framework for analyzing concrete choices organizations face when pursuing automation. Since the necessary extent of oversight is determined by the limitations of the automation technology, and the workforce impact is mostly outside of the organization's control, their possible choices are determined mostly around the Ownership axis. 
 
-Consider a future organization that has the means to automate the work of some junior developers using an "AI Agent" product. Let's assume that they're certain that the "supervised" model of supervision is the only way to ensure tasks get done correctly. They must now determine whether they they should transform the role of junior developers, employing them to assist the agent, or scrap the role entirely, delegating the supervision workload to senior developers. If they scrap the junior developer role in favour of a commercial (outsourced) agent product, they run the risk of becoming more dependent on the external vendor than is ideal. If they own and maintain their own "AI Agent", their risk of regret is lower, but they must also consider the cost of building the product. This leaves them with six possible choices, determined by prepending "In-House", "Contracted", or "Outsourced" to "Supervised-Transform" and "Supervised-Remove". Their choice of automation strategy is now a matter of weighing the tradeoffs between these six scenarios, some of which are easily eliminated as undesirable.
+Consider a future organization that has the means to automate the work of some junior developers using an "AI Agent" product. Let's assume that they're certain that the "supervised" model of oversight is the only way to ensure tasks get done correctly. They must now determine whether they they should transform the role of junior developers, employing them to assist the agent, or scrap the role entirely, delegating the oversight workload to senior developers. If they scrap the junior developer role in favour of a commercial (outsourced) agent product, they run the risk of becoming more dependent on the external vendor than is ideal. If they own and maintain their own "AI Agent", their risk of regret is lower, but they must also consider the cost of building the product. This leaves them with six possible choices, determined by prepending "In-House", "Contracted", or "Outsourced" to "Supervised-Transform" and "Supervised-Remove". Their choice of automation strategy is now a matter of weighing the tradeoffs between these six scenarios, some of which are easily eliminated as undesirable.
 
 ---
 
 ## Historical Overview of Automation (1985–2025)
-
-Below is a broad chronological‐cum‐geographical sweep of major automation trends. We will use illustrative examples to clarify how they can be framed via the three axes. We will also connect those examples back to the **task‐based definition** of automation—particularly focusing on when automation tackled **primary job tasks** and hence triggered retool/transform/remove outcomes.
-
-### Late 1980s: Rise of Industrial Robotics and Office IT
-
-- **Context:** Industrial robots in automotive manufacturing were growing especially in Japan, leading to partially automated welding, painting, etc. Meanwhile, in offices worldwide, personal computers and spreadsheets were automating *some* clerical tasks.  
-- **Typical Axes Profile:**
-  - **Implementation:** Often **In‐House** for major Japanese automakers (they developed proprietary robotic systems in collaboration with local robotics firms, but effectively “owned” the process). In office settings, organizations often brought in outside software (partial “Contracted” approach) but ran it internally.  
-  - **Supervision:** Predominantly **Manual or Supervised**. Factory robots needed continuous monitoring and programming from human engineers. Office systems still needed human input to run each spreadsheet or process.  
-  - **Workforce:** The immediate effect varied. Many clerical roles began to **Retool** (typing pool staff learned to use word processors). Some jobs were **Transformed** in factories (fewer welders, more robot technicians). Relatively few roles were **Removed** outright in this early phase because the automation was not yet fully autonomous or wide‐ranging enough to make entire jobs vanish.  
-- **Task‐Based Rationale:** Robots took over discrete tasks like spot‐welding, but broad lines of assembly still involved humans. Office computers automated tasks (like rewriting letters) but often left humans responsible for organizing, printing, distribution, etc.
-
-### 1990s: Globalization and the IT Boom
-
-- **Context:** Trade liberalization made outsourcing an attractive alternative to local automation for labor‐intensive tasks. Meanwhile, IT systems (ERP, CRMs) automated many back‐office processes.  
-- **Axes in Action:**
-  - **Implementation:** Large enterprises often pursued a **Contracted** approach (commissioning IT vendors to develop or customize software, then hosting it in‐house). Some SMEs began adopting **Outsourced** models for payroll or data processing, letting service bureaus handle everything.  
-  - **Supervision:** A lot of IT systems were **Supervised**—they ran many operations automatically but still had staff overseeing data flows and verifying outputs.  
-  - **Workforce:** For tasks that got fully taken over by software (e.g., automatic invoice matching), some clerical roles were **Removed**. However, more common was **Transform**—the nature of accounting or HR staff changed as they became system specialists.  
-- **Task‐Based Rationale:** If the software or outsourced service automated a minor subset of tasks, staff usually **Retooled**. If it automated the major tasks on which the role was based (e.g., data entry clerks replaced by scanning + optical character recognition software), the job was either drastically **Transformed** or **Removed**.
-
-### Early 2000s: Offshoring vs. Automation
-
-- **Context:** Companies worldwide ramped up offshoring (particularly to China, India, and Eastern Europe). In manufacturing, the question often became “should we deploy expensive robots locally or just offshore production where labor is cheaper?” Meanwhile, advanced robotics and AI capabilities were improving but still not widespread in every domain.  
-- **Axes Examples:**
-  - **Implementation:** Widespread **Outsourced** setups emerged—**entire factories** and processes were managed by third‐party suppliers in Asia. This meant organizations effectively outsourced both the building and operation of the process.  
-  - **Supervision:** Depending on the deal, the offshoring company might keep some **Manual** or **Supervised** oversight of quality, but in many cases, day‐to‐day operation was effectively run by the local partner (close to “Autonomous” from the original firm’s perspective).  
-  - **Workforce:** In high‐wage countries, this strategy often led to **Remove** for local assembly or back‐office staff, because tasks were “removed” from local operations altogether. In the host country, newly employed workers did the tasks *manually*, so the net effect was a shift of roles across borders rather than a retool or transform.  
-- **Task‐Based Rationale:** Offshoring is not always “automation”; often it’s simply a lower‐labor‐cost alternative. Nonetheless, from the perspective of the original local workforce, the tasks were effectively removed.
-
-### 2010s: Industry 4.0 and AI‐Driven Service Automation
-
-- **Context:** Post‐2008, pressure to cut costs and the emergence of new digital technologies led to the so‐called “Fourth Industrial Revolution,” featuring advanced robotics, IoT, and AI. Additionally, machine learning (ML) and big data enabled new forms of service automation: chatbots, algorithmic management (Uber, Amazon logistics), etc.  
-- **Axes Illustrations:**
-  - **Implementation:**  
-    - Many factories started adopting advanced **In‐House** solutions to stay competitive (e.g., in Germany’s “Industry 4.0”). These might be partly “Contracted” in development but run on‐site.  
-    - Numerous service companies embraced **Outsourced** models for AI (cloud‐based automation platforms).  
-  - **Supervision:**  
-    - Automated warehouses (e.g., Amazon) typically operate under a **Supervised** model—robots do the heavy lifting, but staff and managers oversee performance.  
-    - Some algorithmic systems in finance run with minimal real‐time human oversight (close to **Autonomous**).  
-  - **Workforce:**  
-    - **Retool:** In many manufacturing settings, line workers learned to operate collaborative robots (cobots).  
-    - **Transform:** Some tasks for drivers or warehouse pickers changed significantly as algorithms took over scheduling or routing.  
-    - **Remove:** Fully automated processes, like certain “dark” warehouse or fulfillment center cells, made entire picking/packing roles obsolete.  
-- **Task‐Based Rationale:** Where the automation system took over *primary tasks* (e.g., product routing, picking), roles were removed. Where it only covered a subset of tasks, roles were retooled or transformed.
-
-### Early 2020s and the COVID‐19 Catalyst
-
-- **Context:** The pandemic accelerated interest in “contactless” operations. Labor disruptions led companies to invest more aggressively in service automation (robots for cleaning, telemedicine) and advanced digital platforms.  
-- **Axes Lens:**
-  - **Implementation:** Many rushed to adopt **Outsourced** cloud solutions for remote collaboration, process automation, and even robotic services.  
-  - **Supervision:** Some of these solutions ended up **Manual** or **Supervised** (e.g., telepresence robots guided by remote staff). Others, like automated cleaning robots, were **Autonomous** once deployed.  
-  - **Workforce:** Depending on how central these tasks were, healthcare or logistics workers might be **Retooled** to work alongside telehealth or teleoperation systems, or certain roles were **Removed** if the new system supplanted them.  
-- **Task‐Based Rationale:** If the system automated the core tasks of a role (e.g., cleaning staff replaced by autonomous units), the outcome was “Remove.” If it merely offloaded some peripheral tasks, roles shifted to “Retool” or “Transform.”
-
----
-
-## Cross‐Territorial Dynamics and the Three Axes
-
-The three axes also help frame the **global** dimension of automation:
-
-- **Implementation (In‐House / Contracted / Outsourced)**:  
-  - In the 1990s–2000s, many Western companies **outsourced** entire production lines to external suppliers in Asia, removing local jobs.  
-  - Since the 2010s, we see partial “reshoring” with high automation: factories in the U.S. or Europe, run “In‐House” with heavy robotics. This can lead to “Remove” of low‐skilled local roles but create or transform new tech roles.
-
-- **Supervision (Manual / Supervised / Autonomous)**:  
-  - Many East Asian manufacturers progressed from “Manual” to “Supervised” to near‐“Autonomous” factories over three decades.  
-  - By 2025, global leaders in robotics (Japan, Germany, South Korea, China) were edging toward fully autonomous lines in certain sectors, raising important workforce questions.
-
-- **Workforce Impact (Retool / Transform / Remove)**:  
-  - In a high‐wage, unionized economy, the arrival of advanced robotics might lead to “Transform” (workers become robot technicians). In a lower‐wage or less regulated environment, the same technology might result in “Remove” for large numbers of assembly staff.  
-  - Government policies (e.g., Germany’s apprenticeship model) facilitate “Retool” or “Transform” outcomes. Where no retraining structures exist, job elimination is more likely.
-
-## Future Outlook
 
 This is a work in progress.
