@@ -5,7 +5,7 @@ categories: [Technology, Artificial Intelligence]
 tags: [benchmarks, llm, ai]
 ---
 
-## Nonsense-Free Benchmarking for LLMs via EasyLLMBench
+# Nonsense-Free Benchmarking for LLMs via EasyLLMBench
 
 We're often told about vague, subjective leaps in quality – remember the hype around GPT-4.5's supposed "subtle intelligence"? Yeah, clever prompting and wishful thinking can make these claims seem real. 
 
@@ -19,7 +19,7 @@ Yeah, that's what I thought too. Until I met `lm-evaluation-harness`.
 
 I've enjoyed less confusion trying to decipher a lecture whilst on hard drugs. This tool isn't just awful — it's a soul-crushing complexity labyrinth designed by sadists. I don't need to waste another moment trying to decipher its arcane logic, I've made up my mind: it sucks, and we can do much better.
 
-### WTF?
+## WTF?
 
 Okay, let's be fair for a moment. The *intention* behind `lm-evaluation-harness` seems noble: simplify benchmarking by taking coding out of the user's hands. The idea is to treat benchmark definitions purely as *configuration files* – collections of data (usually in YAML) that instruct the main evaluation program on how to behave, without requiring the user to write Python logic for each specific benchmark.
 
@@ -39,7 +39,7 @@ Just glance at the sheer volume of *stuff* you need to understand just to use th
 
 Feeling overwhelmed? *Exactly*. This isn't configuration; it's brain assault disguised as not having to write code.
 
-### A Taste Of Hell
+## A Taste Of Hell
 
 Let me walk you through what happens when you try to add a simple benchmark to `lm-evaluation-harness`. How hard could it be? *cue hysterical laughter*
 
@@ -112,7 +112,7 @@ AttributeError: 'NoneType' object has no attribute 'group'
 
 WHERE did this happen? In your YAML? In a template? In a hidden framework function? IN THE FABRIC OF REALITY ITSELF?
 
-### Something, Something, Abstraction
+## Something, Something, Abstraction
 
 The root of the problem with `lm-evaluation-harness` lies in its poor use of _abstraction_. That's supposed to mean simplifying complex things by hiding unnecessary details behind a clean interface.
 
@@ -122,7 +122,7 @@ The root of the problem with `lm-evaluation-harness` lies in its poor use of _ab
 
 `lm-eval` *tried* to standardize benchmarking, but in the wrong places and using awful abstractions.
 
-### It's That Bad
+## It's That Bad
 
 This isn't just whining. This terrible garbage:
 
@@ -131,7 +131,7 @@ This isn't just whining. This terrible garbage:
 3.  Creates opportunities for misconfiguration and possibly even incorrect results.
 4.  Makes it hard to comprehend how *exactly* how a published score was generated.
 
-### Why I Made EasyLLMBench
+## Why I Made EasyLLMBench
 
 I built **EasyLLMBench** because I hated working with `lm-evaluation-harness`.
 
@@ -149,7 +149,7 @@ There will be opportunities to eliminate repetitive, common code between similar
 
 Finally, EasyLLMBench tackles the problem of bad abstractions that plague `lm-eval` and make useful standardization difficult. Instead of imposing one-size-fits-none concepts like `doc_to_X`, it embraces Python's native tools for *optional*, *explicit* standardization. If *you* find value in standardizing a specific behavior (like Chain-of-Thought prompting or a specific output parsing method) across several *similar* benchmarks, you can define a standard Python `Protocol` (an interface) specifying the methods required for that behavior. Benchmarks that need this capability can then *choose* to implement that protocol (e.g., `class MyBenchmark(Benchmark, SupportsCOT): ...`), or if appropriate, inherit from a class that already implements the required methods. This approach leverages Python's strengths for creating clear, opt-in contracts between components, promoting reusability where it makes sense, without resorting to the forced abstractions that ultimately add more complexity than they hide.
 
-### Conclusion: Demand Clarity, Not Complexity
+## Conclusion: Demand Clarity, Not Complexity
 
 `lm-evaluation-harness`, born from good intentions, ultimately drowned in bad abstractions and a misguided attempt to make YAML function as code. It created a system that is complex, opaque, and actively hostile to the simple goal of evaluating AI models.
 
