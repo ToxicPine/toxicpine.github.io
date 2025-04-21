@@ -103,7 +103,9 @@ What does `regexes_to_ignore: [" "]` actually do? Does it ignore spaces when com
 Need custom logic? Enter the dreaded `!function` escape hatch:
 
 ```yaml
+{% raw %}
 doc_to_text: !function utils.format_basque_prompt
+{% endraw %}
 ```
 
 WHERE IS THIS DEFINED? WHAT ARGUMENTS DOES IT TAKE? WHAT DOES IT RETURN?
