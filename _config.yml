@@ -14,7 +14,7 @@ timezone: Europe/London
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: "shoebox"  # the main title
+title: "shoebox" # the main title
 
 tagline: "Arbion Halili's Personal Website"
 
@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://toxicpine.github.com"
+url: "https://toxicpine.github.io"
 
 github:
   username: toxicpine # change to your GitHub username
