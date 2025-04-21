@@ -1,6 +1,6 @@
 ---
 title: Introducing EasyLLMBench
-date: 2025-04-21 07:00:00 +0000
+date: 2025-04-20 07:00:00 +0000
 categories: [Technology, Artificial Intelligence]
 tags: [benchmarks, llm, ai]
 ---
