@@ -55,7 +55,7 @@ doc_to_text: '{% if answer is not none %}{{question+"\nErantzuna:"}}{% else %}{{
 What fresh hell is this? Where do "answer" and "question" actually come from?
 
 1. It's defining `doc_to_text` (because "question formatter" would be too intuitive)
-2. Inside: Jinja templating (??) with `{% if %}` conditional logic
+2. Inside: Jinja templating (??) with `{% raw %}{% if %}{% endraw %}` conditional logic
 3. Nested deeper: Variable interpolation using `{{}}` syntax
 4. Even deeper: String concatenation operations
 5. All of this: Crammed inside a YAML string
