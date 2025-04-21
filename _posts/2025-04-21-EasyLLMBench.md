@@ -29,7 +29,7 @@ Just glance at the sheer volume of *stuff* you need to understand just to use th
 
 - What's the difference between `dataset_path` and `dataset_name`? 
 - How does `doc_to_text` find variables like `{{question}}`? 
-- What Jinja syntax (`{% if %}`) is allowed inside that YAML string? 
+- What Jinja syntax (`{% raw %}{% if %}{% endraw %}`) is allowed inside that YAML string? 
 - What hidden Python function does `!function utils.helper` call? 
 - Which `filter` functions (`regex`, `take_first`, `remove_whitespace`) exist, and what are their exact arguments inside nested YAML lists? 
 - What does `metric: exact_match` *actually* calculate when combined with `aggregation: mean`, `higher_is_better: true`, and `regexes_to_ignore: [" "]`? 
