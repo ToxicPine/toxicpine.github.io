@@ -45,9 +45,7 @@ I randomly selected an example benchmark. This was my warm welcome:
 
 ```yaml
 # mgsm_direct_eu.yaml
-{% raw %}
-doc_to_text: '{% if answer is not none %}{{question+"\nErantzuna:"}}{% else %}{{"Galdera: "+question+"\nErantzuna:"}}{% endif %}'
-{% endraw %}
+{% raw %}doc_to_text: '{% if answer is not none %}{{question+"\nErantzuna:"}}{% else %}{{"Galdera: "+question+"\nErantzuna:"}}{% endif %}'{% endraw %}
 ```
 
 What fresh hell is this? Where do "answer" and "question" actually come from?
@@ -64,14 +62,12 @@ Here's how we extract answers:
 
 ```yaml
 filter_list:
-{% raw %}
-  - name: flexible-extract
+{% raw %}  - name: flexible-extract
     filter:
     - function: regex
       group_select: -1
       regex_pattern: (-?[0-9]+([ .,][0-9.,]+)?)
-    - function: take_first
-{% endraw %}
+    - function: take_first{% endraw %}
 ```
 
 So now I need to:
@@ -85,15 +81,13 @@ Want to configure metrics? Prepare for this beauty:
 
 ```yaml
 metric_list:
-{% raw %}
-  - metric: exact_match
+{% raw %}  - metric: exact_match
     aggregation: mean
     higher_is_better: true
     ignore_case: true
     ignore_punctuation: true
     regexes_to_ignore:
-      - " "
-{% endraw %}
+      - " "{% endraw %}
 ```
 
 What does `regexes_to_ignore: [" "]` actually do? Does it ignore spaces when comparing? Or is it ignoring regex patterns that consist of just a space? IS IT IGNORING MY WILL TO LIVE?
@@ -101,9 +95,7 @@ What does `regexes_to_ignore: [" "]` actually do? Does it ignore spaces when com
 Need custom logic? Enter the dreaded `!function` escape hatch:
 
 ```yaml
-{% raw %}
-doc_to_text: !function utils.format_basque_prompt
-{% endraw %}
+{% raw %}doc_to_text: !function utils.format_basque_prompt{% endraw %}
 ```
 
 WHERE IS THIS DEFINED? WHAT ARGUMENTS DOES IT TAKE? WHAT DOES IT RETURN?
