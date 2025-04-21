@@ -149,9 +149,9 @@ There will be opportunities to eliminate repetitive, common code between similar
 
 Finally, EasyLLMBench tackles the problem of bad abstractions that plague `lm-eval` and make useful standardization difficult. Instead of imposing one-size-fits-none concepts like `doc_to_X`, it embraces Python's native tools for *optional*, *explicit* standardization. If *you* find value in standardizing a specific behavior (like Chain-of-Thought prompting or a specific output parsing method) across several *similar* benchmarks, you can define a standard Python `Protocol` (an interface) specifying the methods required for that behavior. Benchmarks that need this capability can then *choose* to implement that protocol (e.g., `class MyBenchmark(Benchmark, SupportsCOT): ...`), or if appropriate, inherit from a class that already implements the required methods. This approach leverages Python's strengths for creating clear, opt-in contracts between components, promoting reusability where it makes sense, without resorting to the forced abstractions that ultimately add more complexity than they hide.
 
-## Conclusion: Demand Clarity, Not Complexity
+## The Conclusion
 
-`lm-evaluation-harness`, born from good intentions, ultimately drowned in bad abstractions and a misguided attempt to make YAML function as code. It created a system that is complex, opaque, and actively hostile to the simple goal of evaluating AI models.
+`lm-evaluation-harness` is proof that the road to hell is paved with good intentions. It created a system that is complex, opaque, and actively hostile to the simple goal of evaluating AI models.
 
 EasyLLMBench proves there's a better way.
 
