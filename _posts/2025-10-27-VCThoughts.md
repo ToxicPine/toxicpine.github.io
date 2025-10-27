@@ -15,19 +15,23 @@ You should take my advice with a pinch of salt, I've not raised a large round ye
 
 VCs will offer funds if their investment committee believes:
 
-* with a small non-zero probability, the valuation of my company will exceed $1b;  
-* the business is far more likely to succeed, exceeding the target valuation, if they are well-funded;  
-* funding the business won’t undermine the quality of the VCs portfolio in future (ie, by causing reputational damage to the VC, by undermining the balance of risk within their portfolio).
+* with a small non-zero probability, the valuation of your company will exceed $1b;  
+* your business is far more likely to succeed, exceeding the target valuation, if you're well-funded;  
+* funding your business won’t interfere with their other investments, damage their reputation, etc.
 
-**Explanation:** VCs are better off if the valuation of the companies in their portfolio increases, even if none of them generate revenue. Ideally, the business should generate significant revenue within five years, or get acquired at a massive valuation.
+VCs often profit when their portfolio companies raise another round (at a higher valuation): the VC's equity stake becomes worth more on paper, and they can cash-out by selling their shares.
+
+If a VC is confident that you'll raise again at a much greater valuation, they'll offer great terms.
+
+VCs are most happy if your business IPOs, or gets acquired for a massive sum.
 
 ### The Minimum You Need To Convince Them
 
 VCs are run by humans. They’re tired and busy.   
 They're unlikely to research your ideas, don't assume they'll know what you don't tell them.  
 
-They’ve fine-tuned their own process for interpreting the facts about your business.   
-It allows them to make sane decisions quickly and more easily justify those decisions to their superiors.  
+They’ve fine-tuned their process for judging your business. 
+They've optimized for making sane decisions quickly, and being able to justify those decisions to their superiors.  
 I call this their "commercial instinct”.
 
 VCs have two types of commercial instinct: sensing and intuiting. 
@@ -47,11 +51,11 @@ Founders must appeal to one kind of instinct at minimum.
 
 Here are some Sensing VC motivations, all of the below must apply to convince a VC:
 
-* Evidence that the business has experienced massive growth in their user base;  
+* Evidence that the business has experienced massive growth in your user base;  
 * Evidence that the business has won-over credible outsiders;  
 * Evidence that the business has won-over mindshare;  
-  * The business’s brand is widely associated with the issue that the business solves.  
-  * There are no other brands widely associated with the issue that the business solves.  
+  * Your business’s brand is widely associated with the issue that your business solves.  
+  * There are no other brands widely associated with the issue that your business solves.  
 * Evidence that the founder is credible and can win.
 
 Here are some Intuitive VC motivations, all of the below must apply to convince a VC:
