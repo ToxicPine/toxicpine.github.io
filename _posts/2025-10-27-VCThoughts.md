@@ -19,25 +19,23 @@ VCs will invest if their investment committee believes:
 * Your business is far more likely to succeed if it's well funded;  
 * Funding your business won't interfere with their other investments or damage their reputation.
 
-I've not listed current revenue or profit. VCs make money from your future, not your past.
+I've not listed traction, revenue or profit. Some VCs will fund startups that lack all three.
 
-VCs care about revenue only insofar as it predicts a high-valuation exit or future fundraising rounds.
+VCs care about their future return. They generate this return by selling their stake in your company, typically after an IPO, acquisition, or when you raise your round at a higher valuation.
 
-VCs are happiest if your business IPOs or gets acquired for a massive sum. 
-
-VCs may profit when their portfolio companies raise another round at a higher valuation: the VC's equity stake becomes worth more on paper, and they can cash out by selling their shares.
-
-The expected exit value should drive your company's valuation at each funding round. However, if a VC is confident that you'll raise again (from other VCs) at a much greater valuation, they'll offer favourable terms.
+They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them early opportunity to sell their stake profitably.
 
 ### The Minimum Requirements For Getting Funded
 
 VCs are run by humans. They're tired and busy.   
-They won't research what you don't tell them.  
-It's not their job to find out whether your idea is brilliant or terrible.
+They won't research your idea, they know only what you tell them.  
+It's not their job to figure out whether idea is brilliant or terrible.
 
-They've fine-tuned their process for judging businesses. 
-They've optimized for making sound decisions quickly and justifying those decisions to their superiors.  
-I call this process their "commercial instinct."
+You should choose an idea that makes it easier for VCs to see how they'll get their return.
+
+VCs have refined their process to judge businesses without overthinking each idea.
+They've optimised for making sound decisions quickly and justifying those decisions to their superiors.  
+I call this process their "commercial instinct." You must understand it well.
 
 VCs have two types of commercial instinct: sensing and intuiting. 
 
@@ -73,7 +71,7 @@ Appeal to at least one to get funded.
 * Reason to believe that the founders are better equipped to make decisions for this business than anyone else, for tangible reasons; i.e., they know something that is crucial for the business to succeed while other people don’t, and they have an abundance of topic-relevant experience, etc.   
   * **Explanation:** If not, why hasn’t somebody done this business already? Even if the VC believes that the business idea is an unexploited arbitrage, they should be able to explain why the founders were able to identify this idea earlier than others. If such an explanation exists, the founder has already demonstrated their superior capacity for decision making. Ideally, the founder has chosen their strategy carefully, on the basis of experience that other people don’t have, and this should benefit the business over a long stretch.
 
-#### Other Motivations
+#### Other Important Factors
 
 * Reason to believe that the business will significantly benefit from raising a large round of funding;  
 * Reason to believe that investing in the business won’t upset the risk profile of their portfolio;  
@@ -83,6 +81,8 @@ I’ve opted not to mention idea-specific factors. Many VCs ask founders to prop
 
 ### Additional Advantages
 
+You must embody at least two of these, otherwise you'll struggle to raise.
+
 * Evidence of revenue-generating activities within the company;  
 * Evidence that the founder has created significant revenue before;  
 * Evidence that the founder has positive relationships with other VCs;  
@@ -91,44 +91,54 @@ I’ve opted not to mention idea-specific factors. Many VCs ask founders to prop
   * access to good potential hires, technical knowledge, relationships, etc.  
 * Evidence that the business is sought-after by other VCs.
 
-You must embody at least two of these.
-
 ## What Founders Care About
 
-Founders seek to generate revenue.  
-Founders seek to get VC funding.  
-Founders don’t expect VCs to act rationally.
+Your idea should require massive capital and promise massive returns. VCs exist for big, expensive bets that can generate huge revenue or huge acquisitions. If you don't need their money to scale or your upside isn't large enough, there's no point doing VC.
 
-The lifecycle of a business may be summarized as:
+Since you'll need to raise, you must choose your idea to appeal to VCs' commercial instincts. Each VC's portfolio and decision-making style reveal what will and won't resonate with them. They all heavily depend on similar rules-of-thumb when making investment decisions, regardless of what they might claim. You should take their reputation with a grain of salt, also. If you understand each VC's style, you can identify investors who'll offer better terms and tailor your pitch to them.
 
+Side Note: If you raise from the right VC, you'll find it easier to raise in future. When your current investor has a strong reputation with your next one, their endorsement reflects positively on your business. It's also possible to hurt your chances: VCs often display tribalism, and raising from the wrong investor can discourage certain other VCs from investing in future.
+
+You must also chose your idea to optimise for revenue.
+
+The lifecycle of your business will look something like this:
+
+* Discovery Vehicle: doesn't yet provide a good or service, still learning about the market;
 * Startup: minimal revenue and minimal resources, yet provides a good or service;  
 * Early Firm: some revenue and significant growth-critical resources;  
 * Mature Firm: has mostly expended its growth-critical resources and generates revenue;
 
-Most startups don't have a strong strategy, positioning, and resources.
-They grind to revenue first, then build better strategy and collect resources later.
+If your business can't survive the transition between each stage, it will never achieve its revenue potential.
 
-Founders care about the following, independent of VC incentives.
+You'll need a strong strategy, unique positioning, and many resources to become a mature firm.
+You're unlikely to develop an appropriate long-term strategy during the discovery stage.
+This is fine, if you have a good reason to believe that you could form a better strategy later. 
 
-* It’s very likely that businesses in their market can generate substantial revenue if the founder’s core beliefs are true;  
-  * Founders, being rational, know that they’ll probably need to pivot. If their immediate plans fail, forcing a pivot, it would be better for them if they didn’t need to leave the market to do so, as they could retain some of their progress and most of their insight into the customer. Thus, it’s important for the founder to believe that a massive company will exist in their market, regardless of whether the first product they considered selling is worth making.  
-* Their core beliefs, which inform how they act in the market, are contrarian;  
-  * It is better for a founder if their competition is prone to making predictable mistakes, even if they have knowledge of the product and have enough resources to compete. It’s possible for a founder to guarantee this by selecting an idea that would fail if the obvious strategy were followed, and opt for a controversial strategy that they’re confident will work.  
-* Other founders, with similar strategy and resources, haven’t failed within the target market;  
-  * It’s better to learn from the mistakes of others, it will help a founder avoid areas where they’re unlikely to make revenue.  
-* They have a clear plan of action, driven by short-term KPIs that are directly relevant to the long-run plan;  
-  * If an immediate plan of action can’t be formed, there’s no point.  
-* EITHER Other founders don’t have the knowledge, expertise, or resources needed to identify and then achieve the core premise, whereas our founder does OR Other founders will fail if they attempt a similar business at a later time, if our founder captures the market early OR Other competent founders are biased against starting such a business for personal reasons (it’s boring) or social reasons (it’s controversial), whereas our founder isn’t;  
-* EITHER There isn’t a Schelling point (popular meeting point for relevant technical talent or business-relevant community) for the core theme of the business OR it’s viable to publicly counter-position relative to the entity that already has the attention of potential customers and potential hires;  
-  * It is better for a founder to have access to difficult-to-find talent and recent insight, otherwise it would be too easy for a potential competitor to mimic the founder’s strategy or compromise their social-technological moat.  
-* If the founder continues to participate in the industry where they started their company, they would enjoy an increasing rate of return on their time over at least five years, in terms of: their own industry-relevant professional experience, their ability to hire within the industry, and the industry-relevant value of their social network.  
-  * It might take ten years to exit a startup, possibly longer. It would be ideal for a founder if they enjoyed increasing rewards over time for continuing to specialize in their chosen industry; otherwise, they might feel that their ambition has regressed or that their potential to earn has reached its limit.
+When juding an idea, ask yourself: "will this lead me to a dead-end?"
 
-Founders care about the following, partially to optimize for VC appeal.
+### The Core Factors
 
-* Their business will do things that attract public excitement in the short term.  
-* They can, in the short term, take actions that will make the company look more likely to generate revenue, from the perspective of a VC.  
-  * VCs don’t buy into existing traction; they buy into future traction.   
+* It's very likely that businesses in your market will generate substantial revenue if your core beliefs are true;  
+  * Founders, being rational, know that they'll probably need to pivot. If your immediate plans fail, forcing a pivot, it would be better for you if you didn't need to leave the market to do so, as you could retain some of your progress and most of your insight into the customer. Thus, it's important for you to believe that a massive company will exist in your market, regardless of whether the first product you considered selling is worth making.  
+* Your core beliefs, which inform how you act in the market, are contrarian;  
+  * It is better for you if your competition is prone to making predictable mistakes, even if they have knowledge of the product and have enough resources to compete. It's possible for you to guarantee this by selecting an idea that would fail if the obvious strategy were followed, and opt for a controversial strategy that you're confident will work.  
+* Other founders, with similar strategy and resources, haven't failed within your target market;  
+  * It's better to learn from the mistakes of others, it will help you avoid areas where you're unlikely to make revenue.  
+* You have a clear plan of action, driven by short-term KPIs that are directly relevant to your long-run plan;  
+  * If an immediate plan of action can't be formed, there's no point.  
+* EITHER Other founders don't have the knowledge, expertise, or resources needed to identify and then achieve the core premise, whereas you do OR Other founders will fail if they attempt a similar business at a later time, if you capture the market early OR Other founders are biased against starting such a business for personal reasons (it's boring) or social reasons (it's controversial), whereas you aren't;  
+* EITHER There isn't a Schelling point (popular meeting point for relevant technical talent or business-relevant community) for the core theme of your business OR it's viable to publicly counter-position relative to the entity that already has the attention of potential customers and potential hires;  
+  * It is better for you to have access to difficult-to-find talent and recent insight, otherwise it would be too easy for a potential competitor to mimic your strategy or compromise your social-technological moat.  
+* If you continue to participate in the industry where you started your company, you would enjoy an increasing rate of return on your time over at least five years, in terms of: your own industry-relevant professional experience, your ability to hire within the industry, and the industry-relevant value of your social network.  
+  * It might take ten years to exit a startup, possibly longer. It would be ideal for you if you enjoyed increasing rewards over time for continuing to specialize in your chosen industry; otherwise, you might feel that your ambition has regressed or that your potential to earn has reached its limit.
+
+### The Factors That Help You Raise
+
+These should help you maximise the sense-based appeal of your idea.
+
+* Your business will do things that attract public excitement in the short term.  
+* You can, in the short term, take actions that will make the company look more likely to generate revenue, from the perspective of a VC.  
+  * VCs don't buy into existing traction; they buy into future traction.   
   * VCs like existing traction because it makes promises of future traction credible.  
   * There are other kinds of actions that can foster confidence in the revenue potential of a company, such as public technical achievement and credible third-party validation.
 
@@ -138,7 +148,15 @@ It's clear that some founders don't need traction to raise a large round, yet mo
 
 If a founder has achieved traction, their claims will sound more believable.
 
-The Hope: "Person X has Problem Y; I'll sell Solution Z that solves Y to X."
+**The Hope:** "Person X has Problem Y; I'll sell Solution Z that solves Y to X."
+
+When you break this statement down, you'll realize that finding a great idea is significantly harder than it initially appears.
+
+### The Break-down
+
+You can use this to test your ideas. 
+
+You should try to defeat your ideas point-by-point: if it's easy to defeat, it's not worth defending. 
 
 1. Person X has Problem Y.  
    1. Y conflicts with X’s most significant motivations, rather than their secondary priorities.  
