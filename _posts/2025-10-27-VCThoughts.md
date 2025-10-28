@@ -5,8 +5,6 @@ categories: [Technology, Advice, Venture Capital]
 tags: [vc, venture capital, technology, idea, advice]
 ---
 
-If you're a founder, you want to raise from an American VC, and you've not settled on an idea, this blog might be helpful to you.
-
 If you're a founder who wants to raise capital from a U.S. VC and you haven't settled on an idea, this post might help.
 
 Take my advice with a pinch of salt; I haven't raised a large round yet.
