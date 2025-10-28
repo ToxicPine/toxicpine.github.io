@@ -19,7 +19,9 @@ VCs will invest if their investment committee believes:
 * Your business is far more likely to succeed if it's well funded;  
 * Funding your business won't interfere with their other investments or damage their reputation.
 
-I've not listed revenue or profit. VCs care about these only insofar as they predict high-valuation exits or future fundraising rounds.
+I've not listed current revenue or profit. VCs make money from your future, not your past.
+
+VCs care about revenue only insofar as it predicts a high-valuation exit or future fundraising rounds.
 
 VCs are happiest if your business IPOs or gets acquired for a massive sum. 
 
