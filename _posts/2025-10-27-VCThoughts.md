@@ -7,7 +7,7 @@ tags: [vc, venture capital, technology, idea, advice]
 
 If you're a founder who wants to raise capital from a U.S. VC and you haven't settled on an idea, this post might help.
 
-It discusses the financial decision-making variables; you must also consider any emotional factors that apply to you. 
+You must consider any emotional factors that apply to you separately, this article won't discuss them.
 
 Take my advice with a pinch of salt, since I haven't raised a large round yet. 
 
