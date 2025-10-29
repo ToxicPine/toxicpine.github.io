@@ -7,9 +7,9 @@ tags: [vc, venture capital, technology, idea, advice]
 
 If you're a founder who wants to raise capital from a U.S. VC and you haven't settled on an idea, this post might help.
 
-It focuses on financial rationale and ignores personal considerations, which you'll need to weigh separately.
+It discusses the financial decision-making variables; you must also consider any emotional factors that apply to you. 
 
-Take my advice with a pinch of salt; I haven't raised a large round yet. 
+Take my advice with a pinch of salt, since I haven't raised a large round yet. 
 
 ## What VCs Care About
 
@@ -23,7 +23,7 @@ VCs will invest if their investment committee believes:
 
 I've not listed traction, founder-market fit or product-market fit. Sometimes, VCs will fund startups that lack all three.
 
-VCs only care about their future return. They want to sell their stake in your company at a profit. They want you to increase the value of their stake in your company and they don't care how you do it, so long at it's possible. They have three opportunities to sell their stake: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
+VCs only care about their future return. They want to sell their stake in your company at a profit. They want you to increase the value of their stake in your company and they don't care how you do it, so long as it's possible. They have three opportunities to sell their stake: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
 
 They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them an early opportunity to cash out their stake.
 
@@ -36,7 +36,7 @@ It's not their job to figure out whether your idea is brilliant or terrible.
 You should choose an idea that makes it easier for VCs to see how they'll get their return.
 
 VCs have refined their process to judge businesses without overthinking each idea.
-They've optimised for making sound decisions quickly and justifying those decisions to their superiors.  
+They've optimized for making sound decisions quickly and justifying those decisions to their superiors.  
 I call this process their "commercial instinct." You must understand it well.
 
 VCs have two types of commercial instinct: sensing and intuiting. 
@@ -57,26 +57,26 @@ Appeal to at least one to get funded.
 * Evidence that the business has experienced growth in its user base;  
 * Evidence that the business has won over credible outsiders;  
 * Evidence that the business has won mindshare;  
-  * Your business’s brand is widely associated with the issue that your business solves.  
+  * Your business's brand is widely associated with the issue that your business solves.  
   * There are no other brands widely associated with the issue that your business solves.  
 * Evidence that the founder is good at making money.
 
 #### Intuitive Motivations
 
 * Reason to believe that the business could shift its focus toward much larger revenue-generating opportunities without significant restructuring, a change of brand, or a change of personnel;  
-  * **Explanation:** VCs know that they can’t accurately predict whether the current plan for the business would lead to future success, so they ask themselves, "Would it be rational to bet that the business could achieve profitability, based on what I know about the founder and their north star, if they didn’t have any short-term plans at all?"  
-  * I’m highlighting the degree of fit between the founder and their north star, whether the north star has enough breadth to cover multiple possible products, and whether that north star is believable. I’m not trying to highlight overall founder competence.  
-  * VCs will consider whether the business is operating in a booming market, if the business has positioned itself uniquely relative to other firms, whether the core thesis of the business is flexible enough that they could redefine themselves, whether it would be rational to bet on the team’s ability to create profitable products if the current plan did not exist, etc.   
-* Reason to believe that the founders are better equipped to make decisions for this business than anyone else, for tangible reasons; i.e., they know something that is crucial for the business to succeed while other people don’t, and they have an abundance of topic-relevant experience, etc.   
-  * **Explanation:** If not, why hasn’t somebody done this business already? Even if the VC believes that the business idea is an unexploited arbitrage, they should be able to explain why the founders were able to identify this idea earlier than others. If such an explanation exists, the founder has already demonstrated their superior capacity for decision making. Ideally, the founder has chosen their strategy carefully, on the basis of experience that other people don’t have, and this should benefit the business over a long stretch.
+  * **Explanation:** VCs know that they can't accurately predict whether the current plan for the business would lead to future success, so they ask themselves, "Would it be rational to bet that the business could achieve profitability, based on what I know about the founder and their north star, if they didn't have any short-term plans at all?"  
+  * I'm highlighting the degree of fit between the founder and their north star, whether the north star has enough breadth to cover multiple possible products, and whether that north star is believable. I'm not trying to highlight overall founder competence.  
+  * VCs will consider whether the business is operating in a booming market, if the business has positioned itself uniquely relative to other firms, whether the core thesis of the business is flexible enough that they could redefine themselves, whether it would be rational to bet on the team's ability to create profitable products if the current plan did not exist, etc.   
+* Reason to believe that the founders are better equipped to make decisions for this business than anyone else, for tangible reasons; i.e., they know something that is crucial for the business to succeed while other people don't, and they have an abundance of topic-relevant experience, etc.   
+  * **Explanation:** If not, why hasn't somebody done this business already? Even if the VC believes that the business idea is an unexploited arbitrage, they should be able to explain why the founders were able to identify this idea earlier than others. If such an explanation exists, the founder has already demonstrated their superior capacity for decision making. Ideally, the founder has chosen their strategy carefully, on the basis of experience that other people don't have, and this should benefit the business over a long stretch.
 
 #### The Most Overlooked Motivation
 
 This is an intuitive motivation that both VCs and founders often overlook.
 
-* Reason to believe that the business’s ability to remain competitive will compound, i.e., the progress the business makes each month will enable it to execute on more significant opportunities in the next period, and (ideally) every achievement continues to pay off indefinitely;  
-  * **Explanation:** VCs expect the business to create more revenue if they can: 1\) develop a monopoly over their product segment, and 2\) expand the range of products and services they offer without losing focus. I’ve mentioned this idea of a “compounding edge”, as it is the variable that drives both monopoly power and horizontal expansion. VCs must ask themselves “does the business idea, and the market the business will operate in, make it easier for the founder to gain and maintain monopoly power?”  
-  * Ideally, every customer relationship, hard-won employee, customer insight, technical development, long-term contact, etc, should meaningfully enhance the company’s ability to succeed, even as the business switches its focus onto bigger opportunities with different requirements. 
+* Reason to believe that the business's ability to remain competitive will compound, i.e., the progress the business makes each month will enable it to execute on more significant opportunities in the next period, and (ideally) every achievement continues to pay off indefinitely;  
+  * **Explanation:** VCs expect the business to create more revenue if they can: 1\) develop a monopoly over their product segment, and 2\) expand the range of products and services they offer without losing focus. I've mentioned this idea of a "compounding edge", as it is the variable that drives both monopoly power and horizontal expansion. VCs must ask themselves "does the business idea, and the market the business will operate in, make it easier for the founder to gain and maintain monopoly power?"  
+  * Ideally, every customer relationship, hard-won employee, customer insight, technical development, long-term contact, etc, should meaningfully enhance the company's ability to succeed, even as the business switches its focus onto bigger opportunities with different requirements. 
 
 The traditional advice suggests that compounding competitive advantages only matter later in a business's life. I disagree: if both the VC and founder anticipate that the business will hit a ceiling at the very start, they're at risk of hitting it earlier than expected.
 
@@ -85,10 +85,10 @@ When a founder commits to an idea, they're expected to stay committed to it for 
 #### Other Important Factors
 
 * Reason to believe that the business will significantly benefit from raising a large round of funding;  
-* Reason to believe that investing in the business won’t upset the risk profile of their portfolio;  
+* Reason to believe that investing in the business won't upset the risk profile of their portfolio;  
 * Reason to believe that the business will be sought-after by other VCs in the near future.
 
-I’ve opted not to mention idea-specific factors. Many VCs ask founders to propose a concrete business plan and demonstrate traction, but this is usually performative. VCs often offer tens of millions in funding to startups that are pre-product; traction is not strictly required.
+I've opted not to mention idea-specific factors. Many VCs ask founders to propose a concrete business plan and demonstrate traction, but this is usually performative. VCs often offer tens of millions in funding to startups that are pre-product; traction is not strictly required.
 
 ### Additional Advantages
 
@@ -110,7 +110,7 @@ You could also ignore every piece of advice that a startup incubator (i.e. EF, Y
 
 Side Note: If you raise from the right VC, you'll find it easier to raise in future. When your current investor has a strong reputation with your next one, their endorsement reflects positively on your business. It's also possible to hurt your chances: VCs often display tribalism, and raising from the wrong investor can discourage certain other VCs from investing in future. VCs' incentive to promote their portfolio companies and their fear of missing opportunities can lead to irrational crowd behavior, i.e. financial bubbles.
 
-You must also choose your idea to optimise for revenue.
+You must also choose your idea to optimize for revenue.
 
 The lifecycle of your business will look something like this:
 
@@ -125,7 +125,7 @@ You'll need a strong strategy, unique positioning, and many resources to become 
 You're unlikely to develop an appropriate long-term strategy during the discovery stage.
 This is fine, if you have a good reason to believe that you could form a better strategy later. 
 
-When juding an idea, ask yourself: "will this lead me to a dead-end?"
+When judging an idea, ask yourself: "will this lead me to a dead-end?"
 
 ### The Core Factors
 
@@ -145,7 +145,7 @@ When juding an idea, ask yourself: "will this lead me to a dead-end?"
 
 ### The Factors That Help You Raise
 
-These should help you maximise the sense-based appeal of your idea.
+These should help you maximize the sense-based appeal of your idea.
 
 * Your business will do things that attract public excitement in the short term.  
 * You can, in the short term, take actions that will make the company look more likely to generate revenue, from the perspective of a VC.  
@@ -153,7 +153,7 @@ These should help you maximise the sense-based appeal of your idea.
   * VCs like existing traction because it makes promises of future traction credible.  
   * There are other kinds of actions that can foster confidence in the revenue potential of a company, such as public technical achievement and credible third-party validation.
 
-## Optimising Ideas for Traction
+## Optimizing Ideas for Traction
 
 It's clear that some founders don't need traction to raise a large round, yet most do. 
 
@@ -170,21 +170,21 @@ You can use this to test your ideas.
 You should try to defeat your ideas point-by-point: if it's easy to defeat, it's not worth defending. 
 
 1. Person X has Problem Y.  
-   1. Y conflicts with X’s most significant motivations, rather than their secondary priorities.  
+   1. Y conflicts with X's most significant motivations, rather than their secondary priorities.  
       1. For B2B: X will be promoted, avoid being fired, or mitigate personal disaster if they address Y; it would be impractical for X to keep their job without adopting a solution to Y, if such a solution existed.  
-      2. For B2C: it’s hard to say; you must judge based on X’s willingness to pay for a solution; if X can’t readily quantify how much they’re willing to pay for a solution, the problem doesn’t present a significant threat to X’s core needs.  
-   2. X’s return on time for identifying and purchasing the solution to Y justifies their effort, i.e., they’re not preoccupied with higher-priority problems.  
+      2. For B2C: it's hard to say; you must judge based on X's willingness to pay for a solution; if X can't readily quantify how much they're willing to pay for a solution, the problem doesn't present a significant threat to X's core needs.  
+   2. X's return on time for identifying and purchasing the solution to Y justifies their effort, i.e., they're not preoccupied with higher-priority problems.  
    3. X can adequately assess the severity of Y; X displays a rational attitude toward Y.  
-   4. Assuming that X has made every attempt to dampen Y’s impact themselves, the issue is still urgent and all of these statements remain true.  
+   4. Assuming that X has made every attempt to dampen Y's impact themselves, the issue is still urgent and all of these statements remain true.  
 2. Product Z can fix Y.   
-   1. If X were to buy Z, it would eliminate the practical and emotional consequences of the problem, without leaving behind any concerns that X couldn’t adequately address.  
-   2. X could clear barriers to Z’s adoption, enlisting external support if necessary.  
-   3. X will choose to clear any barriers to Z’s adoption, of their own volition, if offered Z.  
+   1. If X were to buy Z, it would eliminate the practical and emotional consequences of the problem, without leaving behind any concerns that X couldn't adequately address.  
+   2. X could clear barriers to Z's adoption, enlisting external support if necessary.  
+   3. X will choose to clear any barriers to Z's adoption, of their own volition, if offered Z.  
 3. I can sell Solution Z to X.  
    1. X will trust me.  
-   2. I’m willing to sell Z at a price that X can afford.  
+   2. I'm willing to sell Z at a price that X can afford.  
    3. EITHER X can pay me OR X can force a surrogate (i.e., their boss) to pay me.  
    4. I can create and distribute Z.  
    5. I can identify, contact, and engage with X.  
-   6. X won’t prefer a different solution.  
-   7. X won’t prefer a different seller.
+   6. X won't prefer a different solution.  
+   7. X won't prefer a different seller.
