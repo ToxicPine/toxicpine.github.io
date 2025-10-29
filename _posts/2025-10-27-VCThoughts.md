@@ -13,7 +13,7 @@ Take my advice with a pinch of salt, since I haven't raised a large round yet.
 
 ## What VCs Care About
 
-Your idea should require massive capital and promise massive returns. VCs exist for big, expensive bets that can generate huge revenue or huge acquisitions. If you don't need their money to scale or your upside isn't large enough, there's no point doing VC.
+VCs exist for big, expensive bets that can generate huge revenue or huge acquisitions. If you don't need their money to scale or your upside isn't large enough, there's no point doing VC.
 
 VCs will invest if their investment committee believes:
 
