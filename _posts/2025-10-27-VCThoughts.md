@@ -108,7 +108,7 @@ You must choose your idea to appeal to VCs' commercial instincts. Each VC's port
 
 You could also ignore every piece of advice that a startup incubator (i.e. EF, YC, etc) offers yet still receive their investment. Mature VCs know there are many ways to build a profitable company; there are many different ways to appeal to the same group of investors, you must pick one.
 
-Side Note: If you raise from the right VC, you'll find it easier to raise in future. When your current investor has a strong reputation with your next one, their endorsement reflects positively on your business. It's also possible to hurt your chances: VCs often display tribalism, and raising from the wrong investor can discourage certain other VCs from investing in future.
+Side Note: If you raise from the right VC, you'll find it easier to raise in future. When your current investor has a strong reputation with your next one, their endorsement reflects positively on your business. It's also possible to hurt your chances: VCs often display tribalism, and raising from the wrong investor can discourage certain other VCs from investing in future. VCs' incentive to promote their portfolio companies and their fear of missing opportunities can lead to irrational crowd behavior, i.e. financial bubbles.
 
 You must also choose your idea to optimise for revenue.
 
