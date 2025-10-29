@@ -153,7 +153,7 @@ These should help you maximize the sense-based appeal of your idea.
   * VCs like existing traction because it makes promises of future traction credible.  
   * There are other kinds of actions that can foster confidence in the revenue potential of a company, such as public technical achievement and credible third-party validation.
 
-## Optimizing Ideas for Traction
+## Selecting for Traction Potential
 
 It's clear that some founders don't need traction to raise a large round, yet most do. 
 
@@ -169,22 +169,22 @@ You can use this to test your ideas.
 
 You should try to defeat your ideas point-by-point: if it's easy to defeat, it's not worth defending. 
 
-1. Person X has Problem Y.  
-   1. Y conflicts with X's most significant motivations, rather than their secondary priorities.  
-      1. For B2B: X will be promoted, avoid being fired, or mitigate personal disaster if they address Y; it would be impractical for X to keep their job without adopting a solution to Y, if such a solution existed.  
-      2. For B2C: it's hard to say; you must judge based on X's willingness to pay for a solution; if X can't readily quantify how much they're willing to pay for a solution, the problem doesn't present a significant threat to X's core needs.  
-   2. X's return on time for identifying and purchasing the solution to Y justifies their effort, i.e., they're not preoccupied with higher-priority problems.  
-   3. X can adequately assess the severity of Y; X displays a rational attitude toward Y.  
-   4. Assuming that X has made every attempt to dampen Y's impact themselves, the issue is still urgent and all of these statements remain true.  
-2. Product Z can fix Y.   
-   1. If X were to buy Z, it would eliminate the practical and emotional consequences of the problem, without leaving behind any concerns that X couldn't adequately address.  
-   2. X could clear barriers to Z's adoption, enlisting external support if necessary.  
-   3. X will choose to clear any barriers to Z's adoption, of their own volition, if offered Z.  
-3. I can sell Solution Z to X.  
-   1. X will trust me.  
-   2. I'm willing to sell Z at a price that X can afford.  
-   3. EITHER X can pay me OR X can force a surrogate (i.e., their boss) to pay me.  
-   4. I can create and distribute Z.  
-   5. I can identify, contact, and engage with X.  
-   6. X won't prefer a different solution.  
-   7. X won't prefer a different seller.
+1. **Person X has Problem Y.**  
+   * Y conflicts with X's most significant motivations, rather than their secondary priorities.  
+      * For B2B: X will be promoted, avoid being fired, or mitigate personal disaster if they address Y; it would be impractical for X to keep their job without adopting a solution to Y, if such a solution existed.  
+      * For B2C: it's hard to say; you must judge based on X's willingness to pay for a solution; if X can't readily quantify how much they're willing to pay for a solution, the problem doesn't present a significant threat to X's core needs.  
+   * X's return on time for identifying and purchasing the solution to Y justifies their effort, i.e., they're not preoccupied with higher-priority problems.  
+   * X can adequately assess the severity of Y; X displays a rational attitude toward Y.  
+   * Assuming that X has made every attempt to fix Y themselves, including partial solutions, the issue is still as urgent as it looked initially and all of these statements remain true.  
+2. **Product Z can fix Y.**   
+   * If X were to buy Z, it would eliminate the practical and emotional consequences of the problem, without leaving behind any concerns that X couldn't adequately address.  
+   * X could clear barriers to Z's adoption, enlisting external support if necessary.  
+   * X will choose to clear any barriers to Z's adoption, of their own volition, if offered Z.  
+3. **I can sell Solution Z to X.**  
+   * X will trust me.  
+   * I'm willing to sell Z at a price that X can afford.  
+   * EITHER X can pay me OR X can force a surrogate (i.e., their boss) to pay me.  
+   * I can create and distribute Z.  
+   * I can identify, contact, and engage with X.  
+   * X won't prefer a different solution.  
+   * X won't prefer a different seller.
