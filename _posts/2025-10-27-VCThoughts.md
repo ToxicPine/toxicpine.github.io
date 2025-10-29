@@ -175,7 +175,7 @@ You should try to defeat your ideas point-by-point: if it's easy to defeat, it's
       * For B2C: it's hard to say; you must judge based on X's willingness to pay for a solution; if X can't readily quantify how much they're willing to pay for a solution, the problem doesn't present a significant threat to X's core needs.  
    * X's return on time for identifying and purchasing the solution to Y justifies their effort, i.e., they're not preoccupied with higher-priority problems.  
    * X can adequately assess the severity of Y; X displays a rational attitude toward Y.  
-   * Assuming that X has made every attempt to fix Y themselves, including partial solutions, the issue is still as urgent as it looked initially and all of these statements remain true.  
+   * Assuming that X has made every attempt to fix Y themselves, including attempts to create a partial solution, the issue is still as urgent as it looked initially and all of these statements remain true.  
 2. **Product Z can fix Y.**   
    * If X were to buy Z, it would eliminate the practical and emotional consequences of the problem, without leaving behind any concerns that X couldn't adequately address.  
    * X could clear barriers to Z's adoption, enlisting external support if necessary.  
