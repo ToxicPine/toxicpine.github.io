@@ -9,7 +9,7 @@ If you're a founder who wants to raise capital from a U.S. VC and you haven't se
 
 You must consider any emotional factors that apply to you separately, this article won't discuss them.
 
-Take my advice with a pinch of salt, since I haven't raised a large round yet. 
+Take my advice with a pinch of salt; I haven't raised a large round yet. 
 
 ## What VCs Care About
 
