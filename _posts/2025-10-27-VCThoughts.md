@@ -21,9 +21,9 @@ VCs will invest if their investment committee believes:
 * Your business is far more likely to succeed if it's well funded;  
 * Funding your business won't interfere with their other investments or damage their reputation.
 
-I've not listed traction, founder-market fit or product-market fit. Most VCs will fund startups that lack all three.
+I've not listed traction, founder-market fit or product-market fit. Sometimes, VCs will fund startups that lack all three.
 
-VCs only care about their future return. They want to sell their stake in your company at a profit. They want you to increase the value of their stake in your company and they don't care how you do it. They have three opportunities to sell their stake: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
+VCs only care about their future return. They want to sell their stake in your company at a profit. They want you to increase the value of their stake in your company and they don't care how you do it, so long at it's possible. They have three opportunities to sell their stake: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
 
 They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them an early opportunity to cash out their stake.
 
