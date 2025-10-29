@@ -31,7 +31,7 @@ They'll be extra eager to invest when they expect your next funding round to com
 
 VCs are run by humans. They're tired and busy.   
 They won't research your idea, they know only what you tell them.  
-It's not their job to figure out whether idea is brilliant or terrible.
+It's not their job to figure out whether your idea is brilliant or terrible.
 
 You should choose an idea that makes it easier for VCs to see how they'll get their return.
 
