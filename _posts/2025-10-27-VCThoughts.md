@@ -7,11 +7,13 @@ tags: [vc, venture capital, technology, idea, advice]
 
 If you're a founder who wants to raise capital from a U.S. VC and you haven't settled on an idea, this post might help.
 
-Take my advice with a pinch of salt; I haven't raised a large round yet.
+It focuses on financial rationale and ignores personal considerations, which you'll need to weigh separately.
 
-**THIS IS A DRAFT.**
+Take my advice with a pinch of salt; I haven't raised a large round yet. 
 
 ## What VCs Care About
+
+Your idea should require massive capital and promise massive returns. VCs exist for big, expensive bets that can generate huge revenue or huge acquisitions. If you don't need their money to scale or your upside isn't large enough, there's no point doing VC.
 
 VCs will invest if their investment committee believes:
 
@@ -19,13 +21,13 @@ VCs will invest if their investment committee believes:
 * Your business is far more likely to succeed if it's well funded;  
 * Funding your business won't interfere with their other investments or damage their reputation.
 
-I've not listed traction, revenue or profit. Some VCs will fund startups that lack all three.
+I've not listed traction, founder-market fit or product-market fit. Most VCs will fund startups that lack all three.
 
-VCs care about their future return. They generate this return by selling their stake in your company, typically after an IPO, acquisition, or when you raise your round at a higher valuation.
+VCs only care about their future return. They want to sell their stake in your company at a profit. They want you to increase the value of their stake in your company and they don't care how you do it. They have three opportunities to sell their stake: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
 
-They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them early opportunity to sell their stake profitably.
+They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them an early opportunity to cash out their stake.
 
-### The Minimum Requirements For Getting Funded
+### The Checklist For Getting Funded
 
 VCs are run by humans. They're tired and busy.   
 They won't research your idea, they know only what you tell them.  
@@ -45,7 +47,7 @@ To founders, this looks wildly speculative: the VC anticipates future success fr
 Intuiting VCs look at strategy, positioning, and resource density. They rely on narrative and have to foresee a possible future.
 To founders, this looks methodical: the VC is doing deep analysis and asking all the right questions.
 
-VCs often favor their sensing instincts, that doesn't require them to predict the future.
+VCs often favor their sensing instincts. Sensing doesn't require them to predict the future.
 
 Appeal to both instincts for the best terms.  
 Appeal to at least one to get funded.
@@ -64,12 +66,21 @@ Appeal to at least one to get funded.
 * Reason to believe that the business could shift its focus toward much larger revenue-generating opportunities without significant restructuring, a change of brand, or a change of personnel;  
   * **Explanation:** VCs know that they can’t accurately predict whether the current plan for the business would lead to future success, so they ask themselves, "Would it be rational to bet that the business could achieve profitability, based on what I know about the founder and their north star, if they didn’t have any short-term plans at all?"  
   * I’m highlighting the degree of fit between the founder and their north star, whether the north star has enough breadth to cover multiple possible products, and whether that north star is believable. I’m not trying to highlight overall founder competence.  
-  * VCs will consider whether the business is operating in a booming market, if the business has positioned itself uniquely relative to other firms, whether the core thesis of the business is flexible enough that they could redefine themselves, whether it would be rational to bet on the team’s ability to create profitable products if the current plan did not exist, etc.  
-* Reason to believe that the business’s ability to remain competitive will compound, i.e., the progress the business makes each month will enable it to execute on more significant opportunities in the next period, and (ideally) every achievement continues to pay off indefinitely;  
-  * **Explanation:** VCs expect the business to create more revenue if they can: 1\) develop a monopoly over their product segment, and 2\) expand the range of products and services they offer without losing focus. I’ve mentioned this idea of a “compounding edge”, as it is the variable that drives both monopoly power and horizontal expansion. VCs must ask themselves “does the business idea, and the market the business will operate in, make it easier for the founder to gain and maintain monopoly power?”  
-  * Ideally, every customer relationship, hard-won employee, customer insight, technical development, long-term contact, etc, should meaningfully enhance the company’s ability to succeed, even as the business switches its focus onto bigger opportunities with different requirements.  
+  * VCs will consider whether the business is operating in a booming market, if the business has positioned itself uniquely relative to other firms, whether the core thesis of the business is flexible enough that they could redefine themselves, whether it would be rational to bet on the team’s ability to create profitable products if the current plan did not exist, etc.   
 * Reason to believe that the founders are better equipped to make decisions for this business than anyone else, for tangible reasons; i.e., they know something that is crucial for the business to succeed while other people don’t, and they have an abundance of topic-relevant experience, etc.   
   * **Explanation:** If not, why hasn’t somebody done this business already? Even if the VC believes that the business idea is an unexploited arbitrage, they should be able to explain why the founders were able to identify this idea earlier than others. If such an explanation exists, the founder has already demonstrated their superior capacity for decision making. Ideally, the founder has chosen their strategy carefully, on the basis of experience that other people don’t have, and this should benefit the business over a long stretch.
+
+#### The Most Overlooked Motivation
+
+This is an intuitive motivation that both VCs and founders often overlook.
+
+* Reason to believe that the business’s ability to remain competitive will compound, i.e., the progress the business makes each month will enable it to execute on more significant opportunities in the next period, and (ideally) every achievement continues to pay off indefinitely;  
+  * **Explanation:** VCs expect the business to create more revenue if they can: 1\) develop a monopoly over their product segment, and 2\) expand the range of products and services they offer without losing focus. I’ve mentioned this idea of a “compounding edge”, as it is the variable that drives both monopoly power and horizontal expansion. VCs must ask themselves “does the business idea, and the market the business will operate in, make it easier for the founder to gain and maintain monopoly power?”  
+  * Ideally, every customer relationship, hard-won employee, customer insight, technical development, long-term contact, etc, should meaningfully enhance the company’s ability to succeed, even as the business switches its focus onto bigger opportunities with different requirements. 
+
+The traditional advice suggests that compounding competitive advantages only matter later in a business's life. I disagree: if both the VC and founder anticipate that the business will hit a ceiling at the very start, they're at risk of hitting it earlier than expected.
+
+When a founder commits to an idea, they're expected to stay committed to it for up to ten years if it works. If a founder locks themselves into a position where they'll eventually feel their earning potential is capped (even if objectively substantial), they risk having something akin to a mid-life crisis. If these doubts surface early on, the founder may lose motivation and fail to execute effectively.
 
 #### Other Important Factors
 
@@ -93,13 +104,13 @@ You must embody at least two of these, otherwise you'll struggle to raise.
 
 ## What Founders Care About
 
-Your idea should require massive capital and promise massive returns. VCs exist for big, expensive bets that can generate huge revenue or huge acquisitions. If you don't need their money to scale or your upside isn't large enough, there's no point doing VC.
+You must choose your idea to appeal to VCs' commercial instincts. Each VC's portfolio and decision-making style reveal what will and won't resonate with them. They all heavily depend on similar rules-of-thumb when making investment decisions, regardless of what they might claim. You should take their reputation with a grain of salt, also. If you understand each VC's style, you can identify investors who'll offer better terms and tailor your pitch to them.
 
-Since you'll need to raise, you must choose your idea to appeal to VCs' commercial instincts. Each VC's portfolio and decision-making style reveal what will and won't resonate with them. They all heavily depend on similar rules-of-thumb when making investment decisions, regardless of what they might claim. You should take their reputation with a grain of salt, also. If you understand each VC's style, you can identify investors who'll offer better terms and tailor your pitch to them.
+You could also ignore every piece of advice that a startup incubator (i.e. EF, YC, etc) offers yet still receive their investment. Mature VCs know there are many ways to build a profitable company; there are many different ways to appeal to the same group of investors, you must pick one.
 
 Side Note: If you raise from the right VC, you'll find it easier to raise in future. When your current investor has a strong reputation with your next one, their endorsement reflects positively on your business. It's also possible to hurt your chances: VCs often display tribalism, and raising from the wrong investor can discourage certain other VCs from investing in future.
 
-You must also chose your idea to optimise for revenue.
+You must also choose your idea to optimise for revenue.
 
 The lifecycle of your business will look something like this:
 
