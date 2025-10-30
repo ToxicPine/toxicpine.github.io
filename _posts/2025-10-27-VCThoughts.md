@@ -74,6 +74,10 @@ This is the intuitive criterion that both VCs and founders often overlook.
 
 The traditional advice suggests that compounding competitive advantages only matter later in a business's life. I disagree: if both the VC and founder anticipate that the business will hit a ceiling, the founder risks losing motivation or hitting barriers earlier than expected.
 
+#### Epilogue
+
+I've opted not to mention idea-specific factors. Many VCs ask founders to propose a concrete business plan and demonstrate traction, but this is usually performative. VCs will offer tens of millions to startups that are pre-product, if they have intuitive reasons to think their valuation will multiply.
+
 ### Optional Advantages
 
 You must embody at least two of these, otherwise you'll struggle to raise.
@@ -85,10 +89,6 @@ You must embody at least two of these, otherwise you'll struggle to raise.
 * Evidence that the founder has rare access to business-relevant resources;  
   * access to good potential hires, technical knowledge, relationships, etc.  
 * Evidence that the business is sought-after by other VCs.
-
-#### Epilogue
-
-I've opted not to mention idea-specific factors. Many VCs ask founders to propose a concrete business plan and demonstrate traction, but this is usually performative. VCs will offer tens of millions to startups that are pre-product, if they have intuitive reasons to think their valuation will multiply.
 
 ## What Founders Care About
 
