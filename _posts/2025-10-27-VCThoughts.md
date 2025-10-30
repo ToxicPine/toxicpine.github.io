@@ -35,7 +35,7 @@ VCs have two types of commercial instinct: sensing and intuiting.
 
 Sensing VCs look for traction, revenue, and public hype. They judge using their knowledge of what's already happening. To founders, this looks wildly speculative: the VC anticipates future success from a short, possibly misleading, track record.
 
-Intuiting VCs look for strategy, novelty, and talent density. They depend on the company's narrative to judge future success. To founders, this looks methodical: the VC is doing deep analysis and asking all the right questions.
+Intuiting VCs look for strategy, novelty, and density of talent. They depend on the company's narrative to judge future success. To founders, this looks methodical: the VC is doing deep analysis and asking all the right questions.
 
 VCs have both instincts, but often favor their sensing instincts. Sensing doesn't require them to predict the future.
 
