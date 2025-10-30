@@ -29,13 +29,13 @@ You should choose an idea that makes it easier for VCs to see how they'll get th
 
 VCs don't have time to overthink each business idea. They depend on rules-of-thumb to judge businesses; it's fitting describe their decision-making technique as a "commercial instinct."
 
-VCs have two types of commercial instinct: sensing and intuiting. 
+There are two types of commercial instinct: sensing and intuiting. 
 
 Sensing VCs look for traction, revenue, and public hype. They rely on what's already happening to judge future success. To founders, this looks wildly speculative: the VC anticipates future success from a short, possibly misleading, track record.
 
 Intuiting VCs look for strategy, novelty, and density of talent. They rely on the company's narrative to judge future success. To founders, this looks methodical: the VC is doing deep analysis and asking all the right questions.
 
-VCs have both instincts, but often favor their sensing instincts. Sensing doesn't require them to predict the future.
+Every VC has both instincts, but often favor their sensing instincts. Sensing doesn't require them to predict the future.
 
 Appeal to both instincts for the best terms.  
 Appeal to at least one to get funded.
