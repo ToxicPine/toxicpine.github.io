@@ -19,8 +19,6 @@ VCs will invest if their investment committee believes:
 * Your business is far more likely to succeed if it's well funded;  
 * Funding your business won't interfere with their other investments or damage their reputation.
 
-They have three opportunities to sell their stake in your company: after your IPO, when you get acquired, or when you raise your round at a higher valuation.
-
 They'll be extra eager to invest when they expect your next funding round to come at a significantly higher valuation, as this boosts the value of their stake in your company (at least, on paper) and offers them an early opportunity to cash out their stake.
 
 ### The Checklist For Getting Funded
