@@ -27,7 +27,7 @@ VCs are run by busy, often tired, humans. They won't research your idea, they'll
 
 You should choose an idea that makes it easier for VCs to see how they'll get their return.
 
-VCs must rely on rules-of-thumb to judge businesses; they don't have time to overthink each business idea. Since they're not bound to strict rules, it's fitting to describe their decision-making technique as a "commercial instinct."
+VCs must rely on rules-of-thumb to judge businesses; they don't have time to overthink each business idea. Their decisions aren't driven by strict rules, it's fitting to describe their decision-making technique as a "commercial instinct."
 
 VCs have two types of commercial instinct: sensing and intuiting. 
 
