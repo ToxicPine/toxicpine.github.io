@@ -66,7 +66,7 @@ You could satisfy these criteria without traction.
 
 #### The Most Overlooked Factor
 
-This is an intuitive motivation that both VCs and founders often overlook.
+This is the intuitive criterion that both VCs and founders often overlook.
 
 * Reason to believe that the business's ability to remain competitive will compound, i.e., the progress the business makes each month will enable it to execute on more significant opportunities in the next period, and (ideally) every achievement continues to pay off indefinitely;  
   * **Explanation:** VCs expect the business to create more revenue if they can: 1\) develop a monopoly over their product segment, and 2\) expand the range of products and services they offer without losing focus. I've mentioned this idea of a "compounding edge", as it is the variable that drives both monopoly power and horizontal expansion. VCs must ask themselves "does the business idea, and the market the business will operate in, make it easier for the founder to gain and maintain monopoly power?"  
