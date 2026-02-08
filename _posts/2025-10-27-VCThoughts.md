@@ -5,9 +5,28 @@ categories: [Technology, Advice, Venture Capital]
 tags: [vc, venture capital, technology, idea, advice]
 ---
 
+
 If you're a founder who wants to raise capital from a U.S. VC and you haven't settled on an idea, this post might help.
 
 You must consider any emotional factors that apply to you separately, this article won't discuss them.
+
+## Foreword
+
+You cannot learn to build a company from a manual: every market has its own sales cycle, its own culture, its own unwritten rules about how deals get done, and the raising advice that works in one segment is useless in another. If there were any good advice, it would be subject to change, because markets shift, buyers change, and competitors show up when you least expect them. Notably, between two companies in the same space, the right strategy will look completely different.
+
+You have to figure out what to focus on, when to cut your losses, and how to play your hand, all without a playbook. Since the only thing founders reliably have in common is raising from VCs and hiring people, I've focused my advice on those parts.
+
+However, there is one piece of universally applicable founding advice that isn't VC-related: you must be able to distinguish what you cannot yet know from what you're afraid to find out.
+
+If your problem space is hard to grasp, outside observers may give you dismissive feedback. That could mean you're acting on insights others can't yet see, or it could be you avoiding the reality that the problem isn't real. If you don't know your exact customer on day one, holding off may be the prudent move. That could mean you're gaining crucial information, or it could be you avoiding the reality that there is no customer.
+
+To remove the biggest risks to your business as soon as possible, you must seek tangible feedback on all of them, not just the ones that are easy to validate. What that looks like depends entirely on your situation: sometimes your priority is figuring out whether the product even makes sense, sometimes you don't want to start with a product at all. Whatever your strategy is, the principle is the same: the fewer degrees of separation between you and reality the better. If you're trying to gauge demand, for instance, finding suitable customers and asking if they'd pay is stronger signal than surveying non-customers or researching what your competitors are doing.
+
+You'll gain a massive advantage if you pick an industry where you can talk to the right people, run the right experiments, and interpret the results more naturally than your competitors can.
+
+The most compelling reason for taking the rest of my advice with a gain of salt is this: any founders do not reach their real breakthrough until they are deep into the grind, often a year or two after they have already committed to an industry and raised capital.
+
+You will likely burn through a hundred bad ideas before finding one that makes sense.
 
 ## What VCs Care About
 
@@ -149,7 +168,7 @@ If a founder has achieved traction, their claims will sound more believable.
 
 When you break this statement down, you'll realize that finding a great idea is significantly harder than it initially appears.
 
-### The Break-down
+### My Idea Testing Framework
 
 You can use this to test your ideas. 
 
