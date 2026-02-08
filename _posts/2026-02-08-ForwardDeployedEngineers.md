@@ -1,0 +1,114 @@
+---
+title: "DRAFT: Estimation of Latent Demand For Forward-Deployed Engineers in the United States of America"
+date: 2026-02-08 02:00:00 +0100
+categories: [Technology, Papers]
+tags: [papers, automation, economics, forward-deployed engineers]
+---
+
+## Abstract
+
+This paper estimates the latent demand for Forward-Deployed Engineering (FDE) across the UK and US economies. We define FDE as embedded technical work on problems that cannot be solved by standard software products, fixed contracts, or direct hiring. We model this demand using a four-channel framework where FDE acts as the residual channel for complex and evolving problems. We calculate the intensity of this residual demand for every major sector by mapping Bureau of Labor Statistics occupational data to the APQC Process Classification Framework based on the semantic similarity of their definitions. Our primary contribution is to provide a estimate of the technical work that resists standard delivery models. We find that [EMPIRICAL RESULT HERE]. These findings suggest [CONCLUSION HERE].
+
+*(Abstract to be written after results are available.)*
+
+## 1 Introduction
+
+We hypothesize that firms in the UK and US routinely face problems that would benefit from embedded technical problem‑solving, but neither official statistics nor firm‑level data reveal how much of this work there ought to be. We ask: for a given sector and firm size, how many years of work by "forward‑deployed" engineers would it be rational to deploy per 100 employee‑years, given the structure of the work, the available labour markets, and the current software landscape?
+
+Towards an answer, we start from the familiar channels through which organisations currently acquire technical capability and the economic logic of each. Firms may purchase cheap software to leverage the economies of scale inherent in standardised products, commission fixed‑scope projects to secure defined deliverables at a known price, or hire employees to build proprietary institutional knowledge.
+
+We hypothesize that some widely documented failures of "digitisation" stem from a misfit between these channel logics and the reality of the workplace. A firm may seek the cost advantages of SaaS, only to find its requirements are too idiosyncratic for any standard product. It may seek the certainty of fixed‑price contracting, but be unable to specify its emergent problems clearly enough to enforce a contract. It may wish to hire, but find it cannot support the full operational and managerial unit required to make technical staff productive at prevailing wages. When the work is too bespoke for products, too emergent for contracts, and too demanding for direct hiring, the underlying work persists in manual or ad‑hoc form.
+
+A stylised example illustrates the pattern. A mid‑sized manufacturer may recognise recurring production and logistics issues but be unable to recruit senior software engineers. A hospital may see scope for decision support around triage or bed allocation but be unable to define in advance what a successful "AI project" would do. A bank may derive much of its advantage from idiosyncratic compliance workflows that no vertical SaaS product supports. In each case, the organisation can in principle benefit from embedded technical work that reshapes its processes, yet standard channels are either unavailable or prohibitively costly.
+
+The existing literature speaks to related questions yet leaves this allocation problem under‑specified. Task‑level automation and exposure studies (e.g. Autor, Levy and Murnane; Acemoglu and Restrepo; Eloundou et al.) map which tasks could, in principle, be affected by software or AI, but are largely agnostic about who is paid to implement those changes or through which organisational channel. The IT outsourcing literature (e.g. Williamson; Lacity et al.) models make‑versus‑buy decisions at the firm boundary, but typically aggregates heterogeneous delivery mechanisms into a single "outsourcing" term. Recent generative‑AI field experiments (e.g. Dell'Acqua et al.; Noy and Zhang; Brynjolfsson, Chandar and Chen) estimate productivity effects conditional on tool deployment, rather than modelling the process that gets tools in place. Across these streams, the mode of delivery is usually backgrounded, even when it plausibly carries much of the constraint on realised technical change.
+
+We formalise these patterns as a four‑channel framework for acquiring technical capability. In this framework, organisations choose among In‑House (hiring employees), Fixed‑Contract (commissioning specified deliverables), Externally Owned (purchasing software or managed services), and Forward‑Deployed Engineering (embedding external engineers to work on emergent, hard‑to‑specify problems). Forward‑Deployed Engineering (FDE) is not introduced as a new job title but as a functional category: work in which technical staff are embedded at the client, operate on evolving scope, and deliver bespoke systems rather than products.
+
+Within this four‑channel framework, we model FDE as the residual channel. The assumption is as follows: if an organisation can feasibly hire for a technical need, it will tend to do so; if it can specify and verify requirements, it will tend to contract for fixed deliverables; if an adequate product exists, it will tend to buy it. FDE‑shaped work is then the work that remains when hiring is constrained, specification is infeasible, and relevant products are inadequate. This residual characterisation is a modelling choice rather than a universal law, but it has two advantages for our purpose. It locates FDE at identifiable bottlenecks in the production function, and it provides a principled way to relate observable sectoral features (task structure, labour markets, software supply) to an unobserved demand for embedded engineering.
+
+On this basis, we define latent FDE demand as an intensity: the number of FDE‑years per 100 employee‑years that it would be rational to deploy in a given industry–size cell (defined as a specific intersection of a six-digit NAICS code and a firm-headcount band), under the assumptions of the four‑channel framework, even if such roles do not currently exist or are not labelled as "FDE." "Rational" here is normative rather than descriptive: we abstract away from internal politics, status considerations, and limited awareness of the FDE channel, and ask what allocation of embedded engineering would be justified by the technical work and constraints implied by public data. FDE usage may realize below these latent values.
+
+Our empirical strategy is to approximate this latent intensity using a compositional decomposition, in which we break the problem into process‑level pieces and then recombine them. Instead of attempting to infer technical needs directly from job titles, which often mask the underlying nature of the work, we map economic activity to the APQC Process Classification Framework (PCF). We estimate the "FDE-intensity" of specific business processes (for example, "manage treasury policies and procedures" or "define customer service requirements across the enterprise") based on the limiting factors that act on the standard technology adoption channels for those processes. We then reconstruct the demand for each industry–size cell by estimating its process composition, that is, how much time it spends on each activity, and summing the FDE‑weighted components.
+
+This paper makes three contributions. First, it formalises the four‑channel decomposition and the residual view of FDE as an explicit, testable framework for reasoning about how technical capability is delivered. Second, it specifies and implements an end‑to‑end workflow that uses the APQC Process Classification Framework and LLM-mediated reasoning to transform heterogeneous public data (NAICS, BLS OES, and sector context) into transparent, reproducible sector‑level assessments. Third, it produces, to our knowledge, the first systematic estimates of latent FDE demand across UK and US industries and firm‑size bands, intended as a map of industries where embedded technical problem‑solving may be missing from the current division of labour.
+
+There are two limitations that shape how you should read these results. First, FDE is not an observable category in official statistics or standard labour‑market datasets; there are no SOC codes for "forward‑deployed engineer," and job postings do not reliably separate FDE‑like roles from generic consulting or software development. Any quantitative estimate of FDE demand is therefore indirect. Second, the estimates depend on the adequacy of that framework. If the four‑channel taxonomy omits important modes of delivery, if the residual characterisation of FDE fails in large parts of the economy, or if our reference-case analyses are flawed, then the resulting intensities will be systematically miscalibrated. For this reason, the paper presents the framework and the estimates together, with the goal of giving the reader enough structure to see exactly where, and on what grounds, they might disagree.
+
+## 2 Methodology
+
+### 2.1 Overview
+
+We estimate latent FDE demand by intersecting two models: a process profile that maps the labor distribution of each industry–size segment onto standardized activities, and a demand coefficient that estimates the required intensity of embedded engineering for each activity in that specific context. We derive the result by multiplying the volume of labor allocated to each process by its corresponding intensity and summing the components.
+
+We anchor the analysis on processes because technical leverage attaches to *activities*, not to industry labels. The NAICS classification tells us what a firm sells, but reveals little about the internal operations that determine where embedded engineering is actually needed.
+
+We infer the process mix of a firm from who it employs. The BLS occupation counts say "this is who works here," and the PCF mapping says "this is what they are busy doing." If a function has already been productised or outsourced at scale, it tends to leave fewer relevant employees behind, so its share in the process profile is already small. The remaining labor hours in a process are the surface on which further automation or embedded engineering can act.
+
+We also distinguish between *invariant* and *context-dependent* processes. This is based on our assumption that some activities, such as "monitor and audit recall effectiveness," present similar automation opportunities whether applied in automotive repair or food production, whereas others, like "perform discovery research," vary sharply by context. We estimate a single FDE coefficient for invariant processes, and define distinct "buckets" (variations of the process with different technical shapes) with distinct FDE coefficients for variant processes.
+
+The calculation thus proceeds in three steps: we map the firm's labor onto standardized processes; we route each process to its context-specific bucket; and we look up the estimated FDE intensity for that bucket. We sum these process-level intensities, weighted by the share of labor allocated to each process, to produce a single number: the estimate of latent demand for FDEs, expressed as FDE-years per 100 employee-years, for that industry–size cell.
+
+### 2.2 Data Representation
+
+To make this decomposition work, we need a way to describe work that is stable across industries. We use three inputs.
+
+First, we replace job titles with the APQC Process Classification Framework (PCF). Job titles are inconsistent, but the underlying activities are often the same. For instance, a "Project Manager" in construction and a "Product Owner" in software might both be doing "13.2.3 Manage Projects." Treating them as the same coordination problem allows us to apply consistent logic across sectors. We use the roughly 350 PCF Level 3 categories (for example, "4.3.2 Produce/Assemble Product") as our basic units of analysis.
+
+Second, we construct "Industry Archetypes" using Bureau of Labor Statistics Occupational Employment and Wage Statistics (OEWS) data. Each archetype is an average process profile for a broad industry group. We map the approximately 800 Standard Occupational Classification (SOC) codes to the PCF categories using a vector-based semantic mapping pipeline. We generate embeddings for all SOC definitions and PCF categories using a modern large language model (`qwen/qwen3-embedding-8b`), compute cosine similarities to create a "contribution matrix" (e.g., "Software Developer" maps 80% to "Manage IT" and 20% to "Develop Products"), and then project the BLS industry-occupation matrix through these weights. This produces a data-grounded baseline profile for each of the ~290 BLS industry groups: for example, the "Legal Services" archetype spends most of its labor hours on "Deliver Services" and only a small share on "Manage IT."
+
+Third, we use targeted web search to find observable proxies for specific sectors. The average is not the specific. A high‑tech manufacturer looks different from a traditional one, even if they share an industry code. We research indicators such as IT spend ratios, regulatory burden indices, and software vendor landscapes that let us adjust the archetype baseline for a specific industry–size cell.
+
+### 2.3 Estimation Workflow
+
+We combine these inputs in a four-stage pipeline mediated by Large Language Models (LLMs). We use LLMs because the task requires applying a consistent rubric to thousands of distinct industry contexts, a workload that is prohibitive for human analysts. While the retrieval of industry reports and the application of evaluation criteria are rote tasks, they must be performed with high consistency across the entire economy. LLMs are well-suited for this structured qualitative work: given clear prompts ("agents"), they can retrieve evidence and apply judgment rules more efficiently and consistently than a large team of human raters.
+
+We begin by filtering the PCF Level 3 categories based on their technical relevance and structural variance. We first exclude processes that are essentially human-only, such as "Develop Business Strategy," retaining only those with plausible technical applicability. For the remaining categories, we could distinguish between those that present similar technical dynamics across the economy and those that vary by sector. Homogenous processes like "Manage Payroll" are treated as invariant and assigned a single economy-wide coefficient. Conversely, processes where the automation landscape differs markedly by context, such as "Develop Products and Services," are classified as variant and require industry-specific estimation.
+
+For each variant process, we define industry "buckets" to capture differences in delivery constraints. For instance, for "Operate Warehousing," we distinguish between standard retail logistics (typically served by off-the-shelf software) and complex cold-chain operations (where integration and compliance needs often block standard solutions). We assign NAICS codes to these buckets hierarchically: three-digit codes receive a default assignment, which can be overridden by four- or five-digit codes where specific sectors diverge. This ensures that every industry is routed to the appropriate technical context for each activity.
+
+Second, we estimate the "FDE coefficient" for each estimation unit. An estimation unit is either an invariant process (one coefficient applied universally, though modulated by firm size) or a specific bucket of a variant process. For each unit, we gather evidence about three delivery channels:
+
+1.  SaaS: what off‑the‑shelf tools exist for this process, how widely they are adopted, and what parts of the work they do not touch.
+2.  Contracted Technical Solutions: how often organizations frame this work as a project with clear deliverables, how stable the requirements are, and how reliably success can be specified and verified.
+3.  In‑House Technical Hiring: whether typical firms in this context can attract and manage staff with the relevant skills, and at what scale this becomes realistic.
+
+We separate research from judgment. A "research" agent (a retrieval-augmented LLM prompt) collects concrete facts and examples about these channels. A "judge" agent (a separate prompt focused on evaluation) then reads that evidence and asks: after products, contracts, and internal staff have done what they can, how much technically demanding work is left that would be natural for embedded engineers to tackle? The judge expresses this as an FDE coefficient, on a scale of FDE‑hours per 100 labor‑hours for that process, and can let the coefficient vary by size band when the economics of hiring or contracting change with scale. For instance, very small firms may be unable to hire specialist staff even when the work exists, while very large firms may eventually internalize what would otherwise be FDE‑shaped work.
+
+Third, we estimate the process mix of each industry–size cell. We start from the relevant Industry Archetype for that NAICS code, which gives a baseline distribution of labor across PCF categories. We then adjust this baseline using evidence gathered from industry research. For example, if a credible report (sourced by the research agent) indicates that a specific logistics subsector faces heavy regulatory oversight, we increase the share of labor assigned to "Manage Compliance" relative to the archetype baseline. Similarly, evidence of high software utilization justifies increasing the intensity of "Manage IT" processes. We then re-normalize the adjusted process profile to ensure that the labor shares remain non-negative and sum to exactly 100% of the firm's total effort.
+
+Finally, we calculate the total latent demand. For each industry–size cell, we map the labor distribution to PCF processes and route each process to its appropriate industry bucket to retrieve the correct FDE coefficient. We then sum the product of the labor share allocated to each process and this context-specific coefficient. For example, if a firm allocates 20% of its labor to a process with an FDE intensity of 0.1 (10 FDEs per 100 process-hours), that activity contributes 2 FDE-years per 100 employee-years to the firm-wide total. We derive the final intensity estimate for the cell by aggregating these contributions across all processes.
+
+### 2.4 Reference-Case Analysis & Error Propagation
+
+To prevent the propagation of input errors, we implement sanity checks at each stage. At the coefficient level, we enforce range constraints (e.g., FDE hours cannot exceed total labor hours) and require the judge agent to produce both a confidence rating and a reasoning trace. Estimates that violate these bounds are automatically flagged for review.
+
+At the intensity level, we use the Industry Archetypes as reference profiles. The adjusted process mix for a specific NAICS × size cell should remain recognizably similar to its archetype unless the proxies provide strong evidence to the contrary. If the model predicts that a 50‑person accounting firm spends 40 percent of its time on "Manage IT," when the professional‑services archetype allocates only a few percent, that profile is flagged as incoherent and re‑estimated or discarded.
+
+We also compare estimates across related cells. Within a single NAICS code, profiles for different size bands should change in ways that match known scale effects: larger firms usually have more specialized support functions, not fewer. Within an archetype group, similar NAICS codes should have similar profiles unless proxies indicate a reason for divergence.
+
+The final dataset has two layers. At the cell level, we report, for each NAICS × size band, a point estimate of FDE‑years per 100 employee‑years and an associated confidence rating, along with a short explanation of which processes contribute most of the demand. These are the numbers that appear in the main results tables. At the aggregate level, we collapse these cell estimates up the NAICS hierarchy, weighted by employment, to produce sector‑level intensities at the four‑digit and three‑digit levels and economy‑wide totals. These aggregates support the higher‑level comparisons in the results section, such as "Which sectors account for most of the latent FDE demand?" and "How concentrated is that demand by firm size?"
+
+### 2.5 Limitations
+
+This model relies on the assumption that the residual logic holds: that if you cannot buy a product, contract the work out, or hire internal staff, you would in principle use an FDE if that channel were salient and available. It does not capture cases where organizations simply leave problems unsolved or accept chronic inefficiency because decision‑makers never consider embedded engineering as an option. In that sense, our estimates are closer to a upper bound on rational capacity to absorb technical work than to current market demand.
+
+The construction of the inputs also introduces specific failure modes. The occupation‑to‑process crosswalk that underpins the Industry Archetypes is a judgment call; if it misclassifies how certain roles spend their time, the baseline process mix for affected sectors will be wrong. For instance, if compliance staff in a heavily regulated industry are mostly mapped into generic administrative categories, the model will understate that industry's exposure to compliance processes and, in turn, its potential FDE demand there. The decision about which processes are treated as invariant versus variant, and how variant processes are bucketed by industry, can hide important distinctions or invent spurious ones. The sector‑level proxies we use to adjust archetypes are drawn from public data and web research, which skew toward better‑documented industries and may miss important but less visible constraints.
+
+Finally, FDE is not an observable category in the underlying statistics. There are no standard occupational codes for "forward‑deployed engineer," and job postings rarely distinguish between hiring an internal employee and engaging an external partner. We cannot validate our estimates against a government‑issued count of FDEs by industry. Instead, we triangulate against adjacent markets such as management consulting and systems integration, and against known case studies of embedded engineering deployments. For this reason, we present the framework and the estimates together: the numbers are meant to be interrogated and updated, not treated as definitive measurements.
+
+## 3 Results
+
+[YET TO BE DETERMINED.]
+
+## 4 Analysis
+
+[YET TO BE DETERMINED.]
+
+## 5 Summary
+
+[YET TO BE DETERMINED.]
+
+## 6 References
+
+We've endevoured to make the results of this paper as easy to reproduce as possible, the source code may be found at https://github.com/ToxicPine/fde-paper-project
