@@ -2,7 +2,7 @@
 title: "DRAFT: Estimation of Latent Demand For Forward-Deployed Engineers in the United States of America"
 date: 2026-02-08 02:00:00 +0100
 categories: [Technology, Papers]
-tags: [papers, automation, economics, forward-deployed engineers]
+tags: [papers, ai, automation, economics, forward-deployed engineers]
 ---
 
 ## Abstract
