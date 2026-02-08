@@ -65,9 +65,7 @@ If the skills gap alone explained the missing productivity shift, we'd still exp
 
 We have the technical know-how for setting up AI models at work without risking the leakage of data, what we haven't solved the liability problem that leaves IT departments no reason to make any of this possible and every reason to prevent it.
 
-## **The Constraint Layer**
-
-Arguably, the solution to our approval problem is to run the code somewhere that can't reach your more sensitive systems in the first place. If the compute environment has no network access to your production servers and no stored credentials, the code physically cannot exfiltrate data or corrupt records, because there's no channel for it to do so. You don't need to trust the code or the person who wrote it. You just need to trust that the environment has no path to the things you're protecting.
+## **Where We're Headed**
 
 What's needed is an environment where workers are given their limits already in place, where the organization decides what each environment can touch before anyone writes a line of code. There are very few solutions for providing this at the organizational level, i.e. Coder.dev, and no such solutions that are geared towards non-technical users. A developer can set up their own constraints, but they start with full access and choose to lock themselves down, which defeats the purpose. We never needed this before because writing code was slow enough that review could keep up. Now Claude Code produces code faster than anyone can review it, and the infrastructure hasn't caught up.
 
