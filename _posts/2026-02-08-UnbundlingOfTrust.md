@@ -27,7 +27,7 @@ For twenty years, SaaS was buoyed by standardization. Salesforce held your custo
 
 It's not surprising that everyone uses the same tools, however this contributed to the narrowing of operational differentiation: it becomes much harder to out-execute a competitor when you are both contrained by the same products.
 
-The industry accepted this because specialized software came with a bundle:
+SaaS products were sold as a bundle of three things:
 
 **Logic.** The code that does the work.
 
