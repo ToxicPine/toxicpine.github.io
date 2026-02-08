@@ -19,13 +19,13 @@ You can't hire for a skill that only exists as a gap someone is trying to hide. 
 
 ## **Mediocrity In Your Ops Departament**
 
-The second kind of automation is blocked for a different reason: it requires access workers shouldn't have. You can use AI to draft a report, but you can't have code directly update the customer database, because that means reading sensitive records and writing to production systems. To go from AI helping with the grunt work to code that acts on your behalf, workers would have to give their tools access to records over the internet. This would give any IT department heart palpitations. 
+The second kind of automation is blocked for a different reason: it requires access workers shouldn't have. You can use AI to draft a report, but you can't have code directly update the customer database, because that means reading sensitive records and writing to production systems. To go from AI helping with the grunt work to code that acts on your behalf, workers would have to give their tools access to records over the internet. This should give any business heart palpitations. 
 
-Take Samsung, which lifted its ChatGPT ban for the semiconductor division. Within three weeks, proprietary chip-testing source code was sitting on OpenAI's servers. If that's the level of care we should expect from engineers who literally design microprocessors for a living, then handing database credentials to your sales team is a creative form of suicide.
+Take Samsung, which lifted its ChatGPT ban for the semiconductor division. Within three weeks, proprietary chip-testing source code was sitting on OpenAI's servers. If that's the level of care we should expect from engineers who literally design microprocessors for a living, then handing database credentials to your sales team is suicide.
 
-For twenty years, SaaS was buoyed by standardization. Software was expensive to replicate and acted as a trusted straitjacket for data: no matter how careless a user is, they can't accidentally pipe sensitive records to twitter.com. More crucially, the standard choice protects you from blame. If Salesforce gets hacked, it's a global news story and you're a victim. If your custom internal tool gets hacked, it's negligence and you're screwed.
+For twenty years, SaaS was buoyed by standardization. Salesforce held your customer records, HubSpot held your marketing data, Workday held your HR files. This software acted as a trusted straitjacket for data: no matter how careless a user is, they can't accidentally pipe sensitive records to twitter.com. More crucially, the standard choice protects you from blame. If Salesforce gets hacked, it's a global news story and you're a victim. If your custom internal tool gets hacked, it's negligence and you're screwed.
 
-So everyone picks the same tools to stay safe, and everyone's operations end up looking the same. However, your life is now harder, since you're expected to out-execute a competitor who runs the exact same stack you do, and you're both constrained by the same vendor's assumptions about how businesses should work.
+It's not surprising that everyone uses the same tools, however this contributed to the narrowing of operational differentiation: it becomes much harder to out-execute a competitor when you are both contrained by the same products.
 
 The industry accepted this because specialized software came with a bundle:
 
