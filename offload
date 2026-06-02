@@ -3,6 +3,19 @@ set -eu
 
 assume_yes=0
 silent=0
+bold=''
+cyan=''
+dim=''
+green=''
+reset=''
+
+if [[ -t 1 && -z "${NO_COLOR:-}" && "${TERM:-}" != 'dumb' ]]; then
+  bold=$'\033[1m'
+  cyan=$'\033[36m'
+  dim=$'\033[2m'
+  green=$'\033[32m'
+  reset=$'\033[0m'
+fi
 
 usage() {
   printf '%s\n' 'Usage: offload [--yes] [--silent]'
@@ -38,20 +51,24 @@ log() {
 }
 
 intro() {
-  log '/offload lets coding agents continue tasks on another machine.'
+  log "${dim}---${reset}"
+  log "${bold}/offload${reset} lets coding agents continue tasks on another machine."
   log ''
-  log 'You can use it like this:'
-  log '  /offload fix the flaky tests and open a branch'
+  log "${bold}Use it like this:${reset}"
+  log "${cyan}  /offload fix the flaky tests and open a branch${reset}"
   log ''
+  log "${bold}What happens:${reset}"
   log 'The agent sends your current project state to another machine,'
   log 'runs the task there, and keeps its changes on a new branch from here.'
   log 'If your laptop sleeps or disconnects, the remote run can keep going.'
   log ''
-  log 'It can also send status updates via Telegram, have another agent'
+  log "${bold}Optional:${reset}"
+  log 'It can send status updates via Telegram, have another agent'
   log 'restart or resume runs that stop early or drift away from the task'
   log 'requirements, and use the agent remote controls you already have.'
   log ''
   log 'This script installs the tools needed for /offload to work.'
+  log "${dim}---${reset}"
 }
 
 confirm() {
@@ -66,11 +83,12 @@ confirm() {
 
   local response
 
-  printf '%s' 'Continue? [y/N] ' > /dev/tty
+  printf '\n%s' "${bold}Continue?${reset} [y/N] " > /dev/tty
 
   IFS= read -r response < /dev/tty
   case "${response}" in
     y|Y|yes|YES|Yes)
+      printf '\n' > /dev/tty
       ;;
     *)
       printf '%s\n' 'Canceled.' > /dev/tty
@@ -122,5 +140,5 @@ retry() {
   done
 }
 
-retry 'Installing /offload Plugin...' npx skills add https://github.com/ToxicPine/tissloolly -g -a -y -s offload foolfad foolfad-config boondoggle
-retry 'Adding ambit-cli Skill...' npx skills add https://github.com/ToxicPine/ambit-skills -g -a -y -s ambit-cli
+retry "${green}Installing /offload Plugin...${reset}" npx skills add https://github.com/ToxicPine/tissloolly -g -a -y -s offload foolfad foolfad-config boondoggle
+retry "${green}Adding ambit-cli Skill...${reset}" npx skills add https://github.com/ToxicPine/ambit-skills -g -a -y -s ambit-cli
