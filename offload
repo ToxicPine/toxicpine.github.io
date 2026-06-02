@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+set -eu
+
+assume_yes=0
+silent=0
+
+usage() {
+  printf '%s\n' 'Usage: offload [--yes] [--silent]'
+  printf '%s\n' '  --yes      Skip the confirmation prompt.'
+  printf '%s\n' '  --silent   Suppress normal output and skip the confirmation prompt.'
+}
+
+for arg in "$@"; do
+  case "${arg}" in
+    --yes|-y)
+      assume_yes=1
+      ;;
+    --silent)
+      silent=1
+      assume_yes=1
+      ;;
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    *)
+      printf 'Unknown option: %s\n' "${arg}" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+log() {
+  if [[ "${silent}" -eq 0 ]]; then
+    printf '%s\n' "$@"
+  fi
+}
+
+intro() {
+  log '/offload lets coding agents continue tasks on another machine.'
+  log ''
+  log 'You can use it like this:'
+  log '  /offload fix the flaky tests and open a branch'
+  log ''
+  log 'The agent sends your current project state to another machine,'
+  log 'runs the task there, and keeps its changes on a new branch from here.'
+  log 'If your laptop sleeps or disconnects, the remote run can keep going.'
+  log ''
+  log 'It can also send status updates via Telegram, have another agent'
+  log 'restart or resume runs that stop early or drift away from the task'
+  log 'requirements, and use the agent remote controls you already have.'
+  log ''
+  log 'This script installs the tools needed for /offload to work.'
+}
+
+confirm() {
+  if [[ "${assume_yes}" -eq 1 ]]; then
+    return 0
+  fi
+
+  if [[ ! -r /dev/tty ]]; then
+    printf '%s\n' 'No interactive terminal available. Re-run with --yes or --silent to continue.' >&2
+    exit 1
+  fi
+
+  local response
+
+  printf '%s' 'Continue? [y/N] ' > /dev/tty
+
+  IFS= read -r response < /dev/tty
+  case "${response}" in
+    y|Y|yes|YES|Yes)
+      ;;
+    *)
+      printf '%s\n' 'Canceled.' > /dev/tty
+      exit 0
+      ;;
+  esac
+}
+
+intro
+confirm
+
+if ! command -v npx >/dev/null 2>&1; then
+  printf '%s\n' 'npx is required; install Node.js, then run this script again.' >&2
+  exit 1
+fi
+
+retry() {
+  local label="${1}"
+  shift
+
+  local delay=1
+  local attempt=1
+  local max_attempts=5
+  local log_file
+
+  log_file="$(mktemp -t offload-install.XXXXXX)"
+  log "${label}"
+
+  while :; do
+    if "$@" >"${log_file}" 2>&1; then
+      rm -f "${log_file}"
+      return 0
+    fi
+
+    if [[ "${attempt}" -ge "${max_attempts}" ]]; then
+      printf 'Failed after %s attempts: %s\n' "${attempt}" "${label}" >&2
+      printf '%s\n' 'Last command output:' >&2
+      sed 's/^/  /' "${log_file}" >&2
+      rm -f "${log_file}"
+      return 1
+    fi
+
+    if [[ "${silent}" -eq 0 ]]; then
+      printf 'Retrying in %ss: %s\n' "${delay}" "${label}" >&2
+    fi
+    sleep "${delay}"
+    attempt=$((attempt + 1))
+    delay=$((delay * 2))
+  done
+}
+
+retry 'Installing /offload Plugin...' npx skills add https://github.com/ToxicPine/tissloolly -g -a -y -s offload foolfad foolfad-config boondoggle
+retry 'Adding ambit-cli Skill...' npx skills add https://github.com/ToxicPine/ambit-skills -g -a -y -s ambit-cli
