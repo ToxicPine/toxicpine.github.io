@@ -120,7 +120,7 @@ Imagine instead one directory — a package store — where every package, and e
 version of every package, gets its own folder. (A distribution called
 [GoboLinux](https://gobolinux.org/) actually arranges its filesystem this way.)
 
-<pre><code>/packages/
+<pre style="line-height: 1"><code>/packages/
 ├── Python/
 │   └── 3.13.5/
 │       ├── bin/
@@ -164,7 +164,7 @@ What each machine actually needs is one shared, read-only directory for common
 packages and one private, writable directory for its own packages, presented
 together as a single package store:
 
-<pre><code>What machine A sees in /packages/
+<pre style="line-height: 1"><code>What machine A sees in /packages/
 ├── <span style="color:#3d7fc2">Python/3.13.5/</span>
 ├── <span style="color:#3d7fc2">Nginx/1.30.2/</span>
 ├── <span style="color:#3d7fc2">OpenSSL/3.5.1/</span>
@@ -201,7 +201,7 @@ this “copy up.”
 Nix, a package manager with a famously unorthodox design, already arranges
 packages exactly this way; it just spells the names differently:
 
-<pre><code>/nix/store/
+<pre style="line-height: 1"><code>/nix/store/
 ├── 4v1...-python3-3.13.5/
 ├── 8k2...-nginx-1.30.2/
 └── n7z...-openssl-3.5.1/
