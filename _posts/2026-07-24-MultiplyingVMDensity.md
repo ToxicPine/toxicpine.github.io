@@ -3,9 +3,11 @@ title: "Multiplying VM Density by [RESULT]×*"
 date: 2026-07-24 18:45:00 +0100
 categories: [Technology, Infrastructure]
 tags: [virtual machines, virtualization, nix, deduplication]
+mermaid: true
 ---
 
-[WORK IN PROGRESS]
+> **WORK IN PROGRESS**
+{: .prompt-warning }
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
 discovered a way to run [RESULT]× as many VMs at once on the same cluster.\*
@@ -119,7 +121,7 @@ Imagine instead one directory — a package store — where every package, and e
 version of every package, gets its own folder. (A distribution called
 [GoboLinux](https://gobolinux.org/) actually arranges its filesystem this way.)
 
-<pre style="line-height: 1"><code>/packages/
+<pre style="line-height: 1; overflow-y: hidden"><code>/packages/
 ├── Python/
 │   └── 3.13.5/
 │       ├── bin/
@@ -163,7 +165,7 @@ What each machine actually needs is one shared, read-only directory for common
 packages and one private, writable directory for its own packages, presented
 together as a single package store:
 
-<pre style="line-height: 1"><code>What machine A sees in /packages/
+<pre style="line-height: 1; overflow-y: hidden"><code>What machine A sees in /packages/
 ├── <span style="color:#3d7fc2">Python/3.13.5/</span>
 ├── <span style="color:#3d7fc2">Nginx/1.30.2/</span>
 ├── <span style="color:#3d7fc2">OpenSSL/3.5.1/</span>
@@ -200,7 +202,7 @@ this “copy up.”
 Nix, a package manager with a famously unorthodox design, already arranges
 packages exactly this way; it just spells the names differently:
 
-<pre style="line-height: 1"><code>/nix/store/
+<pre style="line-height: 1; overflow-y: hidden"><code>/nix/store/
 ├── 4v1...-python3-3.13.5/
 ├── 8k2...-nginx-1.30.2/
 └── n7z...-openssl-3.5.1/
@@ -270,7 +272,20 @@ Any VM running its own guest kernel interrupts this: the host can cache the
 common blocks of a qcow2 backing image, but each guest kernel sees a virtual
 disk, reads those blocks, and caches them again in its own RAM:
 
-![A host page-cache page copied into the private guest RAM of VMs A, B, and N](/assets/img/posts/vm-density-page-cache.svg)
+```mermaid
+flowchart TB
+    host["Host page cache<br/>one backing-image page"]
+    vmA["VM A reads its virtual disk"]
+    vmB["VM B reads its virtual disk"]
+    vmN["VM N reads its virtual disk"]
+    ramA["VM A guest RAM<br/>private file page"]
+    ramB["VM B guest RAM<br/>private file page"]
+    ramN["VM N guest RAM<br/>private file page"]
+
+    host --> vmA --> ramA
+    host --> vmB --> ramB
+    host --> vmN --> ramN
+```
 
 The file identity that made passive sharing work is severed at the VM boundary:
 from the host's point of view, each guest's cached copy is just guest memory,
@@ -326,7 +341,14 @@ File reads travel a short path from the application down to the store: with
 gVisor's Directfs option, the Sentry opens host files directly rather than
 through an intermediary process, so reading a shared package goes roughly:
 
-![The file-read path from an application through gVisor, OverlayFS, and Snix to the shared package store](/assets/img/posts/vm-density-read-path.svg)
+```mermaid
+flowchart LR
+    app["Application"] --> sentry["gVisor Sentry"]
+    sentry --> directfs["Directfs"]
+    directfs --> overlay["Host OverlayFS"]
+    overlay --> fuse["Snix FUSE mount"]
+    fuse --> store["Shared package store"]
+```
 
 Each sandbox still uses RAM of its own: a Sentry, bookkeeping, and its
 applications' private memory. gVisor's
