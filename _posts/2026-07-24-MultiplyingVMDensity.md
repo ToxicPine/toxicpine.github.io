@@ -1,5 +1,5 @@
 ---
-title: 'Multiplying VM Density by [RESULT]×*'
+title: "Multiplying VM Density by [RESULT]×*"
 date: 2026-07-24 18:45:00 +0100
 categories: [Technology, Infrastructure]
 tags: [virtual machines, virtualization, nix, deduplication]
@@ -8,8 +8,7 @@ tags: [virtual machines, virtualization, nix, deduplication]
 [WORK IN PROGRESS]
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
-discovered a way to run [RESULT]× as many VMs at once on the same
-cluster.\*
+discovered a way to run [RESULT]× as many VMs at once on the same cluster.\*
 
 OpenAI recently wired its Codex coding agent into the ChatGPT app: you can
 [hand a coding task to an agent from your phone](https://openai.com/index/work-with-codex-from-anywhere/),
@@ -88,14 +87,14 @@ in the clone will never differ from the original.
 The usual fix is itself passive:
 [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) disk formats such
 as QEMU's qcow2 let several VM disks draw from one read-only backing image and
-record only their own changes. The VM side of my benchmark uses exactly this. It
-has two limits, though. It only shares what was in the base image when each
-machine was created; anything installed afterwards, even the same package on two
-machines, lands in private blocks the base can never absorb. That's fine for an
-appliance whose software never changes; for a development machine that installs
-things at runtime, the shared portion only decays. The sharing also stops at the
-disk: once machines start reading those blocks into memory, the duplication
-comes back, and that problem gets its own section below.
+record only their own changes. It has two limits, though. It only shares what
+was in the base image when each machine was created; anything installed
+afterwards, even the same package on two machines, lands in private blocks the
+base can never absorb. That's fine for an appliance whose software never
+changes; for a development machine that installs things at runtime, the shared
+portion only decays. The sharing also stops at the disk: once machines start
+reading those blocks into memory, the duplication comes back, and that problem
+gets its own section below.
 
 Which sharpens the question:
 
@@ -215,11 +214,11 @@ Nix doesn't provide the whole sandwich by itself. OverlayFS merges the shared
 and private directories, and Nix's local-overlay store support lets the package
 manager treat the merged files, plus the matching metadata, as a real store.
 
-\*\* This is not an incidental implementation choice: the solution
-relies on a Nix-based container operating system. Nix's immutable, side-by-side
-package store is what makes one shared lower store practical while each machine
-retains private package management; this is not a drop-in optimization for
-arbitrary container images or package managers.
+\*\* This is not an incidental implementation choice: the solution relies on a
+Nix-based container operating system. Nix's immutable, side-by-side package
+store is what makes one shared lower store practical while each machine retains
+private package management; this is not a drop-in optimization for arbitrary
+container images or package managers.
 
 (I thought I was being clever with this sandwich, then found Replit's
 [Super Colliding Nix Stores](https://blog.replit.com/super-colliding-nix-stores)
@@ -311,9 +310,8 @@ rather than emulated hardware, and it doesn't torpedo the security model.
 Calling these VMs is admittedly a cheeky definition, but it keeps the picture
 clear. That is the third asterisk.
 
-\*\*\* Strictly, the “VMs” are gVisor sandboxes on KVM — and the
-absence of a guest kernel is exactly what lets the shared-store and memory
-design work.
+\*\*\* Strictly, the “VMs” are gVisor sandboxes on KVM — and the absence of a
+guest kernel is exactly what lets the shared-store and memory design work.
 
 This middle ground is exactly what the design needs:
 
@@ -436,13 +434,13 @@ The headline claim lives in this table, as both absolute counts and a ratio:
 > **[RESULT]×** as many. Its post-load marginal memory cost was **[RESULT]** per
 > instance, compared with **[RESULT]** for the conventional VM.
 
-\* The headline's asterisk, then: “[RESULT]× more” counts
-simultaneously healthy instances inside the same fixed host-RAM envelope, after
-a common nginx workload has made the relevant software resident. Both targets
-run the same pinned nginx build and configuration, use the same CPU allocation
-and direct network path, and must meet the same error-rate and p99-latency
-objective. The figure does not claim that every workload or every byte of
-private state scales by the same ratio.
+\* The headline's asterisk, then: “[RESULT]× more” counts simultaneously healthy
+instances inside the same fixed host-RAM envelope, after a common nginx workload
+has made the relevant software resident. Both targets run the same pinned nginx
+build and configuration, use the same CPU allocation and direct network path,
+and must meet the same error-rate and p99-latency objective. The figure does not
+claim that every workload or every byte of private state scales by the same
+ratio.
 
 If shared-store page-cache reuse works as intended, the host should keep one
 cached set of the nginx executable, libraries, and other closure files even as
