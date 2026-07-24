@@ -1,5 +1,5 @@
 ---
-title: 'Multiplying VM Density by [RESULT]×<sup>*</sup>'
+title: 'Multiplying VM Density by [RESULT]×*'
 date: 2026-07-24 18:45:00 +0100
 categories: [Technology, Infrastructure]
 tags: [virtual machines, virtualization, nix, deduplication]
@@ -9,7 +9,7 @@ tags: [virtual machines, virtualization, nix, deduplication]
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
 discovered a way to run [RESULT]× as many VMs at once on the same
-cluster.<sup>\*</sup>
+cluster.\*
 
 OpenAI recently wired its Codex coding agent into the ChatGPT app: you can
 [hand a coding task to an agent from your phone](https://openai.com/index/work-with-codex-from-anywhere/),
@@ -34,7 +34,7 @@ nine of every ten copies do nothing but waste storage space.
 So I set out to fix that inefficiency, and it worked:
 
 **When VMs run side by side on one server, each now costs a fraction of the RAM
-and disk it used to, so the same server runs [RESULT]× as many<sup>\*</sup>.**
+and disk it used to, so the same server runs [RESULT]× as many\*.**
 
 The number of VMs that can fit on the same hardware is known as _VM density_ —
 and that's what this blog is about. For a single VM, density optimizations
@@ -120,8 +120,7 @@ Imagine instead one directory — a package store — where every package, and e
 version of every package, gets its own folder. (A distribution called
 [GoboLinux](https://gobolinux.org/) actually arranges its filesystem this way.)
 
-```text
-/packages/
+<pre><code>/packages/
 ├── Python/
 │   └── 3.13.5/
 │       ├── bin/
@@ -134,7 +133,7 @@ version of every package, gets its own folder. (A distribution called
     └── 3.5.1/
         ├── bin/
         └── lib/
-```
+</code></pre>
 
 Now “Python 3.13.5” has an address. If ten machines need that exact folder,
 whether it shipped with the machine or was installed this morning, we can store
@@ -145,7 +144,7 @@ installed. An upgrade installs the new Python version in a separate folder and
 configures the machine to use it. The old folder stays unchanged, so programs
 already using it keep working.
 
-## Why We Cannot Simply Share `/packages`
+## Why We Cannot Simply Share /packages
 
 The tempting shortcut is to mount one common `/packages` directory into every
 machine and declare victory.
@@ -177,8 +176,8 @@ What machine B sees in /packages/
 ├── <span style="color:#3d7fc2">OpenSSL/3.5.1/</span>
 └── <span style="color:#4a9a2e">FFmpeg/7.1/</span>
 
-<span style="color:#3d7fc2">■ the shared lower</span></br>
-<span style="color:#c47a1d">■ A's private upper</span></br>
+<span style="color:#3d7fc2">■ the shared lower</span>
+<span style="color:#c47a1d">■ A's private upper</span>
 <span style="color:#4a9a2e">■ B's private upper</span></code></pre>
 
 In this layout, common packages come from one shared, read-only directory, while
@@ -202,12 +201,11 @@ this “copy up.”
 Nix, a package manager with a famously unorthodox design, already arranges
 packages exactly this way; it just spells the names differently:
 
-```text
-/nix/store/
+<pre><code>/nix/store/
 ├── 4v1...-python3-3.13.5/
 ├── 8k2...-nginx-1.30.2/
 └── n7z...-openssl-3.5.1/
-```
+</code></pre>
 
 In Nix, store contents are never edited in place, and versions coexist side by
 side — exactly what a shared package store requires. Nix even has a word for a
@@ -217,7 +215,7 @@ Nix doesn't provide the whole sandwich by itself. OverlayFS merges the shared
 and private directories, and Nix's local-overlay store support lets the package
 manager treat the merged files, plus the matching metadata, as a real store.
 
-<sup>\*\*</sup> This is not an incidental implementation choice: the solution
+\*\* This is not an incidental implementation choice: the solution
 relies on a Nix-based container operating system. Nix's immutable, side-by-side
 package store is what makes one shared lower store practical while each machine
 retains private package management; this is not a drop-in optimization for
@@ -241,12 +239,11 @@ Ten machines that need the same nginx build now point at one stored copy — the
 problem has changed from finding ten identical copies to handing one object to
 ten machines. On disk:
 
-```text
-total storage
+<pre><code>total storage
   = one shared package store
   + each machine's own extra packages
   + each machine's own data
-```
+</code></pre>
 
 This solves the disk-duplication problem for common, public state. The shared
 package closure occupies the same amount of space whether one VM uses it or a
@@ -274,20 +271,7 @@ Any VM running its own guest kernel interrupts this: the host can cache the
 common blocks of a qcow2 backing image, but each guest kernel sees a virtual
 disk, reads those blocks, and caches them again in its own RAM:
 
-```mermaid
-flowchart TB
-    host["Host page cache<br/>one backing-image page"]
-    vmA["VM A reads its virtual disk"]
-    vmB["VM B reads its virtual disk"]
-    vmN["VM N reads its virtual disk"]
-    ramA["VM A guest RAM<br/>private file page"]
-    ramB["VM B guest RAM<br/>private file page"]
-    ramN["VM N guest RAM<br/>private file page"]
-
-    host --> vmA --> ramA
-    host --> vmB --> ramB
-    host --> vmN --> ramN
-```
+![A host page-cache page copied into the private guest RAM of VMs A, B, and N](/assets/img/posts/vm-density-page-cache.svg)
 
 The file identity that made passive sharing work is severed at the VM boundary:
 from the host's point of view, each guest's cached copy is just guest memory,
@@ -327,7 +311,7 @@ rather than emulated hardware, and it doesn't torpedo the security model.
 Calling these VMs is admittedly a cheeky definition, but it keeps the picture
 clear. That is the third asterisk.
 
-<sup>\*\*\*</sup> Strictly, the “VMs” are gVisor sandboxes on KVM — and the
+\*\*\* Strictly, the “VMs” are gVisor sandboxes on KVM — and the
 absence of a guest kernel is exactly what lets the shared-store and memory
 design work.
 
@@ -344,14 +328,7 @@ File reads travel a short path from the application down to the store: with
 gVisor's Directfs option, the Sentry opens host files directly rather than
 through an intermediary process, so reading a shared package goes roughly:
 
-```mermaid
-flowchart LR
-    app["Application"] --> sentry["gVisor Sentry"]
-    sentry --> directfs["Directfs"]
-    directfs --> overlay["Host OverlayFS"]
-    overlay --> fuse["Snix FUSE mount"]
-    fuse --> store["Shared package store"]
-```
+![The file-read path from an application through gVisor, OverlayFS, and Snix to the shared package store](/assets/img/posts/vm-density-read-path.svg)
 
 Each sandbox still uses RAM of its own: a Sentry, bookkeeping, and its
 applications' private memory. gVisor's
@@ -459,7 +436,7 @@ The headline claim lives in this table, as both absolute counts and a ratio:
 > **[RESULT]×** as many. Its post-load marginal memory cost was **[RESULT]** per
 > instance, compared with **[RESULT]** for the conventional VM.
 
-<sup>\*</sup> The headline's asterisk, then: “[RESULT]× more” counts
+\* The headline's asterisk, then: “[RESULT]× more” counts
 simultaneously healthy instances inside the same fixed host-RAM envelope, after
 a common nginx workload has made the relevant software resident. Both targets
 run the same pinned nginx build and configuration, use the same CPU allocation
@@ -609,16 +586,14 @@ The whole idea fits in one sentence:
 
 A system built that way should cost roughly
 
-```text
-one common software working set
+<pre><code>one common software working set
     + N × genuinely private machine state
-```
+</code></pre>
 
 rather than
 
-```text
-N × (common software working set + private machine state)
-```
+<pre><code>N × (common software working set + private machine state)
+</code></pre>
 
 Every VM still has marginal cost, and a workload dominated by huge private heaps
 or private writes benefits less than one dominated by common executables,
