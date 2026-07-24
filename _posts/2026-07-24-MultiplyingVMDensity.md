@@ -143,7 +143,7 @@ installed. An upgrade installs the new Python version in a separate folder and
 configures the machine to use it. The old folder stays unchanged, so programs
 already using it keep working.
 
-## Why We Cannot Simply Share /packages
+## Why We Cannot Simply Share `/packages`
 
 The tempting shortcut is to mount one common `/packages` directory into every
 machine and declare victory.
