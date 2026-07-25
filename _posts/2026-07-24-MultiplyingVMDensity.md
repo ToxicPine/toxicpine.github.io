@@ -364,8 +364,8 @@ machine adds only what differs about it.
 ## The Two Systems I Built and Compared
 
 To measure how much this design improves VM density, I built two systems and ran
-them head to head on the same workload — the code for the exact comparison and
-machine configurations lives
+them head to head on the same nginx workload — the code for the exact comparison
+and machine configurations lives
 [on my GitHub](https://github.com/ToxicPine/nix-container/tree/benchmarking).
 
 The shared-store side is the test case: it runs
@@ -394,11 +394,12 @@ well-optimized VM on a minimal OS, so that beating it means something.
 ## How I Keep the Comparison Fair
 
 A claim like “3.5× as many VMs” is easy to manufacture with a friendly
-benchmark, so the setup is deliberately unfriendly. Three questions drive it:
+benchmark, so the setup is deliberately unfriendly. Specifically, I wanted to
+know:
 
-1. How long does a prepared instance take to serve a correct nginx response?
-2. What are the fixed and marginal host-memory costs, and how many healthy
+1. What are the fixed and marginal host-memory costs, and how many healthy
    instances fit inside one RAM envelope?
+2. How long does a prepared instance take to serve a correct nginx response?
 3. At equal CPU, what throughput and tail latency can each target sustain?
 
 Two measurement choices matter more than the rest. First, memory is measured
