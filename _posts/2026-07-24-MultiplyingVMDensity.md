@@ -414,9 +414,8 @@ number is simply how much the whole server's memory use rises with each machine
 added.
 
 The rest is standard rigor: instances fully prepared before the timer starts,
-cold and warm cache conditions kept separate and verified, readiness defined as
-three consecutive correct HTTP responses, randomized target order, pinned CPUs,
-swap and same-page merging disabled, failures retained.
+readiness defined as three consecutive correct HTTP responses, pinned CPUs, and
+swap disabled.
 
 ## Results
 
