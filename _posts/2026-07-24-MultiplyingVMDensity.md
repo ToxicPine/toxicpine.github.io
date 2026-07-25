@@ -429,10 +429,10 @@ a stripped-down QEMU sits in the tens of MiB
 shows a VMM can get under 5), and each conventional VM here also reserves its
 256 MiB of guest RAM.
 
-These results do not report disk-space savings. For the common package closure,
-however, deduplication should be close to perfect: every sandbox uses the same
-immutable store paths, so the shared packages occupy one physical copy. Only
-each sandbox's private upper layer adds per-instance storage.
+For the common package closure, storage sharing should be close to perfect:
+every sandbox uses the same immutable store paths, so the shared packages occupy
+one physical copy. Only each sandbox's private upper layer adds per-instance
+storage.
 
 ### Time from Launch to Ready
 
@@ -474,6 +474,17 @@ cached set of the nginx executable, libraries, and other closure files even as
 more gVisor sandboxes are created. By contrast, conventional VMs keep separate
 cached copies of those files in each guest's RAM, so memory devoted to the
 common closure rises with the VM count.
+
+### Storage Use and Instance Density
+
+| Target              | Fixed Shared Storage | Marginal Private Storage | Maximum Instances |
+| ------------------- | -------------------: | -----------------------: | ----------------: |
+| NixOS VM            |         **[RESULT]** |             **[RESULT]** |      **[RESULT]** |
+| gVisor shared store |         **[RESULT]** |             **[RESULT]** |      **[RESULT]** |
+
+The VM row counts one read-only base image and each instance's private qcow2
+overlay. The gVisor row counts one shared Snix store and each instance's private
+upper layer and metadata.
 
 ### Nginx Throughput and Latency
 
@@ -559,22 +570,18 @@ Firecracker, AWS's minimal VMM built to run Lambda, is the natural “lighter VM
 counter-proposal, and on hypervisor overhead it delivers: the VMM process holds
 itself
 [under 5 MiB per microVM](https://github.com/firecracker-microvm/firecracker/blob/main/SPECIFICATION.md),
-against the tens of MiB even a stripped-down QEMU carries. Rebuilding the
-conventional-VM side on it would shave roughly that much off each VM's fixed
-cost.
+against the tens of MiB even a stripped-down QEMU carries. It avoids much of the
+QEMU-specific overhead charged to every VM, so it would narrow the gap in these
+results. If paired with the DAX-based shared-store design described above, it
+could also achieve host-page-cache sharing across VMs.
 
-A Firecracker microVM still boots a full guest kernel with its own page cache,
-so the duplicated guest-resident software, the thing the density benchmark
-actually measures, stays. The tooling around it is also thinner than QEMU's:
-disks are raw files with no qcow2 backing chains, so base-image sharing has to
-happen underneath in the filesystem or device layer; there is no
-shared-filesystem device to carry a store across the boundary; and Firecracker's
-own
-[production guidance](https://github.com/firecracker-microvm/firecracker/blob/main/docs/prod-host-setup.md)
-recommends disabling KSM for side-channel reasons. Whether it would beat the
-tuned QEMU baseline here is genuinely unclear. Its advantages lie in boot time
-and hypervisor overhead, while the contested resource is guest memory. It is
-still a fair comparison to add.
+However, Firecracker's tooling is thinner than QEMU's: disks are raw files with
+no qcow2 backing chains. The baseline is meant to represent a normally hosted
+VM, where many private disks share one read-only image through copy-on-write. A
+Firecracker comparison would have to preserve that property; otherwise it would
+change the storage model. Providing equivalent copy-on-write sharing beneath raw
+disks would require an additional host storage layer that I could not guarantee
+was comparable, which is why I did not use Firecracker here.
 
 ## Future Experiments and Improvements
 
