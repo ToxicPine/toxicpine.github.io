@@ -10,9 +10,9 @@ Posting notes:
 
 ---
 
-## 1/ (279 chars) — attach: marginal memory chart
+## 1/ (273 chars) — attach: marginal memory chart
 
-Apparently, we can run 3.5×* as many VMs at once on the same server, and we're just not doing it. It's dumb, honestly: most of a VM's RAM is cached software, identical across VMs, which almost nobody deduplicates.
+Apparently, we can fit 3.5×* as many VMs at once on the same server, and we're just not doing it. It's dumb, honestly: VMs waste RAM caching the same software as each other, which almost nobody deduplicates.
 
 So I did, and cut disk usage ~10× while I was at it. Here's how:
 
