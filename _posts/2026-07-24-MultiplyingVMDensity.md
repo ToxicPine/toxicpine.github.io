@@ -486,6 +486,10 @@ common closure rises with the VM count.
 | NixOS VM            |         **1.48 GiB** |             **1.92 MiB** |
 | gVisor shared store |         **1.10 GiB** |             **8.53 MiB** |
 
+The marginal figures are not exactly like-for-like: `nix-container` keeps
+unique per-container configuration in its private storage, while the NixOS VM
+has no equivalent per-instance configuration payload.
+
 The VM row counts one read-only base image and each instance's private qcow2
 overlay. The gVisor row counts one shared Snix store and each instance's private
 upper layer and metadata.
