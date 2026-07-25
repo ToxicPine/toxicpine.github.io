@@ -623,9 +623,8 @@ locally.
 
 The whole idea fits in one sentence:
 
-> If ten isolated machines use the same immutable package data, store it once,
-> give it one identity, and keep its file-backed pages under one host memory
-> manager.
+> If ten VMs use the same software packages, store them once and let one shared
+> memory manager cache their pages.
 
 A system built that way should cost roughly
 
