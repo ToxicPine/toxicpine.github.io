@@ -6,8 +6,7 @@ tags: [virtual machines, virtualization, nix, deduplication]
 mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
-  alt:
-    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+  alt: "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
     optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
@@ -466,8 +465,7 @@ and starting the actual workload.
 | gVisor shared store |       **290.3 MiB** |         **76.8 MiB** |              **76.7 MiB** |                  **~209** |
 
 Counts marked `~` project the measured fixed and marginal memory costs across
-the 16 GiB envelope. The complete density ramps will replace them with observed
-maximums.
+the 16 GiB envelope.
 
 The headline claim lives in this table, as both absolute counts and a ratio:
 
@@ -524,9 +522,8 @@ toward either system's density only while it clears the same responsiveness bar.
 
 ### Density with KSM Enabled
 
-This is the hedge promised earlier: the density ramp repeats for the
-conventional VMs with KSM switched on, with the scanner's CPU time charged to
-the VM side:
+This is the hedge promised earlier: I repeat the same test with KSM switched on
+for the conventional VMs, and charge the scanner's CPU time to the VM side:
 
 | Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
 | ------------------- | ------------------------: | ------------------------: | -----------: |
