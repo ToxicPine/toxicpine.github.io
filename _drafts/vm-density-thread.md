@@ -12,7 +12,7 @@ Posting notes:
 
 ## 1/ (279 chars) — attach: marginal memory chart
 
-Apparently, we can run 3.5×* as many VMs at once on the same server, and we're just not doing it. It's dumb, honestly: most of a VM's RAM is the same data loaded once per machine, which almost nobody deduplicates.
+Apparently, we can run 3.5×* as many VMs at once on the same server, and we're just not doing it. It's dumb, honestly: most of a VM's RAM is cached software, identical across VMs, which almost nobody deduplicates.
 
 So I did, and cut disk usage ~10× while I was at it. Here's how:
 
@@ -34,9 +34,9 @@ So I built the VMs to read shared software from the host's ONE page cache: in RA
 
 Replit does something similar internally (their "Super Colliding Nix Stores" post is worth reading). Mine needs no custom infrastructure: a full multi-user Linux machine per person, package manager and all, and it can run on Amazon EKS.
 
-## 5/ (273 chars)
+## 5/ (275 chars)
 
-The rare attempts use active deduplication (Linux's KSM, for example): scan RAM, find identical pages, merge them after the fact. That generalizes fine to multi-user VMs, but it burns CPU.
+The standard fix is active deduplication (Linux's KSM): scan RAM, find identical pages, merge them after the fact. It generalizes to multi-user VMs, but it burns CPU, so it mostly stays off.
 
 Mine is passive: the copies never appear in RAM, so there's nothing to deduplicate.
 
