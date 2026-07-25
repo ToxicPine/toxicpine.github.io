@@ -320,14 +320,14 @@ hardware and a separate guest Linux kernel.
 
 So is this a VM? If we stretch the definition of 'VM', yes: the sandbox runs
 under real hardware virtualization, and its applications never touch the host
-kernel directly. By the conventional definition, though, it isn't a VM. Still, I
-think the claims about VM density in this post are justified because VMs can
-achieve the same page-sharing behaviour demonstrated here. I used gVisor because
-it fits the Kubernetes infrastructure I tend to deploy on, such as Amazon EKS. A
-QEMU VM can mount a shared filesystem with DAX, allowing it to use file contents
-from the host's cache rather than keeping another copy in its own page cache. It
-would still pay for its guest kernel and other private memory, but efficient
-KSM-style approaches can reduce guest-kernel memory consumption.
+kernel directly. As most people would define it, though, gVisor isn't a VM.
+Still, I think the claims about VM density in this post are justified because
+VMs can achieve the same page-sharing behaviour demonstrated here. I used gVisor
+because it fits the Kubernetes infrastructure I tend to deploy on, such as
+Amazon EKS. A QEMU VM can mount a shared filesystem with DAX, allowing it to use
+file contents from the host's cache rather than keeping another copy in its own
+page cache. It would still pay for its guest kernel and other private memory,
+but efficient KSM-style approaches can reduce guest-kernel memory consumption.
 
 <sup>\*\*\*</sup> The measurements in this article are of gVisor sandboxes on
 KVM, not traditional VMs. A VM using a shared filesystem with DAX could achieve
@@ -393,8 +393,8 @@ well-optimized VM on a minimal OS, so that beating it means something.
 
 ## How I Keep the Comparison Fair
 
-It is easy to report “3.5× as many VMs” without establishing whether those
-extra VMs remain usable in practice, so I wanted the comparison to answer three
+It is easy to report “3.5× as many VMs” without establishing whether those extra
+VMs remain usable in practice, so I wanted the comparison to answer three
 questions:
 
 1. What are the fixed and marginal host-memory costs, and how many healthy
