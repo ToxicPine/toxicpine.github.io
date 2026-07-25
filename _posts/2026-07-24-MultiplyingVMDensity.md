@@ -6,7 +6,8 @@ tags: [virtual machines, virtualization, nix, deduplication]
 mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
-  alt: "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+  alt:
+    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
     optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
@@ -391,6 +392,16 @@ while still booting a real kernel with real isolation and internal package
 management. The tuning is deliberate: the baseline should be a genuinely
 well-optimized VM on a minimal OS, so that beating it means something.
 
+The two sides still aren't perfectly like-for-like: one is an OCI image under a
+minimal supervisor, the other a NixOS disk image under systemd, so their
+closures and init machinery differ a little. As a hedge, I also ran the VMs with
+KSM on, giving `ksmd` all the time it needed to deduplicate as thoroughly as it
+can. KSM merges the VMs against each other, with no cross-image comparison
+involved, so its savings independently show how much duplicate memory a fleet of
+identical VMs carries. And if the KSM figure lands near the shared-store one,
+that's telling in itself: both mechanisms would be removing the same
+duplication, one after the copies exist and one by never creating them.
+
 ## How I Keep the Comparison Fair
 
 It is easy to report “3.5× as many VMs” without establishing whether those extra
@@ -463,7 +474,8 @@ The headline claim lives in this table, as both absolute counts and a ratio:
 > Within a host memory envelope of **16 GiB**, the measured costs project
 > **~209** healthy nginx instances for the shared-store gVisor design versus
 > **~59** NixOS VMs: **3.5×** as many. Its post-load marginal memory cost was
-> **76.7 MiB** per instance, compared with **270.2 MiB** for the conventional VM.
+> **76.7 MiB** per instance, compared with **270.2 MiB** for the conventional
+> VM.
 
 \* The headline's asterisk, then: “3.5× more” counts simultaneously healthy
 instances inside the same fixed host-RAM envelope, after a common nginx workload
@@ -486,9 +498,9 @@ common closure rises with the VM count.
 | NixOS VM            |         **1.48 GiB** |             **1.92 MiB** |
 | gVisor shared store |         **1.10 GiB** |             **8.53 MiB** |
 
-The marginal figures are not exactly like-for-like: `nix-container` keeps
-unique per-container configuration in its private storage, while the NixOS VM
-has no equivalent per-instance configuration payload.
+The marginal figures are not exactly like-for-like: `nix-container` keeps unique
+per-container configuration in its private storage, while the NixOS VM has no
+equivalent per-instance configuration payload.
 
 The VM row counts one read-only base image and each instance's private qcow2
 overlay. The gVisor row counts one shared Snix store and each instance's private
@@ -512,8 +524,9 @@ toward either system's density only while it clears the same responsiveness bar.
 
 ### Density with KSM Enabled
 
-For completeness, the density ramp repeats for the conventional VMs with KSM
-switched on, with the scanner's CPU time charged to the VM side:
+This is the hedge promised earlier: the density ramp repeats for the
+conventional VMs with KSM switched on, with the scanner's CPU time charged to
+the VM side:
 
 | Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
 | ------------------- | ------------------------: | ------------------------: | -----------: |
