@@ -6,8 +6,7 @@ tags: [virtual machines, virtualization, nix, deduplication]
 mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
-  alt:
-    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+  alt: "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
     optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
@@ -437,12 +436,12 @@ storage.
 
 ### Time from Launch to Ready
 
-| Cache Condition     | Target              |       Median |          p95 | CPU Time to Ready |     Failures |
-| ------------------- | ------------------- | -----------: | -----------: | ----------------: | -----------: |
-| Host-cold           | NixOS VM            | **[RESULT]** | **[RESULT]** |      **[RESULT]** | **[RESULT]** |
-| Host-cold           | gVisor shared store | **[RESULT]** | **[RESULT]** |      **[RESULT]** | **[RESULT]** |
-| Cross-instance warm | NixOS VM            | **[RESULT]** | **[RESULT]** |      **[RESULT]** | **[RESULT]** |
-| Cross-instance warm | gVisor shared store | **[RESULT]** | **[RESULT]** |      **[RESULT]** | **[RESULT]** |
+| Cache Condition     | Target              |      Median |         p95 | CPU Time to Ready | Failures |
+| ------------------- | ------------------- | ----------: | ----------: | ----------------: | -------: |
+| Host-cold           | NixOS VM            | **6.214 s** | **6.243 s** |       **4.196 s** | **0/30** |
+| Host-cold           | gVisor shared store | **3.843 s** | **3.909 s** |       **4.751 s** | **0/30** |
+| Cross-instance warm | NixOS VM            | **5.164 s** | **5.196 s** |       **3.976 s** | **0/30** |
+| Cross-instance warm | gVisor shared store | **2.553 s** | **2.638 s** |       **3.194 s** | **0/30** |
 
 A minimal readiness daemon with a negligible closure acts as the control here:
 subtracting its launch time from nginx's separates platform startup from loading
@@ -452,15 +451,19 @@ and starting the actual workload.
 
 | Target              | Fixed Platform Cost | Marginal Idle Memory | Marginal Post-Load Memory | Maximum Healthy Instances |
 | ------------------- | ------------------: | -------------------: | ------------------------: | ------------------------: |
-| NixOS VM            |       **344.3 MiB** |        **269.3 MiB** |             **270.2 MiB** |              **[RESULT]** |
-| gVisor shared store |       **290.3 MiB** |         **76.8 MiB** |              **76.7 MiB** |              **[RESULT]** |
+| NixOS VM            |       **344.3 MiB** |        **269.3 MiB** |             **270.2 MiB** |                   **~59** |
+| gVisor shared store |       **290.3 MiB** |         **76.8 MiB** |              **76.7 MiB** |                  **~209** |
+
+Counts marked `~` project the measured fixed and marginal memory costs across
+the 16 GiB envelope. The complete density ramps will replace them with observed
+maximums.
 
 The headline claim lives in this table, as both absolute counts and a ratio:
 
-> Within a host memory envelope of **16 GiB**, the shared-store gVisor design
-> sustained **[RESULT]** healthy nginx instances versus **[RESULT]** NixOS VMs:
-> **3.5×** as many. Its post-load marginal memory cost was **76.7 MiB** per
-> instance, compared with **270.2 MiB** for the conventional VM.
+> Within a host memory envelope of **16 GiB**, the measured costs project
+> **~209** healthy nginx instances for the shared-store gVisor design versus
+> **~59** NixOS VMs: **3.5×** as many. Its post-load marginal memory cost was
+> **76.7 MiB** per instance, compared with **270.2 MiB** for the conventional VM.
 
 \* The headline's asterisk, then: “3.5× more” counts simultaneously healthy
 instances inside the same fixed host-RAM envelope, after a common nginx workload
@@ -478,10 +481,10 @@ common closure rises with the VM count.
 
 ### Storage Use and Instance Density
 
-| Target              | Fixed Shared Storage | Marginal Private Storage | Maximum Instances |
-| ------------------- | -------------------: | -----------------------: | ----------------: |
-| NixOS VM            |         **[RESULT]** |             **[RESULT]** |      **[RESULT]** |
-| gVisor shared store |         **[RESULT]** |             **[RESULT]** |      **[RESULT]** |
+| Target              | Fixed Shared Storage | Marginal Private Storage |
+| ------------------- | -------------------: | -----------------------: |
+| NixOS VM            |         **1.48 GiB** |             **1.92 MiB** |
+| gVisor shared store |         **1.10 GiB** |             **8.53 MiB** |
 
 The VM row counts one read-only base image and each instance's private qcow2
 overlay. The gVisor row counts one shared Snix store and each instance's private
@@ -510,9 +513,11 @@ switched on, with the scanner's CPU time charged to the VM side:
 
 | Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
 | ------------------- | ------------------------: | ------------------------: | -----------: |
-| NixOS VM, KSM on    |             **103.5 MiB** |              **[RESULT]** | **115.86 s** |
-| NixOS VM, KSM off   |             **270.2 MiB** |              **[RESULT]** |            — |
-| gVisor shared store |              **76.7 MiB** |              **[RESULT]** |            — |
+| NixOS VM, KSM on    |             **103.5 MiB** |                  **~155** | **115.86 s** |
+| NixOS VM, KSM off   |             **270.2 MiB** |                   **~59** |            — |
+| gVisor shared store |              **76.7 MiB** |                  **~209** |            — |
+
+The `~` counts use the same fixed-plus-marginal projection as above.
 
 Turning KSM on cut marginal memory by 166.7 MiB per VM, from 270.2 MiB to 103.5
 MiB, a reduction of 62%. That still left each VM 26.7 MiB above the gVisor
