@@ -527,7 +527,7 @@ When several VMs load the same resource, each initially keeps its own copy in
 RAM, so memory rises until `ksmd` finds and merges those copies. `ksmd` also
 eats CPU time that should be available for running workloads.
 
-## Alternatives and Objections Worth Taking Seriously
+## Objections Worth Taking Seriously
 
 ### Why Not Use KSM with Ordinary VMs?
 
