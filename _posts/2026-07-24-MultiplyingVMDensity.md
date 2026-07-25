@@ -7,7 +7,7 @@ mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
   alt:
-    "Marginal Post-load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
     optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
@@ -642,5 +642,5 @@ Every VM still has marginal cost, and a workload dominated by huge private heaps
 or private writes benefits less than one dominated by common executables,
 libraries, interpreters, and read-mostly package data.
 
-Outcome: a server that used to host a handful of VMs can now run a personal VM
-for 3.5× as many people.
+Outcome: a server that used to host a handful of VMs can now run VMs for 3.5× as
+many people.
