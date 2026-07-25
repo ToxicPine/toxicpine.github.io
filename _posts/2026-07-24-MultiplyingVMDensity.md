@@ -393,9 +393,9 @@ well-optimized VM on a minimal OS, so that beating it means something.
 
 ## How I Keep the Comparison Fair
 
-A claim like “3.5× as many VMs” is easy to manufacture with a friendly
-benchmark, so the setup is deliberately unfriendly. Specifically, I wanted to
-know:
+It is easy to report “3.5× as many VMs” without establishing whether those
+extra VMs remain usable in practice, so I wanted the comparison to answer three
+questions:
 
 1. What are the fixed and marginal host-memory costs, and how many healthy
    instances fit inside one RAM envelope?
@@ -527,6 +527,18 @@ RAM, so memory rises until `ksmd` finds and merges those copies. `ksmd` also
 eats CPU time that should be available for running workloads.
 
 ## Objections Worth Taking Seriously
+
+### Won't CPU Become the Bottleneck?
+
+Well, it depends on your circumstances. If, like me, you're giving people VMs
+where their agents can live and work, most of those VMs will sit nearly idle
+much of the day. It would also be less than ideal to ask each person to suspend
+and resume their machine between tasks, so the VMs need to keep running. They
+therefore occupy memory all day while using CPU only intermittently, making it
+sensible to overcommit CPU and minimize the RAM used by each VM. If everyone
+starts CPU-heavy work at once — a build, for example — CPU becomes the
+bottleneck, but I don't expect that to happen often in my case; ordinarily,
+keeping all those mostly idle machines light on RAM matters more.
 
 ### Why Not Use KSM with Ordinary VMs?
 
