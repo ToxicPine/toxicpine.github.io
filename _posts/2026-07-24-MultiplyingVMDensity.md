@@ -533,15 +533,15 @@ and each guest caches it again. That gap between shared backing storage and
 shared resident pages is exactly why the benchmark measures post-load whole-host
 memory.
 
-### Why Not Mount the Shared Store into a Conventional VM?
+### Why Not Mount the Shared Store into a Traditional VM?
 
 That is a legitimate third design: a shared filesystem passed into the VM
-([virtiofs](https://virtio-fs.gitlab.io/), ideally with DAX) can carry file
-sharing across the VM boundary. It also changes the isolation, caching, failure,
-and performance model, and the VM still keeps its guest kernel and other private
+([virtiofs](https://virtio-fs.gitlab.io/), with DAX) can carry file sharing
+across the VM boundary. It also changes the isolation, caching, failure, and
+performance model, and the VM still keeps its guest kernel and other private
 memory. It deserves a follow-up experiment of its own; this one deliberately
-keeps its baseline a conventional, independently package-managed NixOS VM rather
-than quietly turning it into a different architecture.
+keeps its baseline a independently package-managed NixOS VM rather than quietly
+turning it into a different architecture.
 
 ### What About Firecracker?
 
