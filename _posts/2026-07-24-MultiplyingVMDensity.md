@@ -188,16 +188,16 @@ anything a machine adds goes into its own writable directory. Inside each
 machine, the two directories appear as one ordinary package store. A package
 lookup checks the machine's private upper layer first, then falls through to the
 shared lower. A package that A installs or builds lands only in A's upper, where
-B can neither break it nor see it. B gets the same lower but its own upper. Call
-it the upper/lower sandwich.
+B can neither break it nor see it. B gets the same lower but its own upper. We
+could describe this layout as an upper-lower sandwich.
 
-Linux already ships a filesystem that serves exactly this sandwich: OverlayFS
-presents an upper and a lower directory as one merged view. Lower files are read
-in place, new files land in the upper, and if software tries to modify a lower
-file, OverlayFS first copies it into the upper and edits the copy, leaving the
-shared original untouched. The
-[kernel documentation](https://docs.kernel.org/filesystems/overlayfs.html) calls
-this “copy up.”
+Linux already includes a filesystem designed for exactly this kind of sandwich
+layout: OverlayFS presents an upper and a lower directory as one merged view.
+Lower files are read in place, new files land in the upper, and if software
+tries to modify a lower file, OverlayFS first copies it into the upper and edits
+the copy, leaving the shared original untouched. This copy-before-write step is
+called a
+[copy-up operation](https://docs.kernel.org/filesystems/overlayfs.html#non-directories).
 
 ## Nix Already Solves the Package Layout Problem
 
@@ -221,13 +221,13 @@ manager treat the merged files, plus the matching metadata, as a real store.
 \*\* This is not an incidental implementation choice: the solution relies on a
 Nix-based container operating system. Nix's immutable, side-by-side package
 store is what makes one shared lower store practical while each machine retains
-private package management; this is not a drop-in optimization for arbitrary
-container images or package managers.
+private package management; this is not a drop-in optimization for any Linux VM.
 
-(I thought I was being clever with this sandwich, then found Replit's
-[Super Colliding Nix Stores](https://blog.replit.com/super-colliding-nix-stores)
-post: they have run a giant shared Nix store under a writable layer for millions
-of development environments.)
+(This technique has appeared in several forms: Nix has supported
+[experimental local-overlay stores](https://releases.nixos.org/nix/nix-2.22.0/manual/store/types/experimental-local-overlay-store.html)
+since version 2.22, released in April 2024, and I later found Replit's
+[Super Colliding Nix Stores](https://replit.com/blog/super-colliding-nix-stores)
+post describing how it uses a similar setup at much larger scale.)
 
 For the shared lower layer itself, I use [Snix](https://snix.dev/), an
 independent implementation of the Nix store. It exposes the store through
@@ -502,8 +502,18 @@ switched on, with the scanner's CPU time charged to the VM side:
 | NixOS VM, KSM off   |             **270.2 MiB** |              **[RESULT]** |            — |
 | gVisor shared store |              **76.7 MiB** |              **[RESULT]** |            — |
 
-The comparison shows how much of the density gap active deduplication claws back
-after the fact — and what it spends to do it.
+Turning KSM on cut marginal memory by 166.7 MiB per VM, from 270.2 MiB to 103.5
+MiB, a reduction of 62%. That still left each VM 26.7 MiB above the gVisor
+design. Each VM carries QEMU and its supporting virtualization state, while the
+gVisor solution may have lower per-instance runtime overhead. So, the remaining
+gap is therefore not necessarily memory that KSM failed to deduplicate.
+
+However, KSM saves memory only after `ksmd` has scanned newly loaded pages,
+found duplicates, and merged them. The measured 62% reduction is steady-state
+memory use, recorded after KSM's shared-page count had had time to stabilize.
+When several VMs load the same resource, each initially keeps its own copy in
+RAM, so memory rises until `ksmd` finds and merges those copies. `ksmd` also
+eats CPU time that should be available for running workloads.
 
 ## Alternatives and Objections Worth Taking Seriously
 
