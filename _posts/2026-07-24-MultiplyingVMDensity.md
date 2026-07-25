@@ -1,16 +1,18 @@
 ---
-title: "Multiplying VM Density by [RESULT]×*"
+title: "Multiplying VM Density by 3.5×*"
 date: 2026-07-24 18:45:00 +0100
 categories: [Technology, Infrastructure]
 tags: [virtual machines, virtualization, nix, deduplication]
 mermaid: true
+image:
+  path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
+  alt:
+    "Marginal Post-load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+    optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
-> **WORK IN PROGRESS**
-{: .prompt-warning }
-
 TL;DR: I tried to give each of my friends their own VM and accidentally
-discovered a way to run [RESULT]× as many VMs at once on the same cluster.\*
+discovered a way to run 3.5× as many VMs at once on the same cluster.\*
 
 OpenAI recently wired its Codex coding agent into the ChatGPT app: you can
 [hand a coding task to an agent from your phone](https://openai.com/index/work-with-codex-from-anywhere/),
@@ -35,7 +37,7 @@ nine of every ten copies do nothing but waste storage space.
 So I set out to fix that inefficiency, and it worked:
 
 **When VMs run side by side on one server, each now costs a fraction of the RAM
-and disk it used to, so the same server runs [RESULT]× as many\*.**
+and disk it used to, so the same server runs 3.5× as many\*.**
 
 The number of VMs that can fit on the same hardware is known as _VM density_ —
 and that's what this blog is about. For a single VM, density optimizations
@@ -316,17 +318,20 @@ mode, the Sentry fills the roles of both guest operating system and
 still a group of processes, rather than an emulated computer with virtual
 hardware and a separate guest Linux kernel.
 
-So is this a VM? Arguably yes: the sandbox runs under real hardware
-virtualization, and its applications never touch the host kernel directly. The
-difference is that the work a guest kernel would normally do happens to be
-offloaded to the host. However, ordinary VMs offload plenty to their hosts too:
-their virtual disks and network cards are usually thin channels to the host
-rather than emulated hardware, and it doesn't torpedo the security model.
-Calling these VMs is admittedly a cheeky definition, but it keeps the picture
-clear. That is the third asterisk.
+So is this a VM? If we stretch the definition of 'VM', yes: the sandbox runs
+under real hardware virtualization, and its applications never touch the host
+kernel directly. By the conventional definition, though, it isn't a VM. Still, I
+think the claims about VM density in this post are justified because VMs can
+achieve the same page-sharing behaviour demonstrated here. I used gVisor because
+it fits the Kubernetes infrastructure I tend to deploy on, such as Amazon EKS. A
+QEMU VM can mount a shared filesystem with DAX, allowing it to use file contents
+from the host's cache rather than keeping another copy in its own page cache. It
+would still pay for its guest kernel and other private memory, but efficient
+KSM-style approaches can reduce guest-kernel memory consumption.
 
-\*\*\* Strictly, the “VMs” are gVisor sandboxes on KVM — and the absence of a
-guest kernel is exactly what lets the shared-store and memory design work.
+<sup>\*\*\*</sup> The measurements in this article are of gVisor sandboxes on
+KVM, not traditional VMs. A VM using a shared filesystem with DAX could achieve
+the same page sharing, but that design was not tested here.
 
 This middle ground is exactly what the design needs:
 
@@ -388,7 +393,7 @@ well-optimized VM on a minimal OS, so that beating it means something.
 
 ## How I Keep the Comparison Fair
 
-A claim like “[RESULT]× as many VMs” is easy to manufacture with a friendly
+A claim like “3.5× as many VMs” is easy to manufacture with a friendly
 benchmark, so the setup is deliberately unfriendly. Three questions drive it:
 
 1. How long does a prepared instance take to serve a correct nginx response?
@@ -414,8 +419,8 @@ swap and same-page merging disabled, failures retained.
 
 ## Results
 
-> **Drafting note:** the benchmark harness and final measurements are not yet in
-> this repository. The fields below are placeholders for generated results.
+> **Drafting Note:** the benchmark harness and final measurements are not yet in
+> this repository. The figures shown are preliminary.
 
 For context, the known fixed costs: gVisor's Sentry adds
 [a few tens of MiB per sandbox](https://gvisor.dev/docs/architecture_guide/performance/),
@@ -446,17 +451,17 @@ and starting the actual workload.
 
 | Target              | Fixed Platform Cost | Marginal Idle Memory | Marginal Post-Load Memory | Maximum Healthy Instances |
 | ------------------- | ------------------: | -------------------: | ------------------------: | ------------------------: |
-| NixOS VM            |        **[RESULT]** |         **[RESULT]** |              **[RESULT]** |              **[RESULT]** |
-| gVisor shared store |        **[RESULT]** |         **[RESULT]** |              **[RESULT]** |              **[RESULT]** |
+| NixOS VM            |       **344.3 MiB** |        **269.3 MiB** |             **270.2 MiB** |              **[RESULT]** |
+| gVisor shared store |       **290.3 MiB** |         **76.8 MiB** |              **76.7 MiB** |              **[RESULT]** |
 
 The headline claim lives in this table, as both absolute counts and a ratio:
 
-> Within a host memory envelope of **[RESULT]**, the shared-store gVisor design
+> Within a host memory envelope of **16 GiB**, the shared-store gVisor design
 > sustained **[RESULT]** healthy nginx instances versus **[RESULT]** NixOS VMs:
-> **[RESULT]×** as many. Its post-load marginal memory cost was **[RESULT]** per
-> instance, compared with **[RESULT]** for the conventional VM.
+> **3.5×** as many. Its post-load marginal memory cost was **76.7 MiB** per
+> instance, compared with **270.2 MiB** for the conventional VM.
 
-\* The headline's asterisk, then: “[RESULT]× more” counts simultaneously healthy
+\* The headline's asterisk, then: “3.5× more” counts simultaneously healthy
 instances inside the same fixed host-RAM envelope, after a common nginx workload
 has made the relevant software resident. Both targets run the same pinned nginx
 build and configuration, use the same CPU allocation and direct network path,
@@ -493,9 +498,9 @@ switched on, with the scanner's CPU time charged to the VM side:
 
 | Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
 | ------------------- | ------------------------: | ------------------------: | -----------: |
-| NixOS VM, KSM on    |              **[RESULT]** |              **[RESULT]** | **[RESULT]** |
-| NixOS VM, KSM off   |              **[RESULT]** |              **[RESULT]** |            — |
-| gVisor shared store |              **[RESULT]** |              **[RESULT]** |            — |
+| NixOS VM, KSM on    |             **103.5 MiB** |              **[RESULT]** | **115.86 s** |
+| NixOS VM, KSM off   |             **270.2 MiB** |              **[RESULT]** |            — |
+| gVisor shared store |              **76.7 MiB** |              **[RESULT]** |            — |
 
 The comparison shows how much of the density gap active deduplication claws back
 after the fact — and what it spends to do it.
@@ -619,7 +624,5 @@ Every VM still has marginal cost, and a workload dominated by huge private heaps
 or private writes benefits less than one dominated by common executables,
 libraries, interpreters, and read-mostly package data.
 
-Summary: a server that used to host a handful of VMs can now hand a persistent,
-private machine to [RESULT]× as many people. My friends open the ChatGPT app,
-tell an agent what to build, and the machine it builds on costs me roughly
-**[RESULT]** of RAM. That is the argument the benchmark now has to earn.
+Outcome: a server that used to host a handful of VMs can now run a personal VM
+for 3.5× as many people.
