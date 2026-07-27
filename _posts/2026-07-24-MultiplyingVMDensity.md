@@ -7,9 +7,15 @@ mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
   alt:
-    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
-    optional KSM, and 76.7 MiB for the shared-store design."
+    "Marginal Post-Load Memory: 286.7 MiB for a NixOS VM, 114.6 MiB with
+    optional KSM, and 78.2 MiB for the shared-store design."
 ---
+
+> An earlier version of this post used slightly different measurements. The
+> latest run measured a **4.1×** density improvement, as reported below.
+> However, the benchmark harness still shows a few unexplained variations
+> between runs, so I have kept the more conservative **3.5×** headline.
+{: .prompt-info }
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
 discovered a way to run 3.5× as many VMs at once on the same cluster.\*
@@ -430,9 +436,6 @@ swap disabled.
 
 ## Results
 
-> **Drafting Note:** the benchmark harness and final measurements are not yet in
-> this repository. The figures shown are preliminary.
-
 For context, the known fixed costs: gVisor's Sentry adds
 [a few tens of MiB per sandbox](https://gvisor.dev/docs/architecture_guide/performance/),
 a stripped-down QEMU sits in the tens of MiB
@@ -447,12 +450,12 @@ storage.
 
 ### Time from Launch to Ready
 
-| Cache Condition     | Target              |      Median |         p95 | CPU Time to Ready | Failures |
-| ------------------- | ------------------- | ----------: | ----------: | ----------------: | -------: |
-| Host-cold           | NixOS VM            | **6.214 s** | **6.243 s** |       **4.196 s** | **0/30** |
-| Host-cold           | gVisor shared store | **3.843 s** | **3.909 s** |       **4.751 s** | **0/30** |
-| Cross-instance warm | NixOS VM            | **5.164 s** | **5.196 s** |       **3.976 s** | **0/30** |
-| Cross-instance warm | gVisor shared store | **2.553 s** | **2.638 s** |       **3.194 s** | **0/30** |
+| Cache Condition     | Target              |      Median |         p95 | CPU Time to Ready |
+| ------------------- | ------------------- | ----------: | ----------: | ----------------: |
+| Host-cold           | NixOS VM            | **6.214 s** | **6.243 s** |       **4.196 s** |
+| Host-cold           | gVisor shared store | **3.843 s** | **3.909 s** |       **4.751 s** |
+| Cross-instance warm | NixOS VM            | **5.164 s** | **5.196 s** |       **3.976 s** |
+| Cross-instance warm | gVisor shared store | **2.553 s** | **2.638 s** |       **3.194 s** |
 
 A minimal readiness daemon with a negligible closure acts as the control here:
 subtracting its launch time from nginx's separates platform startup from loading
@@ -462,21 +465,20 @@ and starting the actual workload.
 
 | Target              | Fixed Platform Cost | Marginal Idle Memory | Marginal Post-Load Memory | Maximum Healthy Instances |
 | ------------------- | ------------------: | -------------------: | ------------------------: | ------------------------: |
-| NixOS VM            |       **344.3 MiB** |        **269.3 MiB** |             **270.2 MiB** |                   **~59** |
-| gVisor shared store |       **290.3 MiB** |         **76.8 MiB** |              **76.7 MiB** |                  **~209** |
+| NixOS VM            |       **451.5 MiB** |        **291.0 MiB** |             **286.7 MiB** |                    **47** |
+| gVisor shared store |       **276.3 MiB** |         **78.3 MiB** |              **78.2 MiB** |                   **195** |
 
-Counts marked `~` project the measured fixed and marginal memory costs across
-the 16 GiB envelope.
+The instance counts are observed healthy maxima inside the envelope, not
+projections from marginal costs.
 
 The headline claim lives in this table, as both absolute counts and a ratio:
 
-> Within a host memory envelope of **16 GiB**, the measured costs project
-> **~209** healthy nginx instances for the shared-store gVisor design versus
-> **~59** NixOS VMs: **3.5×** as many. Its post-load marginal memory cost was
-> **76.7 MiB** per instance, compared with **270.2 MiB** for the conventional
-> VM.
+> Within a host memory envelope of **16 GiB**, the benchmark ran **195** healthy
+> nginx instances for the shared-store gVisor design versus **47** NixOS VMs:
+> **4.1×** as many. Its post-load marginal memory cost was **78.2 MiB** per
+> instance, compared with **286.7 MiB** for the conventional VM.
 
-\* The headline's asterisk, then: “3.5× more” counts simultaneously healthy
+\* The headline's asterisk, then: “3.5× as many” counts simultaneously healthy
 instances inside the same fixed host-RAM envelope, after a common nginx workload
 has made the relevant software resident. Both targets run the same pinned nginx
 build and configuration, use the same CPU allocation and direct network path,
@@ -507,19 +509,18 @@ upper layer and metadata.
 
 ### Nginx Throughput and Latency
 
-| Workload                | Target              |   Requests/s |          p50 |          p99 |       Errors |   Target CPU |
-| ----------------------- | ------------------- | -----------: | -----------: | -----------: | -----------: | -----------: |
-| Small, keep-alive, c=1  | NixOS VM            | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
-| Small, keep-alive, c=1  | gVisor shared store | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
-| Small, keep-alive, c=32 | NixOS VM            | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
-| Small, keep-alive, c=32 | gVisor shared store | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
-| 1 MiB, keep-alive, c=32 | NixOS VM            | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
-| 1 MiB, keep-alive, c=32 | gVisor shared store | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** | **[RESULT]** |
+| Workload                | Target              | Requests/s |            p50 |            p99 |
+| ----------------------- | ------------------- | ---------: | -------------: | -------------: |
+| Small, keep-alive, c=1  | NixOS VM            |  **6,733** |   **0.140 ms** |   **0.185 ms** |
+| Small, keep-alive, c=1  | gVisor shared store |  **3,938** |   **0.250 ms** |   **0.290 ms** |
+| Small, keep-alive, c=32 | NixOS VM            |  **8,234** |   **3.872 ms** |   **4.228 ms** |
+| Small, keep-alive, c=32 | gVisor shared store | **38,381** |   **0.798 ms** |   **1.292 ms** |
+| 1 MiB, keep-alive, c=32 | NixOS VM            |  **275.2** | **116.452 ms** | **119.752 ms** |
+| 1 MiB, keep-alive, c=32 | gVisor shared store |  **373.3** |  **85.701 ms** |  **87.157 ms** |
 
-We measure performance alongside density because packing more VMs onto the same
-cluster is worthless if each becomes too slow to use. The benchmark tracks
-requests per second, tail latency (p99), errors, and CPU use. An instance counts
-toward either system's density only while it clears the same responsiveness bar.
+Each figure is the median of three 60-second measurements. We measure
+performance alongside density because packing more VMs onto the same cluster is
+worthless if each becomes too slow to use.
 
 ### Density with KSM Enabled
 
@@ -528,20 +529,18 @@ for the conventional VMs, and charge the scanner's CPU time to the VM side:
 
 | Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
 | ------------------- | ------------------------: | ------------------------: | -----------: |
-| NixOS VM, KSM on    |             **103.5 MiB** |                  **~155** | **115.86 s** |
-| NixOS VM, KSM off   |             **270.2 MiB** |                   **~59** |            — |
-| gVisor shared store |              **76.7 MiB** |                  **~209** |            — |
+| NixOS VM, KSM on    |             **114.6 MiB** |                   **142** | **245.48 s** |
+| NixOS VM, KSM off   |             **286.7 MiB** |                    **47** |            — |
+| gVisor shared store |              **78.2 MiB** |                   **195** |            — |
 
-The `~` counts use the same fixed-plus-marginal projection as above.
-
-Turning KSM on cut marginal memory by 166.7 MiB per VM, from 270.2 MiB to 103.5
-MiB, a reduction of 62%. That still left each VM 26.7 MiB above the gVisor
+Turning KSM on cut marginal memory by 172.1 MiB per VM, from 286.7 MiB to 114.6
+MiB, a reduction of 60%. That still left each VM 36.4 MiB above the gVisor
 design. Each VM carries QEMU and its supporting virtualization state, while the
 gVisor solution may have lower per-instance runtime overhead. So, the remaining
 gap is therefore not necessarily memory that KSM failed to deduplicate.
 
 However, KSM saves memory only after `ksmd` has scanned newly loaded pages,
-found duplicates, and merged them. The measured 62% reduction is steady-state
+found duplicates, and merged them. The measured 60% reduction is steady-state
 memory use, recorded after KSM's shared-page count had had time to stabilize.
 When several VMs load the same resource, each initially keeps its own copy in
 RAM, so memory rises until `ksmd` finds and merges those copies. `ksmd` also
