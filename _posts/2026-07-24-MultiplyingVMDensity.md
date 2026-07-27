@@ -6,7 +6,8 @@ tags: [virtual machines, virtualization, nix, deduplication]
 mermaid: true
 image:
   path: /assets/img/posts/multiplying-vm-density-marginal-memory.png
-  alt: "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
+  alt:
+    "Marginal Post-Load Memory: 270.2 MiB for a NixOS VM, 103.5 MiB with
     optional KSM, and 76.7 MiB for the shared-store design."
 ---
 
@@ -574,8 +575,39 @@ I didn't make it the headline configuration for three reasons: it burns CPU and
 bookkeeping rediscovering that guests' pages are identical, after every guest
 has already loaded its own copy; its savings arrive only after the scanner has
 caught up, rather than existing from the moment a file is read; and merging
-private guest memory creates side-channel risks that explicitly sharing a
-read-only package avoids.
+private guest memory creates side-channel risks, whereas the shared-store design
+limits sharing to packages that are already public and read-only.
+
+### Does Sharing the Page Cache Expose One VM to Attacks from Another?
+
+Yes, sharing a page cache creates a security risk, and the easiest way to
+understand it is to follow what happens to a file as it moves in and out of
+memory. The page cache has limited space, so once it fills up, the host makes
+room by removing pages that have not been used recently — a process called
+eviction. If a VM reads a file after its pages have been evicted, it brings them
+back into the cache, which makes later reads much faster. An attacker can
+measure that difference by choosing the pages they want to watch, reading enough
+unrelated files to evict them, then waiting while another VM runs. They then
+read each chosen page and record how long it takes: a page the other VM did not
+use must be loaded from storage and takes longer, while one it did use is
+already back in the cache and returns quickly. This tells the attacker which
+pages the other VM accessed, and repeating the process across several pages from
+the same program can reveal what it is doing. If the program chooses which page
+to read next according to a secret value — for example, a cryptographic key —
+the resulting pattern can expose enough information for the attacker to
+reconstruct that value.
+
+Nix gives us a way to limit this risk because package definitions can carry
+extra information about how their store paths should be handled. When
+`nix-container` assembles the store presented to each VM, it could use that
+information to place safe paths in the global page cache while giving sensitive
+paths cache pages private to that VM. Both kinds of path could still live once
+in the same content-addressed Snix store; only the way they are presented to
+each VM would change. Most packages would therefore keep the memory savings of
+the shared cache, while the paths that need stronger isolation would give up
+those savings. I have not built or measured this split here, so working out
+exactly how to implement it is important future work and deserves a follow-up of
+its own.
 
 ### Does the qcow2 Backing Image Already Deduplicate the VMs?
 
