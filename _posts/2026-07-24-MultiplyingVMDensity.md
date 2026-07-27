@@ -11,12 +11,7 @@ image:
     optional KSM, and 78.2 MiB for the shared-store design."
 ---
 
-> The latest benchmark run measured a 4.1× density improvement, as reported
-> below. However, the harness still shows unexplained variation between runs, so
-> I have kept the more conservative 3.5× headline from the first run.
-{: .prompt-info }
-
-TL;DR: I tried to give each of my friends their own VM and accidentally
+**TL;DR:** I tried to give each of my friends their own VM and accidentally
 discovered a way to run 3.5× as many VMs at once on the same cluster.\*
 
 OpenAI recently wired its Codex coding agent into the ChatGPT app: you can
@@ -434,6 +429,11 @@ readiness defined as three consecutive correct HTTP responses, pinned CPUs, and
 swap disabled.
 
 ## Results
+
+> The latest benchmark run measured a 4.1× density improvement, as reported
+> below. However, the harness still shows unexplained variation between runs, so
+> I have kept the more conservative 3.5× headline from the first run.
+{: .prompt-info }
 
 For context, the known fixed costs: gVisor's Sentry adds
 [a few tens of MiB per sandbox](https://gvisor.dev/docs/architecture_guide/performance/),
