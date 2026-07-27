@@ -11,10 +11,9 @@ image:
     optional KSM, and 78.2 MiB for the shared-store design."
 ---
 
-> An earlier version of this post used slightly different measurements. The
-> latest run measured a 4.1× density improvement, as reported below.
-> However, the benchmark harness still shows a few unexplained variations
-> between runs, so I have kept the more conservative 3.5× headline.
+> The latest benchmark run measured a 4.1× density improvement, as reported
+> below. However, the harness still shows unexplained variation between runs, so
+> I have kept the more conservative 3.5× headline from the first run.
 {: .prompt-info }
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
