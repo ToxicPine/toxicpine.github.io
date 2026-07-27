@@ -12,9 +12,9 @@ image:
 ---
 
 > An earlier version of this post used slightly different measurements. The
-> latest run measured a **4.1×** density improvement, as reported below.
+> latest run measured a 4.1× density improvement, as reported below.
 > However, the benchmark harness still shows a few unexplained variations
-> between runs, so I have kept the more conservative **3.5×** headline.
+> between runs, so I have kept the more conservative 3.5× headline.
 {: .prompt-info }
 
 TL;DR: I tried to give each of my friends their own VM and accidentally
@@ -560,6 +560,25 @@ starts CPU-heavy work at once — a build, for example — CPU becomes the
 bottleneck, but I don't expect that to happen often in my case; ordinarily,
 keeping all those mostly idle machines light on RAM matters more.
 
+### Why Not Mount the Shared Store into a Traditional VM?
+
+That is a legitimate third design: a shared filesystem passed into the VM
+([virtiofs](https://virtio-fs.gitlab.io/), with DAX) can carry file sharing
+across the VM boundary. It also changes the isolation, caching, failure, and
+performance model, and the VM still keeps its guest kernel and other private
+memory. It deserves a follow-up experiment of its own; this one deliberately
+keeps its baseline a independently package-managed NixOS VM rather than quietly
+turning it into a different architecture.
+
+### Does the qcow2 Backing Image Already Deduplicate the VMs?
+
+It deduplicates most of the storage, which is why the benchmark uses it. It
+leaves the guest kernel, the fixed guest-RAM allocation, and the guest page
+cache: when several guests read the same backing block, the host caches it once
+and each guest caches it again. That gap between shared backing storage and
+shared resident pages is exactly why the benchmark measures post-load whole-host
+memory.
+
 ### Why Not Use KSM with Ordinary VMs?
 
 KSM is the all-active alternative: keep ordinary VMs and repair the duplication
@@ -607,25 +626,6 @@ the shared cache, while the paths that need stronger isolation would give up
 those savings. I have not built or measured this split here, so working out
 exactly how to implement it is important future work and deserves a follow-up of
 its own.
-
-### Does the qcow2 Backing Image Already Deduplicate the VMs?
-
-It deduplicates most of the storage, which is why the benchmark uses it. It
-leaves the guest kernel, the fixed guest-RAM allocation, and the guest page
-cache: when several guests read the same backing block, the host caches it once
-and each guest caches it again. That gap between shared backing storage and
-shared resident pages is exactly why the benchmark measures post-load whole-host
-memory.
-
-### Why Not Mount the Shared Store into a Traditional VM?
-
-That is a legitimate third design: a shared filesystem passed into the VM
-([virtiofs](https://virtio-fs.gitlab.io/), with DAX) can carry file sharing
-across the VM boundary. It also changes the isolation, caching, failure, and
-performance model, and the VM still keeps its guest kernel and other private
-memory. It deserves a follow-up experiment of its own; this one deliberately
-keeps its baseline a independently package-managed NixOS VM rather than quietly
-turning it into a different architecture.
 
 ### What About Firecracker?
 
