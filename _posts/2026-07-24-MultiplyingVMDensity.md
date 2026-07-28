@@ -26,8 +26,8 @@ cloud.
 
 I own a server, so the solution was obvious: offer each friend a Linux VM on it
 to serve as their second computer — somewhere their agent can live and make
-things. The catch is that VMs take-up a _lot_ of RAM and disk. If I were to host
-a VM for each friend on a single server, each VM would need to be far more
+things. The catch is that VMs use a _lot_ of RAM and disk space. If I were to
+host a VM for each friend on a single server, each VM would need to be far more
 efficient than usual.
 
 It turns out that most of the RAM and disk a VM consumes goes toward storing
@@ -88,9 +88,9 @@ documents, accounts, logs, settings, etc.
 Isolation requires private state to stay private, but common state is safe to
 share; there is no need to store it ten times.
 
-Disk images do exactly that, though. They bake the common and private parts into
-one disk, and cloning the disk clones everything — even though most bytes in the
-clone will never differ from the original.
+A traditional VM disk image does exactly that, though: it bakes the common and
+private parts into one disk, so cloning the image copies both, even though most
+bytes in the clone will never differ from the original.
 
 The usual fix is itself passive:
 [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) disk formats such
