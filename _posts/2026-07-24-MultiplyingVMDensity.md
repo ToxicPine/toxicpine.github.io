@@ -14,25 +14,30 @@ image:
 **TL;DR:** I tried to give each of my friends their own VM and accidentally
 discovered a way to run 3.5× as many VMs at once on the same cluster.\*
 
-OpenAI recently wired its Codex coding agent into the ChatGPT app: you can
-[hand a coding task to an agent from your phone](https://openai.com/index/work-with-codex-from-anywhere/),
-wander off, and come back to review what it built. Which is wonderful, right up
-until you remember that the phone is only the remote control. The work itself
-happens on a real computer somewhere, and my non-technical friends don't have a
-spare machine to leave running, let alone any appetite for renting and
-administering a VPS just to vibecode.
+OpenAI recently wired its Codex agent into the ChatGPT app: you can
+[hand a task to an agent from your phone](https://openai.com/index/work-with-codex-from-anywhere/),
+wander off, and come back to review what it built. Which is wonderful, until you
+remember that your phone can only serve as a remote control: the agent itself
+must run on another computer. If you'd like to use your agent at any time, that
+computer must always be on and connected to the internet; otherwise, there is
+nothing for your phone to control. Sadly, most of my non-technical friends have
+neither a spare computer to leave running nor the appetite to rent one in the
+cloud.
 
-I do have a server, though, so the solution was obvious: give each friend a
-Linux VM on it to serve as their personal development machine — somewhere their
-agent can live and build things with them. The catch is that VMs cost RAM and
-disk, one server only has so much, and a VM for every friend (plus room to
-invite more) meant each one had to be far more efficient than a typical VM.
+I own a server, so the solution was obvious: offer each friend a Linux VM on it
+to serve as their second computer — somewhere their agent can live and make
+things. The catch is that VMs take-up a _lot_ of RAM and disk. If I were to host
+a VM for each friend on a single server, each VM would need to be far more
+efficient than usual.
 
-It turns out, most of the RAM and disk a VM consumes goes to software it shares
-with every other VM. Ten of them would hold ten copies of the same Python, the
-same git, the same libraries and tools. That means identical bytes are repeated
-on disk, then repeated again in RAM once everyone's agent gets to work, while
-nine of every ten copies do nothing but waste storage space.
+It turns out that most of the RAM and disk a VM consumes goes toward storing
+software it has in common with every other VM: ten VMs would hold ten copies of
+the same libraries and tools, such as Python and Git. This means identical data
+is repeated on disk — for example, there are ten copies of Python, one per VM,
+nine of which do nothing but waste storage space. Worse yet, that data is
+duplicated again in RAM: when an agent uses a piece of software, its VM loads
+its own copy into RAM, so if ten agents use the same software, the server ends
+up holding ten copies.
 
 So I set out to fix that inefficiency, and it worked:
 
@@ -56,63 +61,61 @@ anyone writes.
 The downside is that active deduplication is slow, ongoing work: it acts only
 after duplicates exist, so the system must scan for matches, track each merge,
 and reverse it whenever somebody writes. In memory, that work also burns CPU and
-weakens isolation by comparing and merging separate machines' memory. That has
+weakens isolation by comparing and merging separate VMs' memory. That has
 enabled cross-tenant
 [side-channel attacks](https://en.wikipedia.org/wiki/Side-channel_attack). This
 design still uses some active deduplication, but the less of this work it needs,
 the better.
 
 The second way is passive: arrange for the second copy never to exist by having
-everyone read the data from a common source. If ten machines read Python from
-one shared location, there are no copies to discover, merge, track, or later
+everyone read the data from a common source. If ten VMs read Python from one
+shared location, there are no copies to discover, merge, track, or later
 unmerge. That makes passive sharing faster: no deduplication pass is needed. It
-also saves memory automatically: every machine reads the same underlying file,
-so the host operating system can keep one cached copy in RAM and serve it to all
-ten. More on that later.
+also saves memory automatically: every VM reads the same underlying file, so the
+host operating system can keep one cached copy in RAM and serve it to all ten.
+More on that later.
 
 So the strategy is this: share passively wherever possible, and reserve active
 deduplication for everything else.
 
-## Which Parts of a Machine Can Be Shared?
+## Which Parts of a VM Can Be Shared?
 
-Each machine holds two kinds of state. The common kind is pre-packaged public
-software: the operating-system tools, libraries, interpreters, and applications
-that anyone can download, identical for everybody. The private kind is
-everything the machine does with it: accounts, databases, logs, configuration,
-package-manager metadata, freshly built software, application output.
+Each VM holds two kinds of state (data). The common kind is pre-packaged public
+software: the operating-system tools, libraries, and applications that anyone
+can download, identical for everybody. The private kind is everything else:
+documents, accounts, logs, settings, etc.
 
-Isolation only demands that private state stays private and that common state is
-safe to share. Nothing about it requires storing the common part ten times.
+Isolation requires private state to stay private, but common state is safe to
+share; there is no need to store it ten times.
 
-Machine images do exactly that, though. They bake the common and private parts
-into one disk, and cloning the disk clones everything — even though most bytes
-in the clone will never differ from the original.
+Disk images do exactly that, though. They bake the common and private parts into
+one disk, and cloning the disk clones everything — even though most bytes in the
+clone will never differ from the original.
 
 The usual fix is itself passive:
 [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) disk formats such
 as QEMU's qcow2 let several VM disks draw from one read-only backing image and
 record only their own changes. It has two limits, though. It only shares what
-was in the base image when each machine was created; anything installed
-afterwards, even the same package on two machines, lands in private blocks the
-base can never absorb. That's fine for an appliance whose software never
-changes; for a development machine that installs things at runtime, the shared
-portion only decays. The sharing also stops at the disk: once machines start
-reading those blocks into memory, the duplication comes back, and that problem
-gets its own section below.
+was in the base image when each VM was created; anything installed afterwards,
+even the same package on two VMs, lands in private blocks the base can never
+absorb. That's fine for an appliance whose software never changes; for a
+development VM that installs things at runtime, the shared portion only decays.
+The sharing also stops at the disk: once VMs start reading those blocks into
+memory, the duplication comes back, and that problem gets its own section below.
 
 Which sharpens the question:
 
 > What is the largest class of data we can arrange to never duplicate in the
 > first place — on disk and in memory?
 
-For a development machine, it is the software itself: the common package set. So
-the design problem becomes giving many isolated machines one shared copy of
-their software, without taking away anyone's freedom to install and build
-things. That problem starts on disk.
+For a development VM, it is the software itself: the common package set. So the
+design problem becomes giving many isolated VMs one shared copy of their
+software, without taking away anyone's freedom to install and build things. That
+problem starts on disk.
 
 ## Imagine Every Package Had Its Own Folder
 
-The usual Linux disk layout makes packages difficult to share between machines.
+The usual Linux disk layout makes packages difficult to share between VMs.
 
 Most Linux systems smear one package across several shared directories. A Python
 installation puts commands in `/usr/bin`, libraries in `/usr/lib`, configuration
@@ -138,42 +141,41 @@ version of every package, gets its own folder. (A distribution called
         └── lib/
 </code></pre>
 
-Now “Python 3.13.5” has an address. If ten machines need that exact folder,
-whether it shipped with the machine or was installed this morning, we can store
-it once and let all ten see it.
+Now “Python 3.13.5” has an address. If ten VMs need that exact folder, whether
+it shipped with the VM or was installed this morning, we can store it once and
+let all ten see it.
 
 These folders are safe to share because each package becomes read-only once
 installed. An upgrade installs the new Python version in a separate folder and
-configures the machine to use it. The old folder stays unchanged, so programs
-already using it keep working.
+configures the VM to use it. The old folder stays unchanged, so programs already
+using it keep working.
 
 ## Why We Cannot Simply Share `/packages`
 
-The tempting shortcut is to mount one common `/packages` directory into every
-machine and declare victory.
+The tempting shortcut is to mount one common `/packages` directory into every VM
+and declare victory.
 
-The shortcut fails as soon as one machine changes the shared directory. If
-machine A uninstalls a package that machine B still needs, the package
-disappears from B too. One machine can likewise fill the disk or corrupt the
-package store for everyone. Even when nothing goes wrong, the common directory
-exposes software that should remain private: anything proprietary that A builds
-would appear on B's disk too.
+The shortcut fails as soon as one VM changes the shared directory. If VM A
+uninstalls a package that VM B still needs, the package disappears from B too.
+One VM can likewise fill the disk or corrupt the package store for everyone.
+Even when nothing goes wrong, the common directory exposes software that should
+remain private: anything proprietary that A builds would appear on B's disk too.
 
 If we make the common directory read-only, we prevent that interference, but
 nobody can install anything that isn't already available to everyone or add
 private, custom builds of their own.
 
-What each machine actually needs is one shared, read-only directory for common
+What each VM actually needs is one shared, read-only directory for common
 packages and one private, writable directory for its own packages, presented
 together as a single package store:
 
-<pre style="line-height: 1; overflow-y: hidden"><code>What machine A sees in /packages/
+<pre style="line-height: 1; overflow-y: hidden"><code>What VM A sees in /packages/
 ├── <span style="color:#3d7fc2">Python/3.13.5/</span>
 ├── <span style="color:#3d7fc2">Nginx/1.30.2/</span>
 ├── <span style="color:#3d7fc2">OpenSSL/3.5.1/</span>
 └── <span style="color:#c47a1d">ImageMagick/7.1/</span>
 
-What machine B sees in /packages/
+What VM B sees in /packages/
 ├── <span style="color:#3d7fc2">Python/3.13.5/</span>
 ├── <span style="color:#3d7fc2">Nginx/1.30.2/</span>
 ├── <span style="color:#3d7fc2">OpenSSL/3.5.1/</span>
@@ -184,12 +186,12 @@ What machine B sees in /packages/
 <span style="color:#4a9a2e">■ B's private upper</span></code></pre>
 
 In this layout, common packages come from one shared, read-only directory, while
-anything a machine adds goes into its own writable directory. Inside each
-machine, the two directories appear as one ordinary package store. A package
-lookup checks the machine's private upper layer first, then falls through to the
-shared lower. A package that A installs or builds lands only in A's upper, where
-B can neither break it nor see it. B gets the same lower but its own upper. We
-could describe this layout as an upper-lower sandwich.
+anything a VM adds goes into its own writable directory. Inside each VM, the two
+directories appear as one ordinary package store. A package lookup checks the
+VM's private upper layer first, then falls through to the shared lower. A
+package that A installs or builds lands only in A's upper, where B can neither
+break it nor see it. B gets the same lower but its own upper. We could describe
+this layout as an upper-lower sandwich.
 
 Linux already includes a filesystem designed for exactly this kind of sandwich
 layout: OverlayFS presents an upper and a lower directory as one merged view.
@@ -220,7 +222,7 @@ manager treat the merged files, plus the matching metadata, as a real store.
 
 \*\* This is not an incidental implementation choice: the solution relies on a
 Nix-based container operating system. Nix's immutable, side-by-side package
-store is what makes one shared lower store practical while each machine retains
+store is what makes one shared lower store practical while each VM retains
 private package management; this is not a drop-in optimization for any Linux VM.
 
 (This technique has appeared in several forms: Nix has supported
@@ -232,29 +234,28 @@ post describing how it uses a similar setup at much larger scale.)
 For the shared lower layer itself, I use [Snix](https://snix.dev/), an
 independent implementation of the Nix store. It exposes the store through
 [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace), and carries the
-common closures these machines need.
+common closures these VMs need.
 
-Each machine gets the same Snix-backed lower store, its own OverlayFS upper, and
-its own writable Nix database and profiles. That last part matters: the upper
-holds private package files and the database records that they exist.
+Each VM gets the same Snix-backed lower store, its own OverlayFS upper, and its
+own writable Nix database and profiles. That last part matters: the upper holds
+private package files and the database records that they exist.
 
-Ten machines that need the same nginx build now point at one stored copy — the
+Ten VMs that need the same nginx build now point at one stored copy — the
 problem has changed from finding ten identical copies to handing one object to
-ten machines. On disk:
+ten VMs. On disk:
 
 <pre><code>total storage
   = one shared package store
-  + each machine's own extra packages
-  + each machine's own data
+  + each VM's own extra packages
+  + each VM's own data
 </code></pre>
 
-This solves the disk-duplication problem for common, public state. The shared
-package closure occupies the same amount of space whether one VM uses it or a
-hundred. What remains is private state, which grows independently inside each
-VM, so ten machines will still consume more disk than one. Active deduplication
-now becomes a second-line cleanup for those smaller private upper layers rather
-than the mechanism responsible for noticing that every VM contains the same base
-system.
+This solves the disk-duplication problem for common state. The shared package
+closure occupies the same amount of space whether one VM uses it or a hundred.
+What remains is private state, which grows independently inside each VM, so ten
+VMs will still consume more disk than one. Active deduplication now becomes a
+second-line cleanup for those smaller private upper layers rather than the
+mechanism responsible for noticing that every VM contains the same base system.
 
 ## How the Shared Package Store Also Saves RAM
 
@@ -292,9 +293,9 @@ flowchart TB
 The file identity that made passive sharing work is severed at the VM boundary:
 from the host's point of view, each guest's cached copy is just guest memory,
 with no connection to the file it came from. (This is exactly the situation KSM
-was invented to repair — actively.) Add the guest kernels themselves and their
-supporting memory, all private to each VM, and the cost of every extra machine
-climbs.
+was invented to repair — actively.) The guest kernels and their supporting
+memory are also private to each VM, further increasing the cost of every
+additional VM.
 
 So the design needs an isolation mechanism that doesn't put a whole separate
 Linux kernel and a fixed block of guest RAM between the applications and the
@@ -311,67 +312,59 @@ them and uses a deliberately small set of host system calls when needed.
 
 gVisor can use
 [KVM](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine), Linux's
-hardware-virtualization interface (the CPU-level acceleration that makes
-ordinary VMs fast), to wall the sandbox's memory off from the host's. In this
-mode, the Sentry fills the roles of both guest operating system and
-[hypervisor](https://en.wikipedia.org/wiki/Hypervisor). However, the sandbox is
+hardware-virtualization interface (the CPU-level acceleration that makes VMs
+fast), to wall off the memory of the guest (the isolated environment running our
+applications) from the host. In this mode, the Sentry fills the roles of both
+guest operating system and
+[hypervisor](https://en.wikipedia.org/wiki/Hypervisor). However, the guest is
 still a group of processes, rather than an emulated computer with virtual
 hardware and a separate guest Linux kernel.
 
-So is this a VM? If we stretch the definition of 'VM', yes: the sandbox runs
-under real hardware virtualization, and its applications never touch the host
-kernel directly. As most people would define it, though, gVisor isn't a VM.
-Still, I think the claims about VM density in this post are justified because
-VMs can achieve the same page-sharing behaviour demonstrated using gVisor. I
-used gVisor because it fits the Kubernetes infrastructure I tend to deploy on,
-such as Amazon EKS. However, a QEMU VM can mount a shared filesystem with DAX,
-allowing it to use file contents from the host's cache rather than keeping
-another copy in its own page cache. It would still pay for its guest kernel and
-other private memory, but efficient KSM-style approaches can reduce guest-kernel
-memory consumption.
+So is this a VM? If we stretch the definition of 'VM', yes: the guest runs under
+real hardware virtualization, and its applications never touch the host kernel
+directly. As most people would define it, gVisor isn't a VM.
+
+I still think that the VM-density claims made in this post are justified:
+traditional VMs can achieve the same page-sharing behaviour demonstrated using
+gVisor. I used gVisor because it fits the Kubernetes infrastructure I tend to
+deploy on, such as Amazon EKS. However, a QEMU VM can mount a shared filesystem
+with DAX, allowing it to use file contents from the host's cache rather than
+keeping another copy in its own page cache. Notably, its guest kernel would
+still consume RAM, narrowing the density advantage unless that overhead were
+mitigated.
 
 <sup>\*\*\*</sup> The measurements in this article are of gVisor sandboxes on
-KVM, not traditional VMs. A VM using a shared filesystem with DAX could achieve
-the same page sharing, but that design was not tested here.
+KVM, not traditional VMs. A traditional VM using a shared filesystem with DAX
+could achieve the same page sharing, but that design was not tested here.
 
-This middle ground is exactly what the design needs:
+gVisor is convenient for demonstrating this shared-cache design because its VMs
+can directly share the host's reclaimable page cache instead of maintaining
+opaque page caches of their own.
 
-- stronger isolation machinery than an ordinary container runtime;
-- no fixed block of guest RAM reserved merely because a machine exists;
-- memory the host can see and reclaim, instead of a second opaque page cache
-  inside every guest;
-- direct access to the shared lower store, without wrapping it in a virtual
-  block device.
+With Directfs, a file read travels from the application through gVisor's Sentry
+(the layer between the VM and the host) into the host's OverlayFS (the
+package-store sandwich). For a shared package, OverlayFS selects the Snix FUSE
+lower layer. The host kernel then checks its page cache for that Snix file: the
+first read fetches the pages from Snix and caches them in host RAM; because
+every VM resolves the package to the same Snix file, later reads reuse those
+same pages.
 
-File reads travel a short path from the application down to the store: with
-gVisor's Directfs option, the Sentry opens host files directly rather than
-through an intermediary process, so reading a shared package goes roughly:
-
-```mermaid
-flowchart LR
-    app["Application"] --> sentry["gVisor Sentry"]
-    sentry --> directfs["Directfs"]
-    directfs --> overlay["Host OverlayFS"]
-    overlay --> fuse["Snix FUSE mount"]
-    fuse --> store["Shared package store"]
-```
-
-Each sandbox still uses RAM of its own: a Sentry, bookkeeping, and its
-applications' private memory. gVisor's
+Each guest still needs RAM for the Sentry, its record of running processes and
+open files, and active work. gVisor's
 [resource model](https://gvisor.dev/docs/architecture_guide/resources/) has the
-details. The bet is that the shared software sits in memory once, and each extra
-machine adds only what differs about it.
+details. The bet is that the shared software sits in memory once, while each
+extra VM adds only this private runtime state.
 
 ## The Two Systems I Built and Compared
 
 To measure how much this design improves VM density, I built two systems and ran
 them head to head on the same nginx workload — the code for the exact comparison
-and machine configurations lives
+and VM configurations lives
 [on my GitHub](https://github.com/ToxicPine/nix-container/tree/benchmarking).
 
 The shared-store side is the test case: it runs
 [nix-container](https://github.com/ToxicPine/nix-container) under gVisor's
-`runsc` on KVM; the repository has the full details. Each instance gets a
+`runsc` on KVM; the repository has the full details. Each gVisor VM gets a
 standard OCI container root filesystem, a persistent private `/data`, a
 persistent private `/nix` database and profile area, a private OverlayFS upper
 and work directory, and a merged `/nix/store` whose lower layer is the shared
@@ -379,18 +372,17 @@ Snix store. The container itself is very skeletal: a small process supervisor
 runs nginx, nothing more. `runsc` is configured with Directfs, the internal
 rootfs overlay, and exclusive bind-mount caching.
 
-The baseline is a conventional VM: it boots its own kernel and manages its own
-software, the way a rented VPS does. It runs the same pinned nginx package and
-configuration on a minimal NixOS built with the upstream image builder, with a
-working Nix installation, daemon, and writable store, nginx under systemd, an
-independently prepared qcow2 overlay over one read-only backing image, and a
-direct kernel boot under QEMU's stripped-down `microvm` machine type with one
-vCPU and 256 MiB RAM. Everything QEMU would normally emulate for a
-general-purpose machine, including firmware, PCI, a display, and the default
-device set, is switched off, leaving about as lean a VM as QEMU can produce
-while still booting a real kernel with real isolation and internal package
-management. The tuning is deliberate: the baseline should be a genuinely
-well-optimized VM on a minimal OS, so that beating it means something.
+The baseline is a traditional NixOS VM: it boots its own kernel and manages its
+own software, the way a rented VPS does. It runs the same pinned nginx package
+and configuration on a minimal image produced by the upstream NixOS image
+builder, with a working Nix installation, daemon, and writable store, nginx
+under systemd, an independently prepared qcow2 overlay over one read-only
+backing image, and a direct kernel boot under QEMU's stripped-down `microvm`
+machine type with one vCPU and 256 MiB RAM. Everything QEMU would normally
+emulate for a general-purpose VM, including firmware, PCI, a display, and the
+default device set, is switched off, leaving about as lean a VM as QEMU can
+produce. The tuning is meant to keep the test fair: the baseline should be a
+genuinely well-optimized VM on a minimal OS, so that beating it means something.
 
 The two sides still aren't perfectly like-for-like: one is an OCI image under a
 minimal supervisor, the other a NixOS disk image under systemd, so their
@@ -398,9 +390,9 @@ closures and init machinery differ a little. As a hedge, I also ran the VMs with
 KSM on, giving `ksmd` all the time it needed to deduplicate as thoroughly as it
 can. KSM merges the VMs against each other, with no cross-image comparison
 involved, so its savings independently show how much duplicate memory a fleet of
-identical VMs carries. And if the KSM figure lands near the shared-store one,
-that's telling in itself: both mechanisms would be removing the same
-duplication, one after the copies exist and one by never creating them.
+identical VMs carries. If the KSM figure lands near the shared-store one, that's
+telling in itself: both mechanisms would be removing the same duplication, one
+after the copies exist and one by never creating them.
 
 ## How I Keep the Comparison Fair
 
@@ -408,23 +400,23 @@ It is easy to report “3.5× as many VMs” without establishing whether those 
 VMs remain usable in practice, so I wanted the comparison to answer three
 questions:
 
-1. What are the fixed and marginal host-memory costs, and how many healthy
-   instances fit inside one RAM envelope?
-2. How long does a prepared instance take to serve a correct nginx response?
+1. What are the fixed and marginal host-memory costs, and how many healthy VMs
+   fit inside one RAM envelope?
+2. How long does a prepared VM take to serve a correct nginx response?
 3. At equal CPU, what throughput and tail latency can each target sustain?
 
 Two measurement choices matter more than the rest. First, memory is measured
-after instances have actually served traffic, because idle VM RAM looks cheap: a
-guest's memory is only truly allocated once the guest touches it, and a guest
-that has served requests and read its package closure can hold far more private
-resident data. Second, memory is counted for the whole deployment on both sides
-because shared page cache doesn't belong to any single process. That means
-sandbox runtime, store services, FUSE, and host caches on one side; QEMU, guest
-kernel and RAM, disk-image metadata, and host caches on the other. The headline
-number is simply how much the whole server's memory use rises with each machine
-added.
+after VMs have actually served traffic, because idle VM RAM looks cheap: a VM's
+memory is only truly allocated once the VM touches it, and a VM that has served
+requests and read its package closure can hold far more private resident data.
+Second, I count the memory used by the whole deployment, not just the memory
+attributed to each VM. For gVisor, I count each Sentry, the Snix and FUSE
+services that supply packages, and the host's file cache. For traditional VMs, I
+count QEMU, each VM's guest kernel and RAM, disk-image bookkeeping, and the
+host's file cache. The headline number is simply how much the whole server's
+memory use rises with each VM added.
 
-The rest is standard rigor: instances fully prepared before the timer starts,
+The rest is standard rigor: VMs fully prepared before the timer starts,
 readiness defined as three consecutive correct HTTP responses, pinned CPUs, and
 swap disabled.
 
@@ -432,54 +424,54 @@ swap disabled.
 
 > The latest benchmark run measured a 4.1× density improvement, as reported
 > below. However, the harness still shows unexplained variation between runs, so
-> I have kept the more conservative 3.5× headline from the first run.
-{: .prompt-info }
+> I have kept the more conservative 3.5× headline from the first run. {:
+> .prompt-info }
 
 For context, the known fixed costs: gVisor's Sentry adds
 [a few tens of MiB per sandbox](https://gvisor.dev/docs/architecture_guide/performance/),
 a stripped-down QEMU sits in the tens of MiB
 ([Firecracker](https://github.com/firecracker-microvm/firecracker/blob/main/SPECIFICATION.md)
-shows a VMM can get under 5), and each conventional VM here also reserves its
-256 MiB of guest RAM.
+shows a VMM can get under 5), and each traditional VM here also reserves its 256
+MiB of guest RAM.
 
 For the common package closure, storage sharing should be close to perfect:
-every sandbox uses the same immutable store paths, so the shared packages occupy
-one physical copy. Only each sandbox's private upper layer adds per-instance
+every gVisor VM uses the same immutable store paths, so the shared packages
+occupy one physical copy. Only each VM's private upper layer adds per-VM
 storage.
 
 ### Time from Launch to Ready
 
-| Cache Condition     | Target              |      Median |         p95 | CPU Time to Ready |
-| ------------------- | ------------------- | ----------: | ----------: | ----------------: |
-| Host-cold           | NixOS VM            | **6.214 s** | **6.243 s** |       **4.196 s** |
-| Host-cold           | gVisor shared store | **3.843 s** | **3.909 s** |       **4.751 s** |
-| Cross-instance warm | NixOS VM            | **5.164 s** | **5.196 s** |       **3.976 s** |
-| Cross-instance warm | gVisor shared store | **2.553 s** | **2.638 s** |       **3.194 s** |
+| Cache Condition | Target              |      Median |         p95 | CPU Time to Ready |
+| --------------- | ------------------- | ----------: | ----------: | ----------------: |
+| Host-cold       | NixOS VM            | **6.214 s** | **6.243 s** |       **4.196 s** |
+| Host-cold       | gVisor shared store | **3.843 s** | **3.909 s** |       **4.751 s** |
+| Cross-VM warm   | NixOS VM            | **5.164 s** | **5.196 s** |       **3.976 s** |
+| Cross-VM warm   | gVisor shared store | **2.553 s** | **2.638 s** |       **3.194 s** |
 
 A minimal readiness daemon with a negligible closure acts as the control here:
 subtracting its launch time from nginx's separates platform startup from loading
 and starting the actual workload.
 
-### Memory Use and Instance Density
+### Memory Use and VM Density
 
-| Target              | Fixed Platform Cost | Marginal Idle Memory | Marginal Post-Load Memory | Maximum Healthy Instances |
-| ------------------- | ------------------: | -------------------: | ------------------------: | ------------------------: |
-| NixOS VM            |       **451.5 MiB** |        **291.0 MiB** |             **286.7 MiB** |                    **47** |
-| gVisor shared store |       **276.3 MiB** |         **78.3 MiB** |              **78.2 MiB** |                   **195** |
+| Target              | Fixed Platform Cost | Marginal Idle Memory | Marginal Post-Load Memory | Maximum Healthy VMs |
+| ------------------- | ------------------: | -------------------: | ------------------------: | ------------------: |
+| NixOS VM            |       **451.5 MiB** |        **291.0 MiB** |             **286.7 MiB** |              **47** |
+| gVisor shared store |       **276.3 MiB** |         **78.3 MiB** |              **78.2 MiB** |             **195** |
 
-The instance counts are observed healthy maxima inside the envelope, not
-projections from marginal costs.
+The VM counts are observed healthy maxima inside the envelope, not projections
+from marginal costs.
 
 The headline claim lives in this table, as both absolute counts and a ratio:
 
-> Within a host memory envelope of **16 GiB**, the benchmark ran **195** healthy
-> nginx instances for the shared-store gVisor design versus **47** NixOS VMs:
-> **4.1×** as many. Its post-load marginal memory cost was **78.2 MiB** per
-> instance, compared with **286.7 MiB** for the conventional VM.
+> Within a host memory envelope of 16 GiB, the benchmark ran 195 healthy gVisor
+> VMs running nginx versus 47 NixOS VMs: 4.1× as many. Its post-load marginal
+> memory cost was 78.2 MiB per VM, compared with 286.7 MiB for the traditional
+> VM.
 
 \* The headline's asterisk, then: “3.5× as many” counts simultaneously healthy
-instances inside the same fixed host-RAM envelope, after a common nginx workload
-has made the relevant software resident. Both targets run the same pinned nginx
+VMs inside the same fixed host-RAM envelope, after a common nginx workload has
+made the relevant software resident. Both targets run the same pinned nginx
 build and configuration, use the same CPU allocation and direct network path,
 and must meet the same error-rate and p99-latency objective. The figure does not
 claim that every workload or every byte of private state scales by the same
@@ -487,11 +479,11 @@ ratio.
 
 If shared-store page-cache reuse works as intended, the host should keep one
 cached set of the nginx executable, libraries, and other closure files even as
-more gVisor sandboxes are created. By contrast, conventional VMs keep separate
-cached copies of those files in each guest's RAM, so memory devoted to the
-common closure rises with the VM count.
+more gVisor VMs are created. By contrast, traditional VMs keep separate cached
+copies of those files in each VM's RAM, so memory devoted to the common closure
+rises with the VM count.
 
-### Storage Use and Instance Density
+### Storage Use and VM Density
 
 | Target              | Fixed Shared Storage | Marginal Private Storage |
 | ------------------- | -------------------: | -----------------------: |
@@ -500,11 +492,11 @@ common closure rises with the VM count.
 
 The marginal figures are not exactly like-for-like: `nix-container` keeps unique
 per-container configuration in its private storage, while the NixOS VM has no
-equivalent per-instance configuration payload.
+equivalent per-VM configuration payload.
 
-The VM row counts one read-only base image and each instance's private qcow2
-overlay. The gVisor row counts one shared Snix store and each instance's private
-upper layer and metadata.
+The NixOS row counts one read-only base image and each VM's private qcow2
+overlay. The gVisor row counts one shared Snix store and each VM's private upper
+layer and metadata.
 
 ### Nginx Throughput and Latency
 
@@ -524,19 +516,19 @@ worthless if each becomes too slow to use.
 ### Density with KSM Enabled
 
 This is the hedge promised earlier: I repeat the same test with KSM switched on
-for the conventional VMs, and charge the scanner's CPU time to the VM side:
+for the traditional VMs, and charge the scanner's CPU time to the VM side:
 
-| Configuration       | Marginal Post-Load Memory | Maximum Healthy Instances |     ksmd CPU |
-| ------------------- | ------------------------: | ------------------------: | -----------: |
-| NixOS VM, KSM on    |             **114.6 MiB** |                   **142** | **245.48 s** |
-| NixOS VM, KSM off   |             **286.7 MiB** |                    **47** |            — |
-| gVisor shared store |              **78.2 MiB** |                   **195** |            — |
+| Configuration       | Marginal Post-Load Memory | Maximum Healthy VMs |     ksmd CPU |
+| ------------------- | ------------------------: | ------------------: | -----------: |
+| NixOS VM, KSM on    |             **114.6 MiB** |             **142** | **245.48 s** |
+| NixOS VM, KSM off   |             **286.7 MiB** |              **47** |            — |
+| gVisor shared store |              **78.2 MiB** |             **195** |            — |
 
 Turning KSM on cut marginal memory by 172.1 MiB per VM, from 286.7 MiB to 114.6
 MiB, a reduction of 60%. That still left each VM 36.4 MiB above the gVisor
 design. Each VM carries QEMU and its supporting virtualization state, while the
-gVisor solution may have lower per-instance runtime overhead. So, the remaining
-gap is therefore not necessarily memory that KSM failed to deduplicate.
+gVisor solution may have lower per-VM runtime overhead. So, the remaining gap is
+therefore not necessarily memory that KSM failed to deduplicate.
 
 However, KSM saves memory only after `ksmd` has scanned newly loaded pages,
 found duplicates, and merged them. The measured 60% reduction is steady-state
@@ -552,12 +544,12 @@ eats CPU time that should be available for running workloads.
 Well, it depends on your circumstances. If, like me, you're giving people VMs
 where their agents can live and work, most of those VMs will sit nearly idle
 much of the day. It would also be less than ideal to ask each person to suspend
-and resume their machine between tasks, so the VMs need to keep running. They
+and resume their VM between tasks, so the VMs need to keep running. They
 therefore occupy memory all day while using CPU only intermittently, making it
 sensible to overcommit CPU and minimize the RAM used by each VM. If everyone
 starts CPU-heavy work at once — a build, for example — CPU becomes the
 bottleneck, but I don't expect that to happen often in my case; ordinarily,
-keeping all those mostly idle machines light on RAM matters more.
+keeping all those mostly idle VMs light on RAM matters more.
 
 ### Why Not Mount the Shared Store into a Traditional VM?
 
@@ -573,15 +565,15 @@ turning it into a different architecture.
 
 It deduplicates most of the storage, which is why the benchmark uses it. It
 leaves the guest kernel, the fixed guest-RAM allocation, and the guest page
-cache: when several guests read the same backing block, the host caches it once
-and each guest caches it again. That gap between shared backing storage and
-shared resident pages is exactly why the benchmark measures post-load whole-host
+cache: when several VMs read the same backing block, the host caches it once and
+each VM caches it again. That gap between shared backing storage and shared
+resident pages is exactly why the benchmark measures post-load whole-host
 memory.
 
-### Why Not Use KSM with Ordinary VMs?
+### Why Not Use KSM with Traditional VMs?
 
-KSM is the all-active alternative: keep ordinary VMs and repair the duplication
-afterward. It was built for exactly this. The
+KSM is the all-active alternative: keep traditional VMs and repair the
+duplication afterward. It was built for exactly this. The
 [kernel documentation](https://docs.kernel.org/admin-guide/mm/ksm.html)
 describes `ksmd` periodically scanning registered memory, merging identical
 pages into one write-protected page, and copying again on write. It can
@@ -589,10 +581,10 @@ genuinely improve VM density, which is why the results above include a
 KSM-enabled run.
 
 I didn't make it the headline configuration for three reasons: it burns CPU and
-bookkeeping rediscovering that guests' pages are identical, after every guest
-has already loaded its own copy; its savings arrive only after the scanner has
+bookkeeping rediscovering that VMs' pages are identical, after every VM has
+already loaded its own copy; its savings arrive only after the scanner has
 caught up, rather than existing from the moment a file is read; and merging
-private guest memory creates side-channel risks, whereas the shared-store design
+private VM memory creates side-channel risks, whereas the shared-store design
 limits sharing to packages that are already public and read-only.
 
 ### Does Sharing the Page Cache Expose One VM to Attacks from Another?
@@ -647,10 +639,10 @@ was comparable, which is why I did not use Firecracker here.
 
 ## Future Experiments and Improvements
 
-The first benchmark to add is a conventional VM that mounts a shared package
+The first benchmark to add is a traditional VM that mounts a shared package
 store through [virtiofs with DAX](https://virtio-fs.gitlab.io/). It could
 preserve host-page-cache sharing without removing the guest kernel, making it
-the closest conventional-VM version of this design. A second benchmark would
+the closest traditional-VM version of this design. A second benchmark would
 replace QEMU with Firecracker, separating QEMU's overhead from the cost of the
 guest kernel itself.
 
@@ -676,9 +668,8 @@ Finally, I want to preserve lazy loading whether the store is exposed through
 FUSE or Gofer. With
 [lazy store materialization](https://snix.dev/docs/reference/snix-castore-api/#materializing-store-paths-on-disk),
 a package can appear in `/nix/store` before all of its contents have been
-downloaded. When a sandbox first opens one of its files, the storage layer
-fetches that file from a substituter — a Nix package server — and caches it
-locally.
+downloaded. When a VM first opens one of its files, the storage layer fetches
+that file from a substituter — a Nix package server — and caches it locally.
 
 ## The Core Idea in One Sentence
 
@@ -690,12 +681,12 @@ The whole idea fits in one sentence:
 A system built that way should cost roughly
 
 <pre><code>one common software working set
-    + N × genuinely private machine state
+    + N × genuinely private VM state
 </code></pre>
 
 rather than
 
-<pre><code>N × (common software working set + private machine state)
+<pre><code>N × (common software working set + private VM state)
 </code></pre>
 
 Every VM still has marginal cost, and a workload dominated by huge private heaps
